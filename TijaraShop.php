@@ -51,7 +51,7 @@ class TijaraShop
                     $obj = $login->getLogin();
                     break;
                 case 'supplierGet':
-                    include_once plugin_dir_path(__FILE__)."/api/supplier.php";
+                    include_once plugin_dir_path(__FILE__) . "/api/supplier.php";
                     $supplier = new Supplier($this->request, $this->wpdb);
                     $obj = $supplier->getSupplliers();
                     break;
@@ -73,26 +73,45 @@ class TijaraShop
     public function install()
     {
 
-        $this->wpdb->query("CREATE TABLE IF NOT EXISTS {$this->wpdb->prefix}shop_login (
-                                        id INT AUTO_INCREMENT PRIMARY KEY,
-                                        userName VARCHAR(255) NOT NULL,
-                                        password TEXT NOT NULL ,
-                                        rank INT
-                                         );");
-        $this->wpdb->query("
-        CREATE TABLE IF NOT EXISTS  {$this->wpdb->prefix}shop_fournisseur(
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        prenom VARCHAR(255) NOT NULL ,
-        nom VARCHAR(255) NOT NULL,
-        tel VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        numAddresse INT,
-        rueAddresse VARCHAR(255),
-        villeAddresse VARCHAR(255),
-        zipAddresse VARCHAR(255),
-        paysAddresse VARCHAR(255)
-        );
-        ");
+        $apiCredentialsTable = "CREATE TABLE IF NOT EXISTS ApiCredentials(
+                                idApiCredentials INT AUTO_INCREMENT PRIMARY KEY,
+                                privateKey VARCHAR(255) NOT NULL                               
+);";
+
+        $permissionModelTable = "CREATE TABLE IF NOT EXISTS PermissoinModel(
+                                idPermissionModel INT AUTO_INCREMENT PRIMARY KEY,
+                                namePermissionModel VARCHAR(255) NOT NULL,
+                                hasAdmin TINYINT(1),
+                                hasCOmpta TINYINT(1),
+                                hasProductManagement TINYINT(1),
+                                hasSuppierManagement TINYINT(1),
+                                hasStock TINYINT(1),
+                                hasCaisse TINYINT(1)
+);";
+        $shopLoginTable = "CREATE TABLE IF NOT EXISTS ShopLogin (
+                            idShopLogin INT AUTO_INCREMENT PRIMARY KEY,
+                            usernameShopLogin VARCHAR(255) NOT NULL,
+                            passwordShopLogin TEXT NOT NULL,
+                            hasAdmin TINYINT(1),
+                            hasCOmpta TINYINT(1),
+                            hasProductManagement TINYINT(1),
+                            hasSuppierManagement TINYINT(1),
+                            hasStock TINYINT(1),
+                            hasCaisse TINYINT(1)
+);";
+
+        $shopLoginLogTable = "CREATE TABLE IF NOT EXISTS ShopLoginLog (
+                                idShopLoginLog INT AUTO_INCREMENT PRIMARY KEY ,
+                                idShopLogin INT NOT NULL,
+                                dateShopLoginLog VARCHAR(255),
+                                statusShopLoginLog INT
+);";
+
+        $this->wpdb->query($apiCredentialsTable);
+        $this->wpdb->query($permissionModelTable);
+        $this->wpdb->query($shopLoginTable);
+        $this->wpdb->query($shopLoginLogTable);
+
     }
 
 }
