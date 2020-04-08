@@ -3,7 +3,6 @@
 
 class Request
 {
-
     const HEADER_FORWARDED = 0b00001; // When using RFC 7239
     const HEADER_X_FORWARDED_FOR = 0b00010;
     const HEADER_X_FORWARDED_HOST = 0b00100;

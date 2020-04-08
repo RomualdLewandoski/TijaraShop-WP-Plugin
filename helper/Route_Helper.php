@@ -1,14 +1,15 @@
 <?php
 
 
-class CustomRoutes {
+class Route_Helper extends Helper
+{
 
     /**
      * An array of route data indexed by regex.
      *
      * Example value:
      *
-     * 	   $routes['^widgets/([^/]*)/([^/]*)/?'] = array(
+     *       $routes['^widgets/([^/]*)/([^/]*)/?'] = array(
      *         'callback' => 'some_function', // or array($object, 'someMethod')
      *         'template' => '/template/path/to/file.php',
      *         'query_vars' => array('param1' => 1, 'param2' => 2)
@@ -29,10 +30,10 @@ class CustomRoutes {
      */
     public function __construct()
     {
-        add_action('parse_request',       array($this, 'parseRequestAction'));
-        add_filter('query_vars',          array($this, 'queryVarsFilter'));
+        add_action('parse_request', array($this, 'parseRequestAction'));
+        add_filter('query_vars', array($this, 'queryVarsFilter'));
         add_filter('rewrite_rules_array', array($this, 'rewriteRulesArrayFilter'));
-        add_action('wp_loaded',           array($this, 'wpLoadedAction'));
+        add_action('wp_loaded', array($this, 'wpLoadedAction'));
     }
 
     /*
@@ -44,7 +45,8 @@ class CustomRoutes {
     /**
      * Force flush existing rewrite rules.
      */
-    public function forceFlush() {
+    public function forceFlush()
+    {
         $this->force_flush = true;
     }
 
@@ -53,12 +55,11 @@ class CustomRoutes {
      * of custom routes by invoking the optional callback and optional
      * template file if they are given for the matched route.
      *
-     * @param  WP $query
+     * @param WP $query
      */
     public function parseRequestAction($query)
     {
-        if ($query->matched_rule and isset($this->routes[$query->matched_rule]))
-        {
+        if ($query->matched_rule and isset($this->routes[$query->matched_rule])) {
             $route = $this->routes[$query->matched_rule];
 
             $this->doCallback($route, $query);
@@ -74,12 +75,18 @@ class CustomRoutes {
     /**
      * Add a route with params.
      *
-     * @param string $match      A regular expression for the url match
-     * @param string $callback   Callback; function name or callable array such as `array($object, 'method')`
-     * @param string $template   Optional template path
-     * @param array  $query_vars An array of url query vars indexed by the var name, value being the regex match number.
+     * @param string $match A regular expression for the url match
+     * @param string $callback Callback; function name or callable array such as `array($object, 'method')`
+     * @param string $template Optional template path
+     * @param array $query_vars An array of url query vars indexed by the var name, value being the regex match number.
      */
-    public function addRoute($match, $callback, $template = null, $query_vars = array())
+    public function addRoutes($match, $controller, $method, $query_vars = array())
+    {
+        $this->loadController($controller);
+        $this->addRoute($match, array($this->controller->$controller, $method), $query_vars);
+    }
+
+    function addRoute($match, $callback, $template = null, $query_vars = array())
     {
         $this->routes[$match] = compact('callback', 'template', 'query_vars');
     }
@@ -114,7 +121,7 @@ class CustomRoutes {
      * Filter callback for 'rewrite_rules_array'.
      * Adds new rules for newly defined routes.
      *
-     * @param  array $rules
+     * @param array $rules
      * @return array
      */
     public function rewriteRulesArrayFilter($rules)
@@ -129,14 +136,13 @@ class CustomRoutes {
 
     /**
      * Filter callback for 'query_vars'.
-     * @param  array $vars
+     * @param array $vars
      * @return array
      */
     public function queryVarsFilter($vars)
     {
-        foreach($this->routes as $route)
-        {
-            foreach($route['query_vars'] as $key => $value) {
+        foreach ($this->routes as $route) {
+            foreach ($route['query_vars'] as $key => $value) {
                 $vars[] = $key;
             }
         }
@@ -153,15 +159,15 @@ class CustomRoutes {
     /**
      * Invoke the callback for a given route.
      *
-     * @param  array $route An item from $this->routes
-     * @param  WP    $query
+     * @param array $route An item from $this->routes
+     * @param WP $query
      */
     protected function doCallback($route, $query)
     {
         $params = array();
 
         // params are in the same order as given in the array
-        foreach($route['query_vars'] as $name => $match) {
+        foreach ($route['query_vars'] as $name => $match) {
             $params[] = $query->query_vars[$name];
         }
 
@@ -170,16 +176,14 @@ class CustomRoutes {
 
     /**
      * Includes a template for a given route if one is found.
-     * @param  array $route   An item from $this->routes
+     * @param array $route An item from $this->routes
      */
     protected function doTemplate($route)
     {
-        $candidates = (array) $route['template'];
+        $candidates = (array)$route['template'];
 
-        foreach($candidates as $candidate)
-        {
-            if (file_exists($candidate))
-            {
+        foreach ($candidates as $candidate) {
+            if (file_exists($candidate)) {
                 include $candidate;
                 break;
             }
@@ -190,14 +194,14 @@ class CustomRoutes {
      * Returns a url with query string key/value pairs as
      * needed for rewrite rules.
      *
-     * @param  array $route  An item from $this->routes
+     * @param array $route An item from $this->routes
      * @return string
      */
     protected function makeRuleUrl($route)
     {
         $q_vars = array();
 
-        foreach($route['query_vars'] as $name => $match) {
+        foreach ($route['query_vars'] as $name => $match) {
             $q_vars[] = $name . '=$matches[' . $match . ']';
         }
 
