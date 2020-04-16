@@ -61,13 +61,10 @@ class Route_Helper extends Helper
     {
         if ($query->matched_rule and isset($this->routes[$query->matched_rule])) {
             $route = $this->routes[$query->matched_rule];
-
             $this->doCallback($route, $query);
-
             if ($route['template']) {
                 $html = $this->doTemplate($route);
             }
-
             exit;
         }
     }
@@ -83,11 +80,12 @@ class Route_Helper extends Helper
     public function addRoutes($match, $controller, $method, $query_vars = array())
     {
         $this->loadController($controller);
-        $this->addRoute($match, array($this->controller->$controller, $method), $query_vars);
+        $this->addRoute($match, array($this->controller->$controller, $method), '', $query_vars);
     }
 
-    function addRoute($match, $callback, $template = null, $query_vars = array())
+    function addRoute($match, $callback, $template = null, $query_vars)
     {
+
         $this->routes[$match] = compact('callback', 'template', 'query_vars');
     }
 
@@ -146,7 +144,6 @@ class Route_Helper extends Helper
                 $vars[] = $key;
             }
         }
-
         return $vars;
     }
 
@@ -170,7 +167,6 @@ class Route_Helper extends Helper
         foreach ($route['query_vars'] as $name => $match) {
             $params[] = $query->query_vars[$name];
         }
-
         call_user_func_array($route['callback'], $params);
     }
 

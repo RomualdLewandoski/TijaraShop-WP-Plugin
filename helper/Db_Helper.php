@@ -11,7 +11,13 @@ class Db_Helper extends Helper
         $this->db = $wpdb;
     }
 
-
+    /**
+     * @param string $table
+     * @param null $order
+     * @param null $limit
+     * @param null $offset
+     * @return array|object|null
+     */
     public function get($table = '', $order = null, $limit = null, $offset = null)
     {
         $sql = "SELECT * FROM " . $table;
@@ -28,6 +34,14 @@ class Db_Helper extends Helper
         return $this->db->get_results($sql);
     }
 
+    /**
+     * @param string $table
+     * @param null $where
+     * @param null $order
+     * @param null $limit
+     * @param null $offset
+     * @return array|object|null
+     */
     public function get_where($table = '', $where = null, $order = null, $limit = null, $offset = null)
     {
         $sql = "SELECT * FROM " . $table;
@@ -51,23 +65,51 @@ class Db_Helper extends Helper
         return $this->db->get_results($sql);
     }
 
+    /**
+     * @param string $table
+     * @param null $set
+     * @return false|int
+     */
     public function insert($table = '', $set = null)
     {
         return $this->db->insert($table, $set);
     }
 
+    /**
+     * @param string $table
+     * @param null $set
+     * @param null $where
+     * @return false|int
+     */
     public function update($table = '', $set = null, $where = null)
     {
         return $this->db->update($table, $set, $where);
     }
 
+    /**
+     * @param string $table
+     * @param null $where
+     * @return false|int
+     */
     public function delete($table = '', $where = null)
     {
         return $this->db->delete($table, $where);
     }
 
+    /**
+     * @param $sql
+     * @return bool|int
+     */
     public function custom($sql)
     {
         return $this->db->query($sql);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrefix()
+    {
+        return $this->db->prefix;
     }
 }

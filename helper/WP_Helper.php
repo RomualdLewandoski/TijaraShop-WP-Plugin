@@ -16,7 +16,7 @@ class WP_Helper extends Helper
 
     public function addScript($name)
     {
-        wp_register_script($name, plugins_url('TijaraShop/assets/js/' . $name . 'js', wpPluginFolder));
+        wp_register_script($name, plugins_url('TijaraShop/assets/js/' . $name . '.js', wpPluginFolder));
     }
 
     public function getScript($name)

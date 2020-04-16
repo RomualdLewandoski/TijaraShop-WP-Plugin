@@ -198,12 +198,13 @@ class Request
         self::HEADER_X_FORWARDED_PORT => 'X_FORWARDED_PORT',
     ];
 
-    public function __construct(array $query = [], array $request = [], array $server = [])
+    //public function __construct(array $query = [], array $request = [], array $server = [])
+    public function __construct()
     {
-        $this->initialize($query, $request, $server);
+        $this->initialize($_GET, $_POST, $_SERVER);
     }
 
-    public function initialize(array $query = [], array $request = [],array $server = [], $content = null)
+    public function initialize(array $query = [], array $request = [], array $server = [], $content = null)
     {
         $this->request = new ParameterBag($request);
         $this->query = new ParameterBag($query);
@@ -242,9 +243,9 @@ class Request
      */
     public function get($key, $default = null)
     {
-       /* if ($this !== $result = $this->attributes->get($key, $this)) {
-            return $result;
-        }*/
+        /* if ($this !== $result = $this->attributes->get($key, $this)) {
+             return $result;
+         }*/
 
         if ($this !== $result = $this->query->get($key, $this)) {
             return $result;

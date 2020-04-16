@@ -3,7 +3,6 @@
 
 class System
 {
-    public $request;
     public $model;
     public $controller;
     public $helper;
@@ -12,6 +11,7 @@ class System
 
     public function __construct($pluginFolder)
     {
+        session_start();
         define('wpPluginFolder', $pluginFolder);
         require_once $pluginFolder . '/helper/ParameterBag.php';
         require_once $pluginFolder . '/helper/ServerBag.php';
@@ -25,7 +25,7 @@ class System
         new Controller();
         new Helper();
 
-        $this->request = new Request($_GET, $_POST, $_SERVER);
+
         if (!isset($this->model)) {
             $this->model = new stdClass();
         }
@@ -39,11 +39,19 @@ class System
 
         $this->loadHelper('wp');
         add_action('admin_menu', array($this, 'createAdminMenu'));
-        $this->loadHelper('route');
-        $this->helper->route->addRoutes('^api/?', 'Admin', 'test');
+        include_once wpPluginFolder . 'config/route.php';
+        require_once wpPluginFolder . 'Routes/route.php';
+        $router = new Route();
+        $router->loadRoutes($route);
     }
 
-    public function install(){
+    public function request()
+    {
+        return new Request();
+    }
+
+    public function install()
+    {
         $this->loadController('install');
         $this->controller->install->install();
     }
@@ -51,7 +59,11 @@ class System
     public function createAdminMenu()
     {
         $this->helper->wp->addMenu("TijaraShop", "manage_options", 'TijaraShop', 'Admin', 'index', '', 50.5);
-        $this->helper->wp->addSubMenu("TijaraShop", "Api", "manage_options", "TijaraShop/Api", 'Admin', 'adminApi');
+        $this->helper->wp->addSubMenu("TijaraShop", "Api", "manage_options", "TijaraShop/api", 'Admin', 'adminApi');
+        $this->helper->wp->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", 'Admin', 'adminUsers');
+        $this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Admin', 'adminPerms');
+        $this->helper->wp->addSubMenu("TijaraShop", "Logs user", "manage_options", "TijaraShop/logs", 'Admin', 'adminLogs');
+
     }
 
     public function loadController($controller)
@@ -77,7 +89,7 @@ class System
 
     public function loadView($view, $data = null)
     {
-        $realView = $view . '_View';
+        $realView = $view ;
         if ($data != null) {
             foreach ($data as $key => $value) {
                 $$key = $value;

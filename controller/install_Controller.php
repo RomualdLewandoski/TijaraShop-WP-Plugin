@@ -31,9 +31,9 @@ class install_Controller extends Controller
                             usernameShopLogin VARCHAR(255) NOT NULL,
                             passwordShopLogin TEXT NOT NULL,
                             hasAdmin TINYINT(1),
-                            hasCOmpta TINYINT(1),
+                            hasCompta TINYINT(1),
                             hasProductManagement TINYINT(1),
-                            hasSuppierManagement TINYINT(1),
+                            hasSupplierManagement TINYINT(1),
                             hasStock TINYINT(1),
                             hasCaisse TINYINT(1)
 );";
