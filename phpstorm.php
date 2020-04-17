@@ -30,6 +30,8 @@ die('This file is used for development purposes only.');
  * @property Url_Helper $url                        This is our Url Helper
  * @property Api_Model $api                         Our Api Model
  * @property Perms_Model $perms                     Our Perms model
+ * @property Randomizer_Helper $randomizer          Utils for generate Random string/int etc
+ * @property User_Model $user                       Our user model
  */
 class System
 {

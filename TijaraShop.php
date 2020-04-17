@@ -106,7 +106,7 @@ function plugin_links( $links, $plugin_file, $plugin_data ) {
         $links[] = sprintf( '<a href="%s" class="thickbox" title="%s">%s</a>',
             self_admin_url( 'plugin-install.php?tab=plugin-information&amp;plugin=' . $slug . '&amp;TB_iframe=true&amp;width=600&amp;height=550' ),
             esc_attr( sprintf( __( 'More information about %s' ), $plugin_data['Name'] ) ),
-            __( 'Details' )
+            __( 'View details' )
         );
     }
 
@@ -121,7 +121,7 @@ function tijarashop_push_update( $transient ){
     }
 
     // trying to get from cache first, to disable cache comment 10,20,21,22,24
-    if( false == $remote = get_transient( 'misha_upgrade_YOUR_PLUGIN_SLUG' ) ) {
+    if( false == $remote = get_transient( 'tijarashop_upgrade_TijaraShop' ) ) {
 
         // info.json is the file with the actual plugin information on your server
         $remote = wp_remote_get( 'https://raw.githubusercontent.com/RomualdLewandoski/TijaraShop-WP-Plugin/master/info.json', array(
@@ -132,7 +132,7 @@ function tijarashop_push_update( $transient ){
         );
 
         if ( !is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && !empty( $remote['body'] ) ) {
-            set_transient( 'misha_upgrade_YOUR_PLUGIN_SLUG', $remote, 1 ); // 12 hours cache
+            set_transient( 'tijarashop_upgrade_TijaraShop', $remote, 1 ); // 12 hours cache
         }
 
     }

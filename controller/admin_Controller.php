@@ -5,9 +5,10 @@ class admin_Controller extends Controller
 {
     public function __construct()
     {
-        $this->loadHelper('wp');
         $this->loadModel('api');
         $this->loadModel('perms');
+        $this->loadModel("user");
+        $this->loadHelper('wp');
         $this->loadHelper('form');
         $this->loadHelper('session');
         $this->loadHelper('url');
@@ -70,18 +71,49 @@ class admin_Controller extends Controller
     public function adminUsers()
     {
         //todo we ll use a request here with subPage to be sure that we are doing something like addUser, editUser + id, deleteUser + id or nothing TO list users
+        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['error'] = $this->helper->session->flashdata("error");
         $data['success'] = $this->helper->session->flashdata("success");
         $request = $this->request();
         $action = $request->get('action');
         if ($action == null) {
+            $data['userList'] = $this->model->user->getUsers();
+            $data['search'] = null;
             $this->loadView('adminUser', $data);
+        } else if ($action == "search") {
+            $data['userList'] = $this->model->user->getUserLike($request);
+            $data['search'] = $request->get('searchUserName');
+            $this->loadView('adminUser', $data);
+        } else if ($action == "addUser") {
+            $data['permsList'] = $this->model->perms->listPerms();
+            $this->loadView('adminCreateUser', $data);
+        } else if ($action == "submitAddUser") {
+            if ($this->helper->form->verify(array('addUserName'))) {
+                $this->model->user->addUser($request);
+            } else {
+                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification de l'utilisateur");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users&action=addUser");
+            }
+        } else if ($action == "editUser") {
+            if ($this->helper->form->verify(array('userName'))) {
+                $this->model->user->editUser($request);
+            } else {
+                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification de l'utilisateur");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
+            }
+        }else if ($action == "deleteUser"){
+            $this->model->user->deleteUser($request);
+        }else if ($action == "editPassword"){
+            $this->model->user->resetPassword($request);
+        }
+        else{
+            $this->helper->session->set_flashdata("error", "L'action demandée est inconnue");
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
         }
     }
 
     public function adminPerms()
     {
-        //todo we ll use a request here with subPage: add, edit + id, delete + id AND nothing to list
         $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['error'] = $this->helper->session->flashdata("error");
         $data['success'] = $this->helper->session->flashdata("success");

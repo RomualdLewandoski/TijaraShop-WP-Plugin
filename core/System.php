@@ -95,6 +95,14 @@ class System
                 $$key = $value;
             }
         }
+        echo "    <link rel=\"stylesheet\" href=\"https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css\"
+          media=\"all\">
+    <link rel=\"stylesheet\" href=\"https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css\"
+          media=\"all\">
+    <link rel=\"stylesheet\" href=\"https://kit-free.fontawesome.com/releases/latest/css/free.min.css\" media=\"all\">
+        <link href=\"https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css\"
+          rel=\"stylesheet\">
+    <script src=\"https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js\"></script>";
         include_once wpPluginFolder . 'views/' . $realView . '.php';
 
     }

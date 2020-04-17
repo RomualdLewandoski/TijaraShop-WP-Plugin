@@ -21,6 +21,7 @@ class Perms_Model extends Model
     public function addPerms($request)
     {
         $name = htmlspecialchars($request->get('permsName'));
+
         $admin = $request->get('permsAdmin') != null ? 1 : 0;
         $compta = $request->get('permsCompta') != null ? 1 : 0;
         $product = $request->get('permsProducts') != null ? 1 : 0;
@@ -121,7 +122,8 @@ class Perms_Model extends Model
     public function getPerm($id)
     {
         if ($this->isPermsExist($id)) {
-
+            $query = $this->helper->db->get_where($this->table, array('idPermissionModel' => $id));
+            return $query[0];
         }
     }
 

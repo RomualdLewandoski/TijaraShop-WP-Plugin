@@ -1,8 +1,6 @@
 <div class="navbar nav bg-light tijara-nav text-black-50">
     TijaraShop / Liste des modèles de permission
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-          rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 </div>
 <div class="container-fluid mt-3">
     <?php
@@ -24,7 +22,26 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="card card-primary col-12">
-                <div class="card-header">Liste des modèles de permission</div>
+                <div class="card-header">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            Liste des modèles de permission
+                        </li>
+
+                        <li class="nav-item ml-auto mr-2">
+                            <form action="" method="GET">
+                                <div class="input-group input-group-sm mb-2">
+                                    <input type="text" class="form-control" name="searchPermsName">
+                                    <div class="input-group-prepend">
+                                        <button type="submit" class="input-group-text" id="inputGroup-sizing-sm"><i
+                                                    class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 <div class="card-body table-responsive">
                     <table class="table " id="myTable">
                         <thead class="thead-dark">
@@ -147,7 +164,9 @@
                     </table>
                     <script>
                         $(document).ready(function () {
-                            $('#myTable').DataTable();
+                            $('#myTable').dataTable( {
+                                "searching": false
+                            } );
                         });
                     </script>
 

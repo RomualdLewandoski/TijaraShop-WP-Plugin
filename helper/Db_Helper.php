@@ -48,7 +48,43 @@ class Db_Helper extends Helper
         if ($where != null) {
             $sql = $sql . " WHERE ";
             foreach ($where as $key => $value) {
-                $sql = $sql . " " . $key . " = " . $value . " AND ";
+                $sql = $sql . " " . $key . " = '" . $value . "' AND ";
+            }
+            $sql = substr($sql, 0, -5);
+        }
+        if ($order != null) {
+            $sql = $sql . " ORDER BY " . $order;
+        }
+        if ($limit != null) {
+            if ($offset != null) {
+                $sql = $sql . " LIMIT " . $offset . " , " . $limit;
+            } else {
+                $sql = $sql . "LIMIT 0, " . $limit;
+            }
+        }
+
+        return $this->db->get_results($sql);
+    }
+
+    public function get_like($table = '', $like = null, $order = null, $limit = null, $offset = null)
+    {
+        $sql = "SELECT * FROM " . $table;
+        if ($like != null) {
+            $sql = $sql . " WHERE ";
+            foreach ($like as $key => $value) {
+                if (is_array($value)) {
+                    $type = $value[1];
+                    if ($type == "before") {
+                        $slug = "%" . $value[0];
+                    } else if ($type == "after") {
+                        $slug = $value[0] . "%";
+                    } else {
+                        $slug = "%" . $value[0] . "%";
+                    }
+                } else {
+                    $slug = $value . "%";
+                }
+                $sql = $sql . " " . $key . " LIKE '" . $slug . "' AND ";
             }
             $sql = substr($sql, 0, -5);
         }

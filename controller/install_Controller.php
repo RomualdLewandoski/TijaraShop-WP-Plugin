@@ -20,9 +20,9 @@ class install_Controller extends Controller
                                 idPermissionModel INT AUTO_INCREMENT PRIMARY KEY,
                                 namePermissionModel VARCHAR(255) NOT NULL,
                                 hasAdmin TINYINT(1),
-                                hasCOmpta TINYINT(1),
+                                hasCompta TINYINT(1),
                                 hasProductManagement TINYINT(1),
-                                hasSuppierManagement TINYINT(1),
+                                hasSupplierManagement TINYINT(1),
                                 hasStock TINYINT(1),
                                 hasCaisse TINYINT(1)
 );";
@@ -35,7 +35,8 @@ class install_Controller extends Controller
                             hasProductManagement TINYINT(1),
                             hasSupplierManagement TINYINT(1),
                             hasStock TINYINT(1),
-                            hasCaisse TINYINT(1)
+                            hasCaisse TINYINT(1),
+                            isDefaultPass TINYINT(1)
 );";
 
         $shopLoginLogTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_ShopLoginLog (
