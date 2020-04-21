@@ -55,7 +55,7 @@ function tijarashop_plugin_info( $res, $action, $args ){
     if( false == $remote = get_transient( 'tijarashop_update_' . $plugin_slug ) ) {
 
         // info.json is the file with the actual plugin information on your server
-        $remote = wp_remote_get( 'https://wp.moonly.fr', array(
+        $remote = wp_remote_get( 'https://raw.githubusercontent.com/RomualdLewandoski/TijaraShop-WP-Plugin/master/info.json', array(
                 'timeout' => 20,
                 'headers' => array(
                     'Accept' => 'application/json'
@@ -64,17 +64,6 @@ function tijarashop_plugin_info( $res, $action, $args ){
 
         if ( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
             set_transient( 'tijarashop_update_' . $plugin_slug, $remote, 60 ); // 12 hours cache
-        }else{
-            $remote = wp_remote_get( 'https://raw.githubusercontent.com/RomualdLewandoski/TijaraShop-WP-Plugin/master/info.json', array(
-                    'timeout' => 20,
-                    'headers' => array(
-                        'Accept' => 'application/json'
-                    ) )
-            );
-
-            if ( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
-                set_transient( 'tijarashop_update_' . $plugin_slug, $remote, 60 ); // 12 hours cache
-            }
         }
 
     }
