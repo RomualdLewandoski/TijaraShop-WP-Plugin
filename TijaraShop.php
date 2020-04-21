@@ -3,12 +3,12 @@
 /*
 Plugin Name: TijaraShop Caisse Plugin
 Description: Plugin suplémentaire au bon fonctionnement de la caisse
-Version: 1.1
+Version: 1.3
 Author: Romuald Detrait
 License: Closed-Sources
  */
 
-define("version", 1.1);
+define("version", 1.3);
 
 include_once plugin_dir_path(__FILE__) . '/core/System.php';
 $GLOBALS['tijarashop'] = start();
