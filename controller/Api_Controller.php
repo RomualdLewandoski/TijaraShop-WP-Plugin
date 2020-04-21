@@ -20,7 +20,8 @@ class Api_Controller extends Controller
 
     public function getPerms()
     {
-
+        $this->checkApi();
+        echo "plop";
     }
 
     function checkApi()
