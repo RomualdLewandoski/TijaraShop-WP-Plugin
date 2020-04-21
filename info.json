@@ -1,6 +1,6 @@
 {
   "version" :"1.1",
-  "download_url" : "nothing now",
+  "download_url" : "https://github.com/RomualdLewandoski/TijaraShop-WP-Plugin/raw/master/TijaraShop.zip",
   "required": "5.0",
   "tested" : "5.4",
   "requires_php" : "5.3",
