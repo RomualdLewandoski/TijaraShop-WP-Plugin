@@ -54,8 +54,14 @@ class Api_Model extends Model
         return $obj;
     }
 
-    public function getConfig(){
+    public function getConfig()
+    {
         $query = $this->helper->db->get_where($this->helper->db->getPrefix() . '_shop_Config', array('idConfig' => 1));
         return $query[0];
+    }
+
+    public function isApiValid($key)
+    {
+        return $key == $this->getApiKey();
     }
 }
