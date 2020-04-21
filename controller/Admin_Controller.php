@@ -151,20 +151,6 @@ class Admin_Controller extends Controller
         //todo we ll not use a request here we just have a form to get our logs who are send to a DataTable
     }
 
-    public function adminInstall()
-    {
-        //todo check if install step == 1 if yes redirect
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
-        $request = $this->request();
-        $action = $request->get('action');
-        if ($action == null) {
-            $this->loadView("adminInstall", $data);
-        } else if ($action == "install") {
-            var_dump($_POST);
-        }
-    }
 
     public function getJsonConf()
     {

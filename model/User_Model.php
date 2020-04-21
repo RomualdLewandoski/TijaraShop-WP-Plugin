@@ -17,6 +17,25 @@ class User_Model extends Model
 
     }
 
+    public function createAdminUser($userName, $password)
+    {
+        $userName = htmlspecialchars(trim($userName));
+        $password = htmlspecialchars(trim($password));
+        $cryptPass = $this->cryptPass($password);
+        $data = array(
+            'usernameShopLogin' => $userName,
+            'passwordShopLogin' => $cryptPass,
+            'hasAdmin' => 1,
+            'hasCompta' => 1,
+            'hasProductManagement' => 1,
+            'hasSupplierManagement' => 1,
+            'hasStock' => 1,
+            'hasCaisse' => 1,
+            'isDefaultPass' => 1
+        );
+        return $this->helper->db->insert($this->table, $data) != false;
+    }
+
     public function addUser($request)
     {
 
