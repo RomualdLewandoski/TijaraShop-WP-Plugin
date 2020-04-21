@@ -2,11 +2,22 @@
     TijaraShop / Panneau de Configuration
 </div>
 <div class="container-fluid ">
-    <div class="alert alert-warning mt-3" role="alert">
-        <b>Attention ! </b>Le plugin n'est pas configuré les caisses ne pourront pas fonctionner <a href="admin.php?page=TijaraShop/install"
-                                                                                                    class="alert-link">Procéder
-            à la configuration</a>
-    </div>
+    <?php
+    if ($error != null) {
+        ?>
+        <div class="alert alert-danger mt-3" role="alert">
+            <?= $error ?>
+        </div>
+        <?php
+    }
+    if ($success != null) {
+        ?>
+        <div class="alert alert-success mt-3" role="alert">
+            <?= $success ?>
+        </div>
+        <?php
+    }
+    ?>
     <div class="row">
         <div class="col-lg-3">
             <div class="card card-warning">
