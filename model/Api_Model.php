@@ -8,7 +8,7 @@ class Api_Model extends Model
     public function __construct()
     {
         $this->loadHelper('db');
-        $this->table = $this->helper->db->getPrefix() . '_shop_apicredentials';
+        $this->table = $this->helper->db->getPrefix() . '_shop_ApiCredentials';
     }
 
     /**

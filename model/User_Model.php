@@ -13,7 +13,7 @@ class User_Model extends Model
         $this->loadHelper("db");
         $this->loadHelper("session");
         $this->loadHelper("url");
-        $this->table = $this->helper->db->getPrefix() . '_shop_shoplogin';
+        $this->table = $this->helper->db->getPrefix() . '_shop_ShopLogin';
 
     }
 

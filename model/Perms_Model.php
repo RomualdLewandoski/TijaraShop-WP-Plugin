@@ -10,7 +10,7 @@ class Perms_Model extends Model
         $this->loadHelper('db');
         $this->loadHelper('url');
         $this->loadHelper('session');
-        $this->table = $this->helper->db->getPrefix() . '_shop_permissionmodel';
+        $this->table = $this->helper->db->getPrefix() . '_shop_PermissionModel';
 
     }
 
