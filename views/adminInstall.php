@@ -1,7 +1,25 @@
 <div class="navbar nav bg-light tijara-nav text-black-50">
     TijaraShop / Panneau de Configuration
 </div>
-<div class="container mt-5">
+<div class="container-fluid mt-3">
+    <?php
+    if ($error != null){
+        ?>
+        <div class="alert alert-danger mt-3" role="alert">
+            <?= $error ?>
+        </div>
+        <?php
+    }
+    if ($success != null) {
+        ?>
+        <div class="alert alert-success mt-3" role="alert">
+            <?= $success ?>
+        </div>
+        <?php
+    }
+    ?>
+</div>
+<div class="container mt-2">
     <div class="card col-12 card-success">
         <div class="card-header">
             Installation de TijaraShop
@@ -12,7 +30,7 @@
                      aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
-            <form method="get" action="/">
+            <form method="post" action="<?= $pageUrl;?>&action=install">
                 <div style="height: 0px;background: transparent; color: transparent; z-index: -1000000"
                      data-description="dummyPanel for Chrome auto-fill issue">
                     <input type="text"

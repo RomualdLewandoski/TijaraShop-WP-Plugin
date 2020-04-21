@@ -100,12 +100,11 @@ class Admin_Controller extends Controller
                 $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification de l'utilisateur");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
             }
-        }else if ($action == "deleteUser"){
+        } else if ($action == "deleteUser") {
             $this->model->user->deleteUser($request);
-        }else if ($action == "editPassword"){
+        } else if ($action == "editPassword") {
             $this->model->user->resetPassword($request);
-        }
-        else{
+        } else {
             $this->helper->session->set_flashdata("error", "L'action demandée est inconnue");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
         }
@@ -152,8 +151,19 @@ class Admin_Controller extends Controller
         //todo we ll not use a request here we just have a form to get our logs who are send to a DataTable
     }
 
-    public function adminInstall(){
-        $this->loadView("adminInstall");
+    public function adminInstall()
+    {
+        //todo check if install step == 1 if yes redirect
+        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['error'] = $this->helper->session->flashdata("error");
+        $data['success'] = $this->helper->session->flashdata("success");
+        $request = $this->request();
+        $action = $request->get('action');
+        if ($action == null) {
+            $this->loadView("adminInstall", $data);
+        } else if ($action == "install") {
+            var_dump($_POST);
+        }
     }
 
     public function getJsonConf()
