@@ -51,7 +51,7 @@ class Install_Model extends Model
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
                 }
             }else{
-                $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de la création de la clé API");
+                $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de la création de la clé API =>" .$apiKey);
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
             }
 
