@@ -7,8 +7,8 @@ class Api_Model extends Model
 
     public function __construct()
     {
-        $this->loadHelper('db');
         $this->loadModel('install');
+        $this->loadHelper('db');
         $this->table = $this->helper->db->getPrefix() . '_shop_ApiCredentials';
     }
 
@@ -55,4 +55,8 @@ class Api_Model extends Model
         return $obj;
     }
 
+    public function getConfig(){
+        $query = $this->helper->db->get_where($this->helper->db->getPrefix() . '_shop_Config', array('idConfig' => 1));
+        return $query[0];
+    }
 }
