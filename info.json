@@ -8,7 +8,6 @@
   "sections" : {
     "description": "This is the plugin to connect TijaraShop App to TijaraShop Wordpress",
     "instalation": "Upload the plugin, activate it and it's done, you also need to configure the plugin the first time",
-    "changelog": "<h4>1.4 - 21 Avril 2020</h4><ul><li>Install script</li><li>Base for API</li><li>know bug fixed</li></ul><br><h4>1.2 - 21 Avril 2020</h4><ul><li>Auto update directly from Wordpress Panel</li></ul><br><h4>1.1 - 16 Avril 2020</h4><ul><li>Add MVC mode</li><li>Edit Api</li><li>Edit perms model</li></ul>",
-
+    "changelog": "<h4>1.3 - 21 Avril 2020</h4><ul><li>Install script</li><li>Base for API</li><li>know bug fixed</li></ul><br><h4>1.2 - 21 Avril 2020</h4><ul><li>Auto update directly from Wordpress Panel</li></ul><br><h4>1.1 - 16 Avril 2020</h4><ul><li>Add MVC mode</li><li>Edit Api</li><li>Edit perms model</li></ul>"
   }
 }
