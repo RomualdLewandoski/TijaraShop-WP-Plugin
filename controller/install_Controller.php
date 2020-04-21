@@ -1,7 +1,7 @@
 <?php
 
 
-class install_Controller extends Controller
+class Install_Controller extends Controller
 {
     public function __construct()
     {
@@ -46,9 +46,17 @@ class install_Controller extends Controller
                                 statusShopLoginLog INT
 );";
 
+        $shopConfigTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_config(
+                                idConfig INT AUTO_INCREMENT PRIMARY KEY,
+                                host VARCHAR(255) NOT NULL,
+                                method VARCHAR(255) NOT NULL,
+                                step INT
+)";
+
         $this->helper->db->custom($apiCredentialsTable);
         $this->helper->db->custom($permissionModelTable);
         $this->helper->db->custom($shopLoginTable);
         $this->helper->db->custom($shopLoginLogTable);
+        $this->helper->db->custom($shopConfigTable);
     }
 }

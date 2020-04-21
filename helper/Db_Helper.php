@@ -74,9 +74,9 @@ class Db_Helper extends Helper
             foreach ($like as $key => $value) {
                 if (is_array($value)) {
                     $type = $value[1];
-                    if ($type == "before") {
+                    if ($type == "after") {
                         $slug = "%" . $value[0];
-                    } else if ($type == "after") {
+                    } else if ($type == "before") {
                         $slug = $value[0] . "%";
                     } else {
                         $slug = "%" . $value[0] . "%";

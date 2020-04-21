@@ -21,7 +21,10 @@ class Perms_Model extends Model
     public function addPerms($request)
     {
         $name = htmlspecialchars($request->get('permsName'));
-
+        if ($this->isPermsNameUsed($name)) {
+            $this->helper->session->set_flashdata("error", "Un modèle de permission porte déja ce nom");
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+        }
         $admin = $request->get('permsAdmin') != null ? 1 : 0;
         $compta = $request->get('permsCompta') != null ? 1 : 0;
         $product = $request->get('permsProducts') != null ? 1 : 0;
@@ -55,6 +58,11 @@ class Perms_Model extends Model
         return $this->helper->db->get($this->table);
     }
 
+    public function getPermsLike($request)
+    {
+        return $this->helper->db->get_like($this->table, array('namePermissionModel' => array($request->get('searchPermsName'), 'before')));
+    }
+
     /**
      * @param $request
      * @description Edit a specific perms model (By his ID)
@@ -63,7 +71,14 @@ class Perms_Model extends Model
     {
         $id = $request->get('id');
         if ($this->isPermsExist($id)) {
+            $oldPerms = $this->getPerm($id);
             $name = htmlspecialchars($request->get('permsName'));
+            if ($name != $oldPerms->namePermissionModel) {
+                if ($this->isPermsNameUsed($name)) {
+                    $this->helper->session->set_flashdata("error", "Un modèle de permission porte déja ce nom");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+                }
+            }
             $admin = $request->get('permsAdmin') != null ? 1 : 0;
             $compta = $request->get('permsCompta') != null ? 1 : 0;
             $product = $request->get('permsProducts') != null ? 1 : 0;
@@ -135,5 +150,11 @@ class Perms_Model extends Model
     public function isPermsExist($id)
     {
         return count($this->helper->db->get_where($this->table, array('idPermissionModel' => $id))) != 0 ? TRUE : FALSE;
+    }
+
+    public function isPermsNameUsed($name)
+    {
+        return count($this->helper->db->get_where($this->table, array('namePermissionModel' => $name))) != 0 ? TRUE : FALSE;
+
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-class admin_Controller extends Controller
+class Admin_Controller extends Controller
 {
     public function __construct()
     {
@@ -70,7 +70,6 @@ class admin_Controller extends Controller
 
     public function adminUsers()
     {
-        //todo we ll use a request here with subPage to be sure that we are doing something like addUser, editUser + id, deleteUser + id or nothing TO list users
         $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['error'] = $this->helper->session->flashdata("error");
         $data['success'] = $this->helper->session->flashdata("success");
@@ -122,6 +121,10 @@ class admin_Controller extends Controller
         if ($action == null) {
             $data['perms'] = $this->model->perms->listPerms();
             $this->loadView("adminPermsList", $data);
+        } else if ($action == "search") {
+            $data['perms'] = $this->model->perms->getPermsLike($request);
+            $data['search'] = $request->get('searchPermsName');
+            $this->loadView('adminPermsList', $data);
         } else if ($action == "addPermsModel") {
             if ($this->helper->form->verify(array('permsName'))) {
                 $this->model->perms->addPerms($request);
@@ -149,6 +152,9 @@ class admin_Controller extends Controller
         //todo we ll not use a request here we just have a form to get our logs who are send to a DataTable
     }
 
+    public function adminInstall(){
+        $this->loadView("adminInstall");
+    }
 
     public function getJsonConf()
     {

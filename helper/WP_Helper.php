@@ -1,7 +1,7 @@
 <?php
 
 
-class WP_Helper extends Helper
+class Wp_Helper extends Helper
 {
 
     public function addStyle($name)

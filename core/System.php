@@ -63,12 +63,13 @@ class System
         $this->helper->wp->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", 'Admin', 'adminUsers');
         $this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Admin', 'adminPerms');
         $this->helper->wp->addSubMenu("TijaraShop", "Logs user", "manage_options", "TijaraShop/logs", 'Admin', 'adminLogs');
+        $this->helper->wp->addSubMenu("null", "Install TijaraShop", "manage_options", "TijaraShop/install", 'Admin', 'adminInstall');
 
     }
 
     public function loadController($controller)
     {
-        $realController = $controller . '_Controller';
+        $realController = ucfirst($controller) . '_Controller';
         require_once wpPluginFolder . '/controller/' . $realController . '.php';
         if (!isset($this->controller)) {
             $this->controller = new stdClass();
@@ -79,7 +80,7 @@ class System
 
     public function loadModel($model)
     {
-        $realModel = $model . '_Model';
+        $realModel = ucfirst($model) . '_Model';
         require_once wpPluginFolder . 'model/' . $realModel . '.php';
         if (!isset($this->model)) {
             $this->model = new stdClass();
@@ -109,7 +110,7 @@ class System
 
     public function loadHelper($helper)
     {
-        $realHelper = $helper . '_Helper';
+        $realHelper = ucfirst($helper) . '_Helper';
         require_once wpPluginFolder . 'helper/' . $realHelper . '.php';
         if (!isset($this->helper)) {
             $this->helper = new stdClass();

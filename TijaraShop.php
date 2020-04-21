@@ -19,17 +19,25 @@ function start()
 }
 
 register_activation_hook(__FILE__, 'install');
-add_filter('plugins_api', 'misha_plugin_info', 20, 3);
+add_filter('plugins_api', 'tijarashop_plugin_info', 20, 3);
 add_filter('site_transient_update_plugins', 'tijarashop_push_update' );
+add_action( 'upgrader_process_complete', 'tijarashop_after_update', 10, 2 );
 
 // Display the link with the plugin meta.
 add_filter( 'plugin_row_meta', 'plugin_links' , 10, 4 );
+
+function tijarashop_after_update( $upgrader_object, $options ) {
+    if ( $options['action'] == 'update' && $options['type'] === 'plugin' )  {
+        // just clean the cache when new plugin version is installed
+        delete_transient( 'tijarashop_upgrade_TijaraShop' );
+    }
+}
 
 function install()
 {
     $GLOBALS['tijarashop']->install();
 }
-function misha_plugin_info( $res, $action, $args ){
+function tijarashop_plugin_info( $res, $action, $args ){
 
     // do nothing if this is not about getting plugin information
     if( 'plugin_information' !== $action ) {
@@ -125,22 +133,21 @@ function tijarashop_push_update( $transient ){
 
         // info.json is the file with the actual plugin information on your server
         $remote = wp_remote_get( 'https://raw.githubusercontent.com/RomualdLewandoski/TijaraShop-WP-Plugin/master/info.json', array(
-                'timeout' => 10,
+                'timeout' => 20,
                 'headers' => array(
                     'Accept' => 'application/json'
                 ) )
         );
 
         if ( !is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && !empty( $remote['body'] ) ) {
-            set_transient( 'tijarashop_upgrade_TijaraShop', $remote, 1 ); // 12 hours cache
+            set_transient( 'tijarashop_upgrade_TijaraShop', $remote, 60 ); // 12 hours cache
         }
 
     }
 
-    if( $remote ) {
+    if( !is_wp_error($remote) && $remote ) {
 
         $remote = json_decode( $remote['body'] );
-
         // your installed plugin version should be on the line below! You can obtain it dynamically of course
         if( $remote && version_compare( version, $remote->version, '<' ) && version_compare($remote->requires, get_bloginfo('version'), '<' ) ) {
             $res = new stdClass();

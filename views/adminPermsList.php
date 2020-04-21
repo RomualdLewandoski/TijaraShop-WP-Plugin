@@ -25,11 +25,16 @@
                 <div class="card-header">
                     <ul class="nav">
                         <li class="nav-item">
-                            Liste des modèles de permission
+                            Liste des modèles de permission <?php
+                            if ($search != null){
+                                echo "avec le nom du modele commencant par <strong>\"".$search."\"</strong> <a href='".$pageUrl."'>Voir toute la liste</a>";
+                            }
+                            ?>
                         </li>
 
                         <li class="nav-item ml-auto mr-2">
-                            <form action="" method="GET">
+                            <form action="<?= $pageUrl ?>" method="post">
+                                <input type="hidden" name="action" value="search">
                                 <div class="input-group input-group-sm mb-2">
                                     <input type="text" class="form-control" name="searchPermsName">
                                     <div class="input-group-prepend">

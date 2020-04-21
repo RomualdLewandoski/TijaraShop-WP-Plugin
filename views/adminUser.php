@@ -26,7 +26,7 @@
                         <li class="nav-item">
                             Liste des utilisateurs <?php
                             if ($search != null){
-                                echo "avec le nom d'utilisateur commencant par <strong>\"".$search."\"</strong> <a href='".$pageUrl."'>Voir toutela liste</a>";
+                                echo "avec le nom d'utilisateur commencant par <strong>\"".$search."\"</strong> <a href='".$pageUrl."'>Voir toute la liste</a>";
                             }
                             ?>
                         </li>

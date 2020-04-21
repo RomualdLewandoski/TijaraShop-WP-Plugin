@@ -23,7 +23,7 @@ die('This file is used for development purposes only.');
  * @property Helper $helper                         Helper Class
  * @property Db_Helper $db                          This is our query builder
  * @property Request $request                       This is our Request Library
- * @property WP_Helper $wp                          This is our Wordpress Helper
+ * @property Wp_Helper $wp                          This is our Wordpress Helper
  * @property Form_Helper $form                      This is our Form Helper
  * @property Route_Helper $route                    This is our Route Helper
  * @property Session_Helper $session                Session Helper Class

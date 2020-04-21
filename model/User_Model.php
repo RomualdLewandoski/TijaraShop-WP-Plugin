@@ -19,6 +19,7 @@ class User_Model extends Model
 
     public function addUser($request)
     {
+
         $userName = htmlspecialchars(trim($request->get('addUserName')));
         if ($this->isUserExist($userName)) {
             $this->helper->session->set_flashdata("error", "L'utilisateur existe déjà dans la base de donnée");
@@ -79,7 +80,6 @@ class User_Model extends Model
     public function isUserExist($name)
     {
         return count($this->helper->db->get_where($this->table, array('usernameShopLogin' => $name))) != 0 ? TRUE : FALSE;
-
     }
 
     public function getUsers()
@@ -89,7 +89,7 @@ class User_Model extends Model
 
     public function getUserLike($request)
     {
-        return $this->helper->db->get_like($this->table, array('usernameShopLogin' => array($request->get('searchUserName'), 'after')));
+        return $this->helper->db->get_like($this->table, array('usernameShopLogin' => array($request->get('searchUserName'), 'before')));
     }
 
     public function editUser($request)

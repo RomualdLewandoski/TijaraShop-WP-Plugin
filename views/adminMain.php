@@ -3,7 +3,7 @@
 </div>
 <div class="container-fluid ">
     <div class="alert alert-warning mt-3" role="alert">
-        <b>Attention ! </b>Le plugin n'est pas configuré les caisses ne pourront pas fonctionner <a href="#"
+        <b>Attention ! </b>Le plugin n'est pas configuré les caisses ne pourront pas fonctionner <a href="admin.php?page=TijaraShop/install"
                                                                                                     class="alert-link">Procéder
             à la configuration</a>
     </div>
