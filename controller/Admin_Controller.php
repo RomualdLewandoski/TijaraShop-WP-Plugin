@@ -6,7 +6,6 @@ class Admin_Controller extends Controller
     public function __construct()
     {
         $this->loadModel('install');
-
         $this->loadModel('api');
         $this->loadModel('perms');
         $this->loadModel("user");
@@ -26,20 +25,19 @@ class Admin_Controller extends Controller
         $this->helper->wp->getScript('jquery-3.4.1.min');
         $this->helper->wp->getScript('datatables');
         $this->helper->wp->getScript('bootstrap.bundle.min');
-        if (!$this->model->install->isInstall() && $this->request()->get('page') != 'TijaraShop/install'){
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
-        }
+
     }
 
     public function index()
     {
+        $this->checkInstall();
         $data['apiKey'] = $this->model->api->getApiKey();
         $this->loadView('adminMain', $data);
     }
 
     public function adminApi()
     {
-
+        $this->checkInstall();
         $request = $this->request();
         $action = $request->get('action');
         if ($action == null) {
@@ -74,6 +72,7 @@ class Admin_Controller extends Controller
 
     public function adminUsers()
     {
+        $this->checkInstall();
         $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['error'] = $this->helper->session->flashdata("error");
         $data['success'] = $this->helper->session->flashdata("success");
@@ -116,6 +115,7 @@ class Admin_Controller extends Controller
 
     public function adminPerms()
     {
+        $this->checkInstall();
         $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['error'] = $this->helper->session->flashdata("error");
         $data['success'] = $this->helper->session->flashdata("success");
@@ -152,6 +152,7 @@ class Admin_Controller extends Controller
 
     public function adminLogs()
     {
+        $this->checkInstall();
         //todo we ll not use a request here we just have a form to get our logs who are send to a DataTable
     }
 
@@ -160,5 +161,12 @@ class Admin_Controller extends Controller
     {
         $json_string = json_encode($this->model->api->generateJson(), JSON_PRETTY_PRINT);
         return $json_string;
+    }
+
+    function checkInstall()
+    {
+        if (!$this->model->install->isInstall()) {
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
+        }
     }
 }
