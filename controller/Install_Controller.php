@@ -11,6 +11,8 @@ class Install_Controller extends Controller
         $this->loadHelper('session');
         $this->loadHelper('url');
 
+        $this->loadModel("install");
+
         $this->helper->wp->addStyle('bootstrap');
         $this->helper->wp->addStyle('TijaraShop');
         $this->helper->wp->addStyle('datatables');
