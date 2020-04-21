@@ -9,7 +9,7 @@ License: Closed-Sources
  */
 
 define("version", 1.2);
-define("startTime", date("d/m/Y H:i"));
+define("apiVersion", "1.2");
 include_once plugin_dir_path(__FILE__) . '/core/System.php';
 $GLOBALS['tijarashop'] = start();
 

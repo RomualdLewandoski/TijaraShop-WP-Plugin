@@ -14,8 +14,7 @@ class Api_Controller extends Controller
     {
         $obj = new stdClass();
         $obj->state = "READY";
-        $obj->version = version;
-        $obj->startTime = startTime;
+        $obj->version = apiVersion;
         echo json_encode($obj);
     }
 
