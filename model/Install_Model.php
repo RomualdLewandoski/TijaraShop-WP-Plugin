@@ -33,7 +33,7 @@ class Install_Model extends Model
                 'method' => $methodInstall,
                 'step' => 1
             );
-            if ($apiKey == null) {
+            if ($apiKey == null  OR $apiKey == "") {
                 $apiKey = mb_strtoupper($this->helper->randomizer->randomizeString(8));
             }
             if ($this->model->api->saveApiKey($apiKey)){
