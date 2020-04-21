@@ -6,6 +6,7 @@ class Api_Controller extends Controller
     public function __construct()
     {
         $this->loadModel('api');
+        $this->loadModel('perms');
         $this->loadHelper('url');
 
     }
@@ -21,7 +22,10 @@ class Api_Controller extends Controller
     public function getPerms()
     {
         $this->checkApi();
-        echo "plop";
+        $obj = new stdClass();
+        $perms = $this->model->perms->listPerms();
+        $obj->perms = $perms;
+        echo json_encode($obj);
     }
 
     function checkApi()
