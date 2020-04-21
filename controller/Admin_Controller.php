@@ -5,6 +5,8 @@ class Admin_Controller extends Controller
 {
     public function __construct()
     {
+        $this->loadModel('install');
+
         $this->loadModel('api');
         $this->loadModel('perms');
         $this->loadModel("user");
@@ -24,7 +26,9 @@ class Admin_Controller extends Controller
         $this->helper->wp->getScript('jquery-3.4.1.min');
         $this->helper->wp->getScript('datatables');
         $this->helper->wp->getScript('bootstrap.bundle.min');
-
+        if (!$this->model->install->isInstall()){
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
+        }
     }
 
     public function index()

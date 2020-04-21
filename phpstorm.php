@@ -32,6 +32,7 @@ die('This file is used for development purposes only.');
  * @property Perms_Model $perms                     Our Perms model
  * @property Randomizer_Helper $randomizer          Utils for generate Random string/int etc
  * @property User_Model $user                       Our user model
+ * @property Install_Model $install                 Our install model
  */
 class System
 {

@@ -3,8 +3,12 @@
 
 class Install_Model extends Model
 {
+    protected $table;
+
     public function __construct()
     {
+        $this->loadHelper('db');
+        $this->table = $this->helper->db->getPrefix() . '_shop_config';
     }
 
     public function makeInstall($request)
@@ -16,8 +20,13 @@ class Install_Model extends Model
 
     public function isInstall()
     {
-        //todo check on db if Install is OK or NOT
-        return false;
+        $query = $this->helper->db->get_where($this->table, array('idConfig' => 1));
+        if (count($query) == 0) {
+            return false;
+        } else {
+            $data = $query[0];
+            return $data->step == 1;
+        }
     }
 
 
