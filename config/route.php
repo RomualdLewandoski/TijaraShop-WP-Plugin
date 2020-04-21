@@ -1,5 +1,6 @@
 <?php
 
+$route['api/users'] = "api/getUsers";
 $route['api/perms'] = "api/getPerms";
 //$route['api/main/$?'] = "admin/test";
 $route['api/main'] = "api/index";
