@@ -8,6 +8,7 @@ class Api_Model extends Model
     public function __construct()
     {
         $this->loadHelper('db');
+        $this->loadModel('install');
         $this->table = $this->helper->db->getPrefix() . '_shop_ApiCredentials';
     }
 
@@ -44,11 +45,11 @@ class Api_Model extends Model
      */
     public function generateJson()
     {
+        $config = $this->model->install->getConfig();
         $obj = new stdClass();
-        $obj->method = "install";
+        $obj->method = $config->method;
         $obj->database = "sqlite";
-        $obj->init = "false";
-        $obj->host = site_url()."/";
+        $obj->host = $config->host;
         $obj->api = "api";
         $obj->privateKey = $this->getApiKey();
         return $obj;

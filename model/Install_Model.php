@@ -70,5 +70,9 @@ class Install_Model extends Model
         }
     }
 
+    public function getConfig(){
+        return $this->helper->db->get_where($this->table, array('idConfig' => 1))[0];
+    }
+
 
 }
