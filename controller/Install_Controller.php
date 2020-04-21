@@ -63,7 +63,7 @@ class Install_Controller extends Controller
                                 statusShopLoginLog INT
 );";
 
-        $shopConfigTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_config(
+        $shopConfigTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Config(
                                 idConfig INT AUTO_INCREMENT PRIMARY KEY,
                                 host VARCHAR(255) NOT NULL,
                                 method VARCHAR(255) NOT NULL,

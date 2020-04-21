@@ -13,7 +13,7 @@ class Install_Model extends Model
         $this->loadHelper('randomizer');
         $this->loadModel('api');
         $this->loadModel('user');
-        $this->table = $this->helper->db->getPrefix() . '_shop_config';
+        $this->table = $this->helper->db->getPrefix() . '_shop_Config';
     }
 
     public function makeInstall($request)
