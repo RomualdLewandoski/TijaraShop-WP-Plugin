@@ -3,7 +3,7 @@
 /*
 Plugin Name: TijaraShop Caisse Plugin
 Description: Plugin suplémentaire au bon fonctionnement de la caisse
-Version: 1.2
+Version: 1.2Test3.0
 Author: Romuald Detrait
 License: Closed-Sources
  */
