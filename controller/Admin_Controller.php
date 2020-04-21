@@ -31,6 +31,8 @@ class Admin_Controller extends Controller
     public function index()
     {
         $this->checkInstall();
+        $data['error'] = $this->helper->session->flashdata("error");
+        $data['success'] = $this->helper->session->flashdata("success");
         $data['apiKey'] = $this->model->api->getApiKey();
         $this->loadView('adminMain', $data);
     }
