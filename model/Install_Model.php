@@ -36,18 +36,25 @@ class Install_Model extends Model
             if ($apiKey == null) {
                 $apiKey = mb_strtoupper($this->helper->randomizer->randomizeString(8));
             }
-            $this->model->api->saveApiKey($apiKey);
-            $this->model->user->createAdminUser($adminName, $adminPass);
-            if (!$this->helper->db->insert($this->table, $configData)) {
-                //todo error
-                $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de l'installation du plugin");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
-            } else {
-                //todo success
-                $this->helper->session->set_flashdata("success", "L'installation est terminée avec succès vous pouvez dès a présent configurer la caisse ou utiliser le plugin WordPress");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop");
+            if ($this->model->api->saveApiKey($apiKey)){
+                if ($this->model->user->createAdminUser($adminName, $adminPass)){
+                    if (!$this->helper->db->insert($this->table, $configData)) {
+                        $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de l'installation du plugin");
+                        $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
+                    } else {
+                        $this->helper->session->set_flashdata("success", "L'installation est terminée avec succès vous pouvez dès a présent configurer la caisse ou utiliser le plugin WordPress");
+                        $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop");
 
+                    }
+                }else{
+                    $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de la création du compte administrateur");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
+                }
+            }else{
+                $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de la création de la clé API");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
             }
+
 
         }
     }
