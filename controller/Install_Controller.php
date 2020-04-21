@@ -77,7 +77,8 @@ class Install_Controller extends Controller
         $this->helper->db->custom($shopConfigTable);
     }
 
-    public function displayInstall(){
+    public function displayInstall()
+    {
         $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['error'] = $this->helper->session->flashdata("error");
         $data['success'] = $this->helper->session->flashdata("success");
@@ -86,7 +87,12 @@ class Install_Controller extends Controller
         if ($action == null) {
             $this->loadView("adminInstall", $data);
         } else if ($action == "install") {
-            var_dump($_POST);
+            if ($this->helper->form->verify(array('siteUrl', 'methodInstall', 'adminName', 'adminPassword', 'adminPasswordConf'))) {
+                $this->model->install->makeInstall($request);
+            } else {
+                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire d'installation");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
+            }
         }
     }
 }

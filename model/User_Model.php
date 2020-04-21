@@ -31,7 +31,7 @@ class User_Model extends Model
             'hasSupplierManagement' => 1,
             'hasStock' => 1,
             'hasCaisse' => 1,
-            'isDefaultPass' => 1
+            'isDefaultPass' => 0
         );
         return $this->helper->db->insert($this->table, $data) != false;
     }
