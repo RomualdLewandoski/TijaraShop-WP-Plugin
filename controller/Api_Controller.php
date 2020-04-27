@@ -62,7 +62,7 @@ class Api_Controller extends Controller
             $type = strtolower($request->get('type'));
             $action = strtolower($request->get('action'));
             echo $request->get('value');
-            $value = json_decode($request->get('value'));
+            $value = json_decode(base64_decode($request->get('value')));
             switch ($type) {
                 case "user":
                     switch ($action) {
