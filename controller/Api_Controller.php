@@ -65,7 +65,7 @@ class Api_Controller extends Controller
             switch ($type) {
                 case "user":
                     switch ($action) {
-                        case "editPass":
+                        case "editpass":
                             $id = $value->idWp;
                             $newPass = $value->newPass;
                             $obj = $this->model->user->updatePassword($id, $newPass);
