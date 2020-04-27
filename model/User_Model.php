@@ -206,7 +206,7 @@ class User_Model extends Model
         }
     }
 
-    public function updatePassword($idShopLogin,$newPass)
+    public function updatePassword($idShopLogin, $newPass)
     {
         $data = array(
             "passwordShopLogin" => $newPass,

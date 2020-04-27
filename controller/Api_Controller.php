@@ -68,6 +68,7 @@ class Api_Controller extends Controller
                         case "editpass":
                             $id = $value->idWp;
                             $newPass = $value->newPass;
+                            echo "DEBUG: ".$id . " " . $newPass;
                             $obj = $this->model->user->updatePassword($id, $newPass);
                             break;
 
