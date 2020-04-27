@@ -61,16 +61,13 @@ class Api_Controller extends Controller
         if ($this->helper->form->verify(array('type', 'action', 'value'))) {
             $type = strtolower($request->get('type'));
             $action = strtolower($request->get('action'));
-            echo $request->get('value');
             $value = json_decode(base64_decode($request->get('value')));
             switch ($type) {
                 case "user":
                     switch ($action) {
                         case "editpass":
-                            var_dump($value);
                             $id = $value->idWp;
                             $newPass = $value->newPass;
-                            echo "DEBUG: ".$id . " " . $newPass;
                             $obj = $this->model->user->updatePassword($id, $newPass);
                             break;
 
