@@ -60,7 +60,7 @@ class Api_Controller extends Controller
         $request = $this->request();
         if ($this->helper->form->verify(array('type', 'action', 'value'))) {
             $type = strtolower($request->get('type'));
-            $action = strtotime($request->get('action'));
+            $action = strtolower($request->get('action'));
             $value = json_encode($request->get('value'));
             switch ($type) {
                 case "user":
