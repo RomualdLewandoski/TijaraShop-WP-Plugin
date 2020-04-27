@@ -66,6 +66,7 @@ class Api_Controller extends Controller
                 case "user":
                     switch ($action) {
                         case "editpass":
+                            var_dump($value);
                             $id = $value->idWp;
                             $newPass = $value->newPass;
                             echo "DEBUG: ".$id . " " . $newPass;
