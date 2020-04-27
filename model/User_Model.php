@@ -206,5 +206,23 @@ class User_Model extends Model
         }
     }
 
+    public function updatePassword($request)
+    {
+        $idShopLogin = $request->get('idWp');
+        $newPass = $request->get('newPass');
+        $data = array(
+            "passwordShopLogin" => $newPass,
+            "isDefaultPass" => 0
+        );
+        $obj = new stdClass();
+        if (!$this->helper->db->update($this->table, $data, array('idShopLogin' => $idShopLogin))) {
+            $obj->state = 1;
+            $obj->error = "Erreur interne dans l'api lors de la mise a jour du mot de passe";
+        } else {
+            $obj->state = 0;
+        }
+        return $obj;
+    }
+
 
 }

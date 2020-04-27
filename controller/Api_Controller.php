@@ -9,6 +9,7 @@ class Api_Controller extends Controller
         $this->loadModel('perms');
         $this->loadModel('user');
         $this->loadHelper('url');
+        $this->loadHelper('form');
 
     }
 
@@ -35,6 +36,20 @@ class Api_Controller extends Controller
         $obj = new stdClass();
         $users = $this->model->user->getUsers();
         $obj->users = $users;
+        echo json_encode($obj);
+    }
+
+    public function changeUserPass()
+    {
+        $this->checkApi();
+        $obj = new stdClass();
+        $request = $this->request();
+        if ($this->helper->form->verify(array('idWp', 'newPass'))) {
+            $obj = $this->model->user->updatePassword($request);
+        } else {
+            $obj->state = 1;
+            $obj->error = "Des champs sont manquants dans l'envoie de la modification du login";
+        }
         echo json_encode($obj);
     }
 
