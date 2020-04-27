@@ -61,6 +61,7 @@ class Api_Controller extends Controller
         if ($this->helper->form->verify(array('type', 'action', 'value'))) {
             $type = strtolower($request->get('type'));
             $action = strtolower($request->get('action'));
+            echo $request->get('value');
             $value = json_decode($request->get('value'));
             switch ($type) {
                 case "user":
