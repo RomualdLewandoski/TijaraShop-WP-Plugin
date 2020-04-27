@@ -1,5 +1,5 @@
 <?php
-
+$route['api/update'] = "api/updater";
 $route['api/users/changepass'] = "api/changeUserPass";
 $route['api/users'] = "api/getUsers";
 $route['api/perms'] = "api/getPerms";

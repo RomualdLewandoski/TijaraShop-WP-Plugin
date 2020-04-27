@@ -206,10 +206,8 @@ class User_Model extends Model
         }
     }
 
-    public function updatePassword($request)
+    public function updatePassword($idShopLogin,$newPass)
     {
-        $idShopLogin = $request->get('idWp');
-        $newPass = $request->get('newPass');
         $data = array(
             "passwordShopLogin" => $newPass,
             "isDefaultPass" => 0

@@ -45,10 +45,52 @@ class Api_Controller extends Controller
         $obj = new stdClass();
         $request = $this->request();
         if ($this->helper->form->verify(array('idWp', 'newPass'))) {
-            $obj = $this->model->user->updatePassword($request);
+            $obj = $this->model->user->updatePassword($request->get('idWp'), $request->get('newPass'));
         } else {
             $obj->state = 1;
             $obj->error = "Des champs sont manquants dans l'envoie de la modification du login";
+        }
+        echo json_encode($obj);
+    }
+
+    public function updater()
+    {
+        $this->checkApi();
+        $obj = new stdClass();
+        $request = $this->request();
+        if ($this->helper->form->verify(array('type', 'action', 'value'))) {
+            $type = strtolower($request->get('type'));
+            $action = strtotime($request->get('action'));
+            $value = json_decode($request->get('value'));
+            switch ($type) {
+                case "user":
+                    switch ($action) {
+                        case "editPass":
+                            $id = $value->idWp;
+                            $newPass = $value->newPass;
+                            $obj = $this->model->user->updatePassword($id, $newPass);
+                            break;
+
+                        default:
+                            $obj->state = 1;
+                            $obj->error = "Unknown user action";
+                    }
+                    //todo createUser, deleteUser, editUser
+                    break;
+                case "perms":
+                    //todo create, edit, delete
+                    break;
+                case "supplier":
+                    //todo add, edit, delete
+                    break;
+
+                default:
+                    $obj->state = 1;
+                    $obj->error = "Unknown type";
+            }
+        } else {
+            $obj->state = 1;
+            $obj->error = "Des champs sont manquants dans l'envoie de l'UpdateThread";
         }
         echo json_encode($obj);
     }
