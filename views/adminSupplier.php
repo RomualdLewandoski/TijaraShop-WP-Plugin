@@ -26,10 +26,43 @@
                         <li class="nav-item">
                             Liste des fournisseurs
                         </li>
+                        <li class="nav-item ml-auto mr-2">
+                            <a href="<?= $pageUrl ?>&action=addSupplier" class="btn btn-sm btn-success">Ajouter un
+                                fournisseur</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body">
-                    coucou
+                    ICI NOUS AVONT UN TABLEAU AVEC L'UTILISATION DE DATATABLES LES INFOS A AFFICHER SONT: #ID, RAISON
+                    SOCIALE, NOM, PRENOM, TEL, ADRESSE, ACTIONS (VOIR, EDITER, SUPPRIMER)
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Raison sociale</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Tel</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>SARL Dupuis</td>
+                            <td>Dupont</td>
+                            <td>Bernard</td>
+                            <td>0699592756</td>
+                            <td>Appt 29 Tour Fourier Rue de Fecamp 62300 Lens</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-success">Voir</button>
+                                <button type="button" class="btn btn-sm btn-warning">Editer</button>
+                                <button type="button" class="btn btn-sm btn-danger">Supprimer</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
