@@ -32,11 +32,9 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-body">
-                    ICI NOUS AVONT UN TABLEAU AVEC L'UTILISATION DE DATATABLES LES INFOS A AFFICHER SONT: #ID, RAISON
-                    SOCIALE, NOM, PRENOM, TEL, ADRESSE, ACTIONS (VOIR, EDITER, SUPPRIMER)
-                    <table class="table table-responsive">
-                        <thead>
+                <div class="card-body table-responsive">
+                    <table class="table " id="myTable">
+                        <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Raison sociale</th>
@@ -63,6 +61,14 @@
                         </tr>
                         </tbody>
                     </table>
+                    <script>
+                        $(document).ready(function () {
+                            $('#myTable').dataTable({
+                                
+                            });
+                        });
+                    </script>
+
                 </div>
             </div>
         </div>
