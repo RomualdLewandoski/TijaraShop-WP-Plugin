@@ -11,10 +11,26 @@
         <?php
     }
     if ($success != null) {
+        ?>
+        <div class="alert alert-success mt-3" role="alert">
+            <?= $success ?>
+        </div>
+        <?php
+    }
     ?>
-    <div class="alert alert-success mt-3" role="alert">
-        <?= $success ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary col-12">
+                <div class="card-header">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            Liste des fournisseurs
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    coucou
+                </div>
+            </div>
+        </div>
     </div>
-<?php
-}
-?>
