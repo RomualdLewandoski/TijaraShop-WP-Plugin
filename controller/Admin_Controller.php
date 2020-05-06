@@ -172,7 +172,16 @@ class Admin_Controller extends Controller
         }
     }
 
-    public function adminSupplier(){
-        echo "salut";
+    public function adminSupplier()
+    {
+        $this->checkInstall();
+        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['error'] = $this->helper->session->flashdata("error");
+        $data['success'] = $this->helper->session->flashdata("success");
+        $request = $this->request();
+        $action = $request->get('action');
+        if ($action == null) {
+            $this->loadView('adminSupplier', $data);
+        }
     }
 }
