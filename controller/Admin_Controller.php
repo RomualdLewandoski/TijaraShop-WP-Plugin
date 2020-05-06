@@ -171,4 +171,8 @@ class Admin_Controller extends Controller
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
         }
     }
+
+    public function adminSupplier(){
+        echo "salut";
+    }
 }
