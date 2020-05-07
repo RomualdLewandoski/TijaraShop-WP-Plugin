@@ -43,6 +43,7 @@ class System
         require_once wpPluginFolder . 'Routes/route.php';
         $router = new Route();
         $router->loadRoutes($route);
+
     }
 
     public function request()

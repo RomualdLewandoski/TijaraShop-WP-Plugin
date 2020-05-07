@@ -33,11 +33,11 @@ class Install_Model extends Model
                 'method' => $methodInstall,
                 'step' => 1
             );
-            if ($apiKey == null  OR $apiKey == "") {
+            if ($apiKey == null OR $apiKey == "") {
                 $apiKey = mb_strtoupper($this->helper->randomizer->randomizeString(8));
             }
-            if ($this->model->api->saveApiKey($apiKey)){
-                if ($this->model->user->createAdminUser($adminName, $adminPass)){
+            if ($this->model->api->saveApiKey($apiKey)) {
+                if ($this->model->user->createAdminUser($adminName, $adminPass)) {
                     if (!$this->helper->db->insert($this->table, $configData)) {
                         $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de l'installation du plugin");
                         $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
@@ -46,12 +46,12 @@ class Install_Model extends Model
                         $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop");
 
                     }
-                }else{
+                } else {
                     $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de la création du compte administrateur");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
                 }
-            }else{
-                $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de la création de la clé API =>" .$apiKey);
+            } else {
+                $this->helper->session->set_flashdata('error', "Une erreur interne est survenue lors de la création de la clé API =>" . $apiKey);
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
             }
 
@@ -70,7 +70,8 @@ class Install_Model extends Model
         }
     }
 
-    public function getConfig(){
+    public function getConfig()
+    {
         $query = $this->helper->db->get_where($this->table, array('idConfig' => 1));
         return $query[0];
     }
