@@ -401,6 +401,47 @@
                     </div>
                 </div>
             </div>
+            <div class="card card-danger mt-1 col-12">
+                <div class="card-header">
+                    Dernière commande le **
+                    <div class="row mt-4 mb-1 aic">
+                        <div class="col-md-5">Commande en cours</div>
+                        <div class="col-md-5"><input type="text" disabled class="form-control"></div>
+                    </div>
+                    <div class="row mb-1 aic">
+                        <div class="col-md-5">
+                            BL à facturer
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-1 aic">
+                        <div class="col-md-5">
+                            Factures à régler
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-1 aic">
+                        <div class="col-md-5">
+                            Avoirs
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-1 aic">
+                        <div class="col-md-5">
+                            <strong>Solde théorique</strong>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--END 2nd col -->
         </div>
     </div>
