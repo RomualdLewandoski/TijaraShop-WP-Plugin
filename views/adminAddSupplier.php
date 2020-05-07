@@ -506,34 +506,35 @@
                 </div>
                 <!-- END 4th col -->
             </div>
-
-            <div class="card card-danger col-12">
-                <div class="card-header">
-                    <div class="row text-center mb-2">
-                        <div class="col-md-2 "></div>
-                        <div class="col-md-3 "><h6 class="card-title-info">Nom / Prénom</h6></div>
-                        <div class="col-md-5 "><h6 class="card-title-info">Mail</h6></div>
-                        <div class="col-md-2 "><h6 class="card-title-info">Tel</h6></div>
+            <div class="col-md-12">
+                <div class="card card-danger col-12">
+                    <div class="card-header">
+                        <div class="row text-center mb-2">
+                            <div class="col-md-2 "></div>
+                            <div class="col-md-3 "><h6 class="card-title-info">Nom / Prénom</h6></div>
+                            <div class="col-md-5 "><h6 class="card-title-info">Mail</h6></div>
+                            <div class="col-md-2 "><h6 class="card-title-info">Tel</h6></div>
+                        </div>
+                        <div class="row aic mb-2">
+                            <div class="col-md-2">Direction</div>
+                            <div class="col-md-3"><input type="text" class="form-control"></div>
+                            <div class="col-md-5"><input type="email" class="form-control"></div>
+                            <div class="col-md-2"><input type="text" class="form-control"></div>
+                        </div>
+                        <div class="row aic mb-2">
+                            <div class="col-md-2">Comptabilité</div>
+                            <div class="col-md-3"><input type="text" class="form-control"></div>
+                            <div class="col-md-5"><input type="email" class="form-control"></div>
+                            <div class="col-md-2"><input type="text" class="form-control"></div>
+                        </div>
+                        <div class="row aic mb-4">
+                            <div class="col-md-2">Commercial</div>
+                            <div class="col-md-3"><input type="text" class="form-control"></div>
+                            <div class="col-md-5"><input type="email" class="form-control"></div>
+                            <div class="col-md-2"><input type="text" class="form-control"></div>
+                        </div>
+                        <textarea placeholder="Note" class="form-control"></textarea>
                     </div>
-                    <div class="row aic mb-2">
-                        <div class="col-md-2">Direction</div>
-                        <div class="col-md-3"><input type="text" class="form-control"></div>
-                        <div class="col-md-5"><input type="email" class="form-control"></div>
-                        <div class="col-md-2"><input type="text" class="form-control"></div>
-                    </div>
-                    <div class="row aic mb-2">
-                        <div class="col-md-2">Comptabilité</div>
-                        <div class="col-md-3"><input type="text" class="form-control"></div>
-                        <div class="col-md-5"><input type="email" class="form-control"></div>
-                        <div class="col-md-2"><input type="text" class="form-control"></div>
-                    </div>
-                    <div class="row aic mb-4">
-                        <div class="col-md-2">Commercial</div>
-                        <div class="col-md-3"><input type="text" class="form-control"></div>
-                        <div class="col-md-5"><input type="email" class="form-control"></div>
-                        <div class="col-md-2"><input type="text" class="form-control"></div>
-                    </div>
-                    <textarea placeholder="Note" class="form-control"></textarea>
                 </div>
             </div>
 
