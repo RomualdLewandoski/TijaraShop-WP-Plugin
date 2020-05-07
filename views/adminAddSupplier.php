@@ -506,9 +506,7 @@
                 </div>
                 <!-- END 4th col -->
             </div>
-        </div>
 
-        <div class="row mb-2">
             <div class="card card-danger col-12">
                 <div class="card-header">
                     <div class="row text-center mb-2">
@@ -538,7 +536,10 @@
                     <textarea placeholder="Note" class="form-control"></textarea>
                 </div>
             </div>
+
         </div>
+
+
         <!--END supplierAdd2-->
     </div>
     <!--END CONTAINER-->
