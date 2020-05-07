@@ -451,7 +451,7 @@
     <div id="supplierAdd2" style="display: none">
         <div class="row mt-3 mb-2">
             <div class="col-md-6">
-                <div class="card col-12 card-info">
+                <div class="card col-12 card-info mb-2">
                     <div class="card-header">
                         <h5 class="card-title-info mb-2">Règlement</h5>
                         <div class="col-9 offset-3">
@@ -470,6 +470,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="card col-12 card-success mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title-info mb-2">Coordonnées bancaires</h5>
+                        <div class="row mb-2 aic">
+                            <div class="col-md-2">IBAN</div>
+                            <div class="col-md-10"><input type="text" class="form-control"></div>
+                        </div>
+                        <div class="row aic">
+                            <div class="col-md-2">BIC</div>
+                            <div class="col-md-10"><input type="text" class="form-control"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- END 3rd col -->
             </div>
             <div class="col-md-6">
