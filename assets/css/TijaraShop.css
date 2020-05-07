@@ -186,10 +186,10 @@ pre {
 .bg-lightblue {
     background-color: #cce9f5;
 }
-.inner-link {
+a .inner-link {
     color: #0098d4;
     font-weight: bold;
 }
-.inner-link :hover {
+a .inner-link :hover {
     text-decoration: none;
 }
