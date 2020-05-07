@@ -537,11 +537,18 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-
         <!--END supplierAdd2-->
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card col-12 card-success text-center">
+                <button type="submit" id="addSupplierAction" class="btn btn-success">Ajouter le fournisseur</button>
+                <a href="<?= $siteUrl ?>" class="btn btn-success">Retour à la liste des fournisseurs</a>
+            </div>
+        </div>
     </div>
     <!--END CONTAINER-->
 </div>
