@@ -547,7 +547,7 @@
             <div class="card col-12 card-success text-center">
                 <div class="card-header text-center">
                     <button type="submit" id="addSupplierAction" class="btn btn-success">Ajouter le fournisseur</button>
-                    <a href="<?= $siteUrl ?>" class="btn btn-danger">Retour à la liste des fournisseurs</a>
+                    <a href="wp-admin/admin.php?page=TijaraShop%2Fsupplier" class="btn btn-danger">Retour à la liste des fournisseurs</a>
                 </div>
 
             </div>
