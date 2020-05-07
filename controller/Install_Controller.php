@@ -77,12 +77,12 @@ class Install_Controller extends Controller
                                 societyName VARCHAR(255),
                                 firstName VARCHAR(255),
                                 lastName VARCHAR(255),
-                                adress VARCHAR(255),
+                                address VARCHAR(255),
                                 zipCode VARCHAR (50),
                                 city VARCHAR(255),
                                 country varchar (140),
                                 phone VARCHAR(100),
-                                mobilePhine VARCHAR(100),
+                                mobilePhone VARCHAR(100),
                                 mail VARCHAR(255),
                                 refCode VARCHAR(100),
                                 webSite VARCHAR(255),
@@ -92,7 +92,8 @@ class Install_Controller extends Controller
                                 tva VARCHAR (255),
                                 siret VARCHAR(255),
                                 contact TEXT,
-                                notes TEXT
+                                notes TEXT,
+                                isActive TINYINT(1)
 );";
 
         $this->helper->db->custom($apiCredentialsTable);
