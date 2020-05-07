@@ -545,8 +545,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card col-12 card-success text-center">
-                <button type="submit" id="addSupplierAction" class="btn btn-success">Ajouter le fournisseur</button>
-                <a href="<?= $siteUrl ?>" class="btn btn-success">Retour à la liste des fournisseurs</a>
+                <div class="card-header text-center">
+                    <button type="submit" id="addSupplierAction" class="btn btn-success">Ajouter le fournisseur</button>
+                    <a href="<?= $siteUrl ?>" class="btn btn-danger">Retour à la liste des fournisseurs</a>
+                </div>
+
             </div>
         </div>
     </div>
