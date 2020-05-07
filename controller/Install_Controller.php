@@ -71,12 +71,36 @@ class Install_Controller extends Controller
                                 method VARCHAR(255) NOT NULL,
                                 step INT
 )";
+        $shopSupplierTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Supplier(
+                                idSupplier INT AUTO_INCREMENT PRIMARY KEY,
+                                isSociety TINYINT(1),
+                                societyName VARCHAR(255),
+                                firstName VARCHAR(255),
+                                lastName VARCHAR(255),
+                                adress VARCHAR(255),
+                                zipCode VARCHAR (50),
+                                city VARCHAR(255),
+                                country varchar (140),
+                                phone VARCHAR(100),
+                                mobilePhine VARCHAR(100),
+                                mail VARCHAR(255),
+                                refCode VARCHAR(100),
+                                webSite VARCHAR(255),
+                                paymentType INT,
+                                iban VARCHAR(255),
+                                BIC VARCHAR(255),
+                                tva VARCHAR (255),
+                                siret VARCHAR(255),
+                                contact TEXT,
+                                notes TEXT
+);";
 
         $this->helper->db->custom($apiCredentialsTable);
         $this->helper->db->custom($permissionModelTable);
         $this->helper->db->custom($shopLoginTable);
         $this->helper->db->custom($shopLoginLogTable);
         $this->helper->db->custom($shopConfigTable);
+        $this->helper->db->custom($shopSupplierTable);
     }
 
     public function displayInstall()
