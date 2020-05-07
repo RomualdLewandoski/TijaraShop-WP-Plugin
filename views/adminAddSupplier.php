@@ -357,11 +357,51 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card card-warning col-12 mt-2">
+                <div class="card-header">
+                    <div class="row mb-1 aic">
+                        <div class="col-md-2">Code Ref.</div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-1 aic">
+                        <div class="col-md-2">Site Web</div>
+                        <div class="col-md-10"><input type="text" class="form-control"></div>
+                    </div>
+                    <div class="row mb-1 aic">
+                        <div class="col-md-1 offset-10 text-right mb-1">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="actif" value="option1" checked>
+                                <label class="form-check-label" for="actif">Actif</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END 1st col -->
         </div>
+
         <div class="col-md-6">
 
+            <!--END 2nd col -->
         </div>
     </div>
 
+    <script>
+        var configChoosenSupplierAdd = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': {allow_single_deselect: true},
+            '.chosen-select-no-single': {disable_search_threshold: 10},
+            '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+            '.chosen-select-rtl': {rtl: true},
+            '.chosen-select-width': {width: '95%'}
+        }
+        for (var selector in configChoosenSupplierAdd) {
+            $(selector).chosen(configChoosenSupplierAdd[selector]);
+        }
+    </script>
     <!--END PAGE -->
 </div>
