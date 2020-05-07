@@ -446,57 +446,60 @@
                 <!--END 2nd col -->
             </div>
         </div>
-        <div id="supplierAdd2" style="display: none">
-            <div class="row mt-3 mb-2">
-                <div class="col-md-6">
-                        <div class="card col-12 card-info">
-                            <div class="card-header">
-                                <h5 class="card-title-info mb-2">Règlement</h5>
-                                <div class="col-9 offset-3">
-                                    <div class="row aic">
-                                        <div class="col-md-5">Mode de règlement</div>
-                                        <div class="col-md-7">
-                                            <select class="form-control">
-                                                <option>Tous</option>
-                                                <option>Virement</option>
-                                                <option>Espèces</option>
-                                                <option>CB</option>
-                                                <option>Autre</option>
-                                            </select>
-                                        </div>
-                                    </div>
+        <!-- END supplierAdd1 -->
+    </div>
+    <div id="supplierAdd2" style="display: none">
+        <div class="row mt-3 mb-2">
+            <div class="col-md-6">
+                <div class="card col-12 card-info">
+                    <div class="card-header">
+                        <h5 class="card-title-info mb-2">Règlement</h5>
+                        <div class="col-9 offset-3">
+                            <div class="row aic">
+                                <div class="col-md-5">Mode de règlement</div>
+                                <div class="col-md-7">
+                                    <select class="form-control">
+                                        <option>Tous</option>
+                                        <option>Virement</option>
+                                        <option>Espèces</option>
+                                        <option>CB</option>
+                                        <option>Autre</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    <!-- END 3rd col -->
+                    </div>
                 </div>
-                <div class="col-md-6">
+                <!-- END 3rd col -->
+            </div>
+            <div class="col-md-6">
 
-                    <!-- END 4th col -->
-                </div>
+                <!-- END 4th col -->
             </div>
         </div>
+        <!--END supplierAdd2-->
     </div>
-
-    <script>
-        var configChoosenSupplierAdd = {
-            '.chosen-select': {},
-            '.chosen-select-deselect': {allow_single_deselect: true},
-            '.chosen-select-no-single': {disable_search_threshold: 10},
-            '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-            '.chosen-select-rtl': {rtl: true},
-            '.chosen-select-width': {width: '95%'}
-        }
-        for (var selector in configChoosenSupplierAdd) {
-            $(selector).chosen(configChoosenSupplierAdd[selector]);
-        }
-        $('#supplierAddMore').click(function (event) {
-            event.preventDefault()
-            let pane1 = $('#supplierAdd1')
-            let pane2 = $('#supplierAdd2')
-            pane1.toggle()
-            pane2.toggle()
-        })
-    </script>
-    <!--END PAGE -->
+    <!--END CONTAINER-->
 </div>
+
+<script>
+    var configChoosenSupplierAdd = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': {allow_single_deselect: true},
+        '.chosen-select-no-single': {disable_search_threshold: 10},
+        '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+        '.chosen-select-rtl': {rtl: true},
+        '.chosen-select-width': {width: '95%'}
+    }
+    for (var selector in configChoosenSupplierAdd) {
+        $(selector).chosen(configChoosenSupplierAdd[selector]);
+    }
+    $('#supplierAddMore').click(function (event) {
+        event.preventDefault()
+        let pane1 = $('#supplierAdd1')
+        let pane2 = $('#supplierAdd2')
+        pane1.toggle()
+        pane2.toggle()
+    })
+</script>
+<!--END PAGE -->
