@@ -204,3 +204,9 @@ pre {
     -ms-flex-align: center !important;
     align-items: center !important;
 }
+
+.card-title-info {
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #9fa5aa;
+}
