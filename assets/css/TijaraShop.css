@@ -182,3 +182,7 @@ pre {
     max-width: 65%;
     text-align: left!important;
 }
+
+.bg-lightblue {
+    background-color: #cce9f5;
+}

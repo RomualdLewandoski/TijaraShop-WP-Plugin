@@ -182,6 +182,8 @@ class Admin_Controller extends Controller
         $action = $request->get('action');
         if ($action == null) {
             $this->loadView('adminSupplier', $data);
+        } else if ($action == "addSupplier") {
+            $this->loadView('adminAddSupplier', $data);
         }
     }
 }

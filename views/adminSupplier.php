@@ -64,7 +64,7 @@
                     <script>
                         $(document).ready(function () {
                             $('#myTable').dataTable({
-                                
+
                             });
                         });
                     </script>
@@ -73,3 +73,5 @@
             </div>
         </div>
     </div>
+<!--END PAGE-->
+</div>
