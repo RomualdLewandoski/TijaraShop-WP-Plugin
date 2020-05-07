@@ -487,7 +487,23 @@
                 <!-- END 3rd col -->
             </div>
             <div class="col-md-6">
-
+                <div class="card card-warning mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title-info mb-2"> Identification</h5>
+                        <div class="row">
+                            <div class="col-md-7 offset-5">
+                                <div class="row aic mb-2">
+                                    <div class="col-md-4">N° TVA</div>
+                                    <div class="col-md-8"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="row aic mb-2">
+                                    <div class="col-md-4">N° SIRET</div>
+                                    <div class="col-md-8"><input type="text" class="form-control"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- END 4th col -->
             </div>
         </div>
