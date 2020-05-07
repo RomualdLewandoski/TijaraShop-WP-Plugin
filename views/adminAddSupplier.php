@@ -89,7 +89,7 @@
                             Pays
                         </div>
                         <div class="col-md-10">
-                            <select id="country" name="country" class="form-control chosen-select">
+                            <select id="country" name="country" class="form-control chosen-select col-12">
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Åland Islands">Åland Islands</option>
                                 <option value="Albania">Albania</option>
@@ -385,7 +385,22 @@
         </div>
 
         <div class="col-md-6">
-
+            <div class="card card-primary col-12">
+                <div class="card-header">
+                    <div class="row mb-1 aic">
+                        <div class="col-md-3">Téléphone</div>
+                        <div class="col-md-9"><input type="text" class="form-control"></div>
+                    </div>
+                    <div class="row mb-1 aic">
+                        <div class="col-md-3">Mobile</div>
+                        <div class="col-md-9"><input type="text" class="form-control"></div>
+                    </div>
+                    <div class="row aic">
+                        <div class="col-md-3">Mail</div>
+                        <div class="col-md-9"><input type="email" class="form-control"></div>
+                    </div>
+                </div>
+            </div>
             <!--END 2nd col -->
         </div>
     </div>
