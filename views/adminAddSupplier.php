@@ -21,15 +21,15 @@
     <div class="row text-black bg-lightblue px-2 align-items-center">
         <div class="col-md-1 text-right">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">Société</label>
+                <input class="form-check-input" type="checkbox" id="isSociety" name="isSociety">
+                <label class="form-check-label" for="isSociety">Société</label>
             </div>
         </div>
         <div class="col-md-5 mt-3">
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-3 col-form-label">Raison Sociale</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control bg-white" id="staticEmail">
+                    <input type="text" class="form-control bg-white" id="societyName" name="societyName">
                 </div>
             </div>
         </div>
@@ -44,17 +44,17 @@
                     <div class="card-header">
                         <div class="row mb-1">
                             <div class="col-md-2">
-                                <select class="custom-select">
-                                    <option>ND</option>
-                                    <option>Mr</option>
-                                    <option>Mme</option>
+                                <select class="custom-select" name="gender" id="firstName">
+                                    <option value="ND">ND</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mme">Mme</option>
                                 </select>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="firstName" id="firstName">
                             </div>
                             <div class="col-md-5">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="lastName" id="lastName">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -73,16 +73,16 @@
                                 Adresse
                             </div>
                             <div class="col-md-10">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="address" name="address">
                             </div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-2">CP / Ville</div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="zipCode" name="zipCode">
                             </div>
                             <div class="col-md-7">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="city" name="city">
                             </div>
                         </div>
                         <div class="row aic">
@@ -364,18 +364,18 @@
                         <div class="row mb-1 aic">
                             <div class="col-md-2">Code Ref.</div>
                             <div class="col-md-10">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="refCode" name="refCode">
                             </div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-2">Site Web</div>
-                            <div class="col-md-10"><input type="text" class="form-control"></div>
+                            <div class="col-md-10"><input type="text" class="form-control" id="webSite" name="webSite"></div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-1 offset-10 text-right mb-1">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="actif" value="option1" checked>
-                                    <label class="form-check-label" for="actif">Actif</label>
+                                    <input class="form-check-input" type="checkbox" id="isActive" name="isActive" checked>
+                                    <label class="form-check-label" for="isActive">Actif</label>
                                 </div>
                             </div>
                         </div>
@@ -390,15 +390,15 @@
                     <div class="card-header">
                         <div class="row mb-1 aic">
                             <div class="col-md-3">Téléphone</div>
-                            <div class="col-md-9"><input type="text" class="form-control"></div>
+                            <div class="col-md-9"><input type="text" class="form-control" id="phone" name="phone"></div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-3">Mobile</div>
-                            <div class="col-md-9"><input type="text" class="form-control"></div>
+                            <div class="col-md-9"><input type="text" class="form-control" id="mobilePhone" name="mobilePhone"></div>
                         </div>
                         <div class="row aic">
                             <div class="col-md-3">Mail</div>
-                            <div class="col-md-9"><input type="email" class="form-control"></div>
+                            <div class="col-md-9"><input type="email" class="form-control" id="mail" name="mail"></div>
                         </div>
                     </div>
                 </div>
@@ -458,12 +458,12 @@
                             <div class="row aic">
                                 <div class="col-md-5">Mode de règlement</div>
                                 <div class="col-md-7">
-                                    <select class="form-control">
-                                        <option>Tous</option>
-                                        <option>Virement</option>
-                                        <option>Espèces</option>
-                                        <option>CB</option>
-                                        <option>Autre</option>
+                                    <select class="form-control" id="paymentType" name="paymentType">
+                                        <option value="Tous">Tous</option>
+                                        <option value="Virement">Virement</option>
+                                        <option value="Espèces">Espèces</option>
+                                        <option value="CB">CB</option>
+                                        <option value="Autre">Autre</option>
                                     </select>
                                 </div>
                             </div>
@@ -475,11 +475,11 @@
                         <h5 class="card-title-info mb-2">Coordonnées bancaires</h5>
                         <div class="row mb-2 aic">
                             <div class="col-md-2">IBAN</div>
-                            <div class="col-md-10"><input type="text" class="form-control"></div>
+                            <div class="col-md-10"><input type="text" class="form-control" id="iban" name="iban"></div>
                         </div>
                         <div class="row aic">
                             <div class="col-md-2">BIC</div>
-                            <div class="col-md-10"><input type="text" class="form-control"></div>
+                            <div class="col-md-10"><input type="text" class="form-control" id="bic" name="bic"></div>
                         </div>
                     </div>
                 </div>
@@ -494,11 +494,11 @@
                             <div class="col-md-7 offset-5">
                                 <div class="row aic mb-2">
                                     <div class="col-md-4">N° TVA</div>
-                                    <div class="col-md-8"><input type="text" class="form-control"></div>
+                                    <div class="col-md-8"><input type="text" class="form-control" id="tva" name="tva"></div>
                                 </div>
                                 <div class="row aic mb-2">
                                     <div class="col-md-4">N° SIRET</div>
-                                    <div class="col-md-8"><input type="text" class="form-control"></div>
+                                    <div class="col-md-8"><input type="text" class="form-control" id="siret" name="siret"></div>
                                 </div>
                             </div>
                         </div>
@@ -517,23 +517,23 @@
                         </div>
                         <div class="row aic mb-2">
                             <div class="col-md-2">Direction</div>
-                            <div class="col-md-3"><input type="text" class="form-control"></div>
-                            <div class="col-md-5"><input type="email" class="form-control"></div>
-                            <div class="col-md-2"><input type="text" class="form-control"></div>
+                            <div class="col-md-3"><input type="text" class="form-control" id="directionName" name="directionName"></div>
+                            <div class="col-md-5"><input type="email" class="form-control" id="directionMail" name="directionMail"></div>
+                            <div class="col-md-2"><input type="text" class="form-control" id="directionPhone" name="DirectionPhone"></div>
                         </div>
                         <div class="row aic mb-2">
                             <div class="col-md-2">Comptabilité</div>
-                            <div class="col-md-3"><input type="text" class="form-control"></div>
-                            <div class="col-md-5"><input type="email" class="form-control"></div>
-                            <div class="col-md-2"><input type="text" class="form-control"></div>
+                            <div class="col-md-3"><input type="text" class="form-control" id="comptaName" name="comptaName"></div>
+                            <div class="col-md-5"><input type="email" class="form-control" id="comptaMail" name="comptaMail"></div>
+                            <div class="col-md-2"><input type="text" class="form-control" id="comptaPhone" name="comptaPhone"></div>
                         </div>
                         <div class="row aic mb-4">
                             <div class="col-md-2">Commercial</div>
-                            <div class="col-md-3"><input type="text" class="form-control"></div>
-                            <div class="col-md-5"><input type="email" class="form-control"></div>
-                            <div class="col-md-2"><input type="text" class="form-control"></div>
+                            <div class="col-md-3"><input type="text" class="form-control" id="comName" name="comName"></div>
+                            <div class="col-md-5"><input type="email" class="form-control" id="comMail" name="comMail"></div>
+                            <div class="col-md-2"><input type="text" class="form-control" id="comPhone" name="comPhone"></div>
                         </div>
-                        <textarea placeholder="Note" class="form-control"></textarea>
+                        <textarea placeholder="Note" class="form-control" id="notes" name="notes"></textarea>
                     </div>
                 </div>
             </div>
@@ -547,7 +547,8 @@
             <div class="card col-12 card-success text-center">
                 <div class="card-header text-center">
                     <button type="submit" id="addSupplierAction" class="btn btn-success">Ajouter le fournisseur</button>
-                    <a href="admin.php?page=TijaraShop%2Fsupplier" class="btn btn-danger">Retour à la liste des fournisseurs</a>
+                    <a href="admin.php?page=TijaraShop%2Fsupplier" class="btn btn-danger">Retour à la liste des
+                        fournisseurs</a>
                 </div>
 
             </div>
