@@ -1,4 +1,5 @@
 <?php
+$route['cgu'] = "cgu/index";
 $route['api/update'] = "api/updater";
 $route['api/users/changepass'] = "api/changeUserPass";
 $route['api/users'] = "api/getUsers";

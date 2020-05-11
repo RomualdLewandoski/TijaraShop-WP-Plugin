@@ -3,8 +3,14 @@
 
 class Supplier_Model extends Model
 {
+    protected $table;
+
     public function __construct()
     {
+        $this->loadHelper('db');
+        $this->loadHelper('session');
+        $this->loadHelper('url');
+        $this->table = $this->helper->db->getPrefix() . '_shop_Supplier';
 
     }
 
@@ -12,6 +18,7 @@ class Supplier_Model extends Model
     {
         $isSociety = $request->get('isSociety') != null ? 1 : 0;
         $societyName = htmlspecialchars($request->get('societyName'));
+        $gender = htmlspecialchars($request->get('gender'));
         $firstName = htmlspecialchars($request->get('firstName'));
         $lastName = htmlspecialchars($request->get('lastName'));
         $address = htmlspecialchars($request->get('address'));
@@ -51,20 +58,62 @@ class Supplier_Model extends Model
         $notes = htmlspecialchars($request->get('notes'));
         $isActive = $request->get('isActive') != null ? 1 : 0;
 
-
         if ($siret != null) {
-            //todo make a simple check to be sure that we don't aleready have ths siret name on our database
-            //with a return HERE IF SIRET EXIST
+            if ($this->getBy("siret", $siret) != null) {
+                //todo already exist
+            }
         }
         if ($tva != null) {
-            //todo same as siret
+            if ($this->getBy("tva", $tva) != null) {
+                //todo already exist
+            }
         }
         if ($refCode != null) {
-            //todo same as siret & tva
+            if ($this->getBy("refCode", $refCode) != null) {
+                //todo already exist
+            }
         }
         if ($societyName != null) {
-            //todo same as above
+            if ($this->getBy("societyName", $societyName) != null) {
+                //todo already exist
+            }
         }
-        
+
+        $data = array(
+            'isSociety' => $isSociety,
+            'societyName' => $societyName,
+            'gender' => $gender,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'address' => $address,
+            'zipCode' => $zipCode,
+            'city' => $city,
+            'country' => $country,
+            'phone' => $phone,
+            'mobilePhone' => $mobilePhone,
+            'mail' => $mail,
+            'refCode' => $refCode,
+            'webSite' => $webSite,
+            'paymentType' => $paymentType,
+            'iban' => $iban,
+            'bic' => $bic,
+            'tva' => $tva,
+            'siret' => $siret,
+            'contact' => $contactStr,
+            'notes' => $notes,
+            'isActive' => $isActive
+        );
+
+        if (!$this->helper->db->insert($this->table, $data)) {
+            //todo err
+        } else {
+            //todo success
+        }
+
+    }
+
+    public function getBy($row, $value)
+    {
+        return $this->helper->db->get_where($this->table, array($row => $value));
     }
 }

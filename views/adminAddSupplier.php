@@ -44,7 +44,7 @@
                     <div class="card-header">
                         <div class="row mb-1">
                             <div class="col-md-2">
-                                <select class="custom-select" name="gender" id="firstName">
+                                <select class="custom-select" name="gender" id="gender">
                                     <option value="ND">ND</option>
                                     <option value="Mr">Mr</option>
                                     <option value="Mme">Mme</option>
