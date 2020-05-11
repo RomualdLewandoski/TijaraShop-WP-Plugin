@@ -11,11 +11,11 @@ class Cgu_Controller
         <p>TijaraShop s'engage à effectuer le maximum afin que vos données personnelles soient en sécurité dans son
             infrastructure.
             <br>
-            TijaraShop ne fournira <u>aucune</u> donnée à un tiers à des fins commerciales sous quelque pretexte que ce
+            TijaraShop ne fournira <u>aucune</u> donnée à un tiers à des fins commerciales sous quelque prétexte que ce
             soit !
         </p>
         <h2>Fournisseurs : </h2>
-        <p>Le système de fiche fournisseur de TIjaraShop collecte certeines informations concernant votre entreprise
+        <p>Le système de fiche fournisseur de TIjaraShop collecte certaines informations concernant votre entreprise
         <ul>
             <li>n°TVA</li>
             <li>n°SIRET</li>
@@ -36,7 +36,7 @@ class Cgu_Controller
         <h3>Opposition</h3>
         <p>Conformément au RGPD, vous avez un droit d'accès, de modification et de suppression de vos données
             personnelles sur l'ensembles des services fournis par TijaraShop, cette action s'effectue par mail à
-            l'adresse <strong>monmail</strong> ou par courrier à l'adresse <strong> 232 Rue de Lannoy, 59100 Roubaix</strong></p>
+            l'adresse <strong>monmail</strong> ou par courrier à l'adresse : <br><strong> 232 Rue de Lannoy, 59100 Roubaix</strong></p>
         <?php
     }
 }
