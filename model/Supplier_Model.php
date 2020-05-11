@@ -122,4 +122,8 @@ class Supplier_Model extends Model
     {
         return $this->helper->db->get_where($this->table, array($row => $value));
     }
+
+    public function listSupplier(){
+        return $this->helper->db->get($this->table);
+    }
 }

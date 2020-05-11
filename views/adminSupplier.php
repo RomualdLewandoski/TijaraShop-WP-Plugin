@@ -46,26 +46,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>SARL Dupuis</td>
-                            <td>Dupont</td>
-                            <td>Bernard</td>
-                            <td>0699592756</td>
-                            <td>Appt 29 Tour Fourier Rue de Fecamp 62300 Lens</td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-success">Voir</button>
-                                <button type="button" class="btn btn-sm btn-warning">Editer</button>
-                                <button type="button" class="btn btn-sm btn-danger">Supprimer</button>
-                            </td>
-                        </tr>
+                        <?php
+                        foreach ($listSupplier as $supplier):
+                            ?>
+                            <tr>
+                                <td><?= $supplier->idSupplier ?></td>
+                                <td><?= $supplier->societyName ?></td>
+                                <td><?= $supplier->lastName ?></td>
+                                <td><?= $supplier->firstName ?></td>
+                                <td><?= $supplier->phone ?></td>
+                                <td><?= $supplier->address ?> <?= $supplier->zipCode ?>  <?= $supplier->city ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success">Voir</button>
+                                    <button type="button" class="btn btn-sm btn-warning">Editer</button>
+                                    <button type="button" class="btn btn-sm btn-danger">Supprimer</button>
+                                </td>
+                            </tr>
+                        <?php
+                        endforeach;
+                        ?>
                         </tbody>
                     </table>
                     <script>
                         $(document).ready(function () {
-                            $('#myTable').dataTable({
-
-                            });
+                            $('#myTable').dataTable({});
                         });
                     </script>
 
@@ -73,5 +77,5 @@
             </div>
         </div>
     </div>
-<!--END PAGE-->
+    <!--END PAGE-->
 </div>
