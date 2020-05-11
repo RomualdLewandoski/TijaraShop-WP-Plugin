@@ -60,22 +60,26 @@ class Supplier_Model extends Model
 
         if ($siret != null) {
             if ($this->getBy("siret", $siret) != null) {
-                //todo already exist
+                $this->helper->session->set_flashdata("error", "Le numéro de SIRET existe déja dans la base de donnée");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
         }
         if ($tva != null) {
             if ($this->getBy("tva", $tva) != null) {
-                //todo already exist
+                $this->helper->session->set_flashdata("error", "Le numéro de TVA existe déja dans la base de donnée");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
         }
         if ($refCode != null) {
             if ($this->getBy("refCode", $refCode) != null) {
-                //todo already exist
+                $this->helper->session->set_flashdata("error", "Le numéro de référence Fournisseur existe déja dans la base de donnée");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
         }
         if ($societyName != null) {
             if ($this->getBy("societyName", $societyName) != null) {
-                //todo already exist
+                $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
         }
 
@@ -105,9 +109,11 @@ class Supplier_Model extends Model
         );
 
         if (!$this->helper->db->insert($this->table, $data)) {
-            //todo err
+            $this->helper->session->set_flashdata("error", "Erreur lors de l'ajout de la société dans la base de donnée");
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
         } else {
-            //todo success
+            $this->helper->session->set_flashdata("success", "La société a bien été ajoutée");
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
         }
 
     }

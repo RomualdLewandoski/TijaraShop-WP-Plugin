@@ -9,6 +9,7 @@ class Admin_Controller extends Controller
         $this->loadModel('api');
         $this->loadModel('perms');
         $this->loadModel("user");
+        $this->loadModel('supplier');
         $this->loadHelper('wp');
         $this->loadHelper('form');
         $this->loadHelper('session');
@@ -156,6 +157,28 @@ class Admin_Controller extends Controller
         }
     }
 
+    public function adminSupplier()
+    {
+        $this->checkInstall();
+        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['error'] = $this->helper->session->flashdata("error");
+        $data['success'] = $this->helper->session->flashdata("success");
+        $request = $this->request();
+        $action = $request->get('action');
+        if ($action == null) {
+            $this->loadView('adminSupplier', $data);
+        } else if ($action == "addSupplier") {
+            $this->loadView('adminAddSupplier', $data);
+        } else if ($action == "add") {
+            if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName'))) {
+                $this->model->supplier->addSupplier($request);
+            } else {
+                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification du modèle de permission");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
+        }
+    }
+
     public function adminLogs()
     {
         $this->checkInstall();
@@ -176,18 +199,5 @@ class Admin_Controller extends Controller
         }
     }
 
-    public function adminSupplier()
-    {
-        $this->checkInstall();
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
-        $request = $this->request();
-        $action = $request->get('action');
-        if ($action == null) {
-            $this->loadView('adminSupplier', $data);
-        } else if ($action == "addSupplier") {
-            $this->loadView('adminAddSupplier', $data);
-        }
-    }
+
 }
