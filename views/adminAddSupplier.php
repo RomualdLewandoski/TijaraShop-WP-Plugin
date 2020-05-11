@@ -474,11 +474,11 @@
                                     <div class="col-md-5">Mode de règlement</div>
                                     <div class="col-md-7">
                                         <select class="form-control" id="paymentType" name="paymentType">
-                                            <option value="Tous">Tous</option>
-                                            <option value="Virement">Virement</option>
-                                            <option value="Espèces">Espèces</option>
-                                            <option value="CB">CB</option>
-                                            <option value="Autre">Autre</option>
+                                            <option value="0">Tous</option>
+                                            <option value="1">Virement</option>
+                                            <option value="2">Espèces</option>
+                                            <option value="3">CB</option>
+                                            <option value="4">Autre</option>
                                         </select>
                                     </div>
                                 </div>
