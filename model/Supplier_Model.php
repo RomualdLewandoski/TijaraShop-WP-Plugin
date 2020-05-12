@@ -78,7 +78,7 @@ class Supplier_Model extends Model
         }
         if ($societyName != null) {
             $tempo = $this->getBy("societyName", $societyName);
-            var_dump($tempo);
+            var_dump($societyName);
            /* if ($this->getBy("societyName", $societyName) != null) {
                 $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
