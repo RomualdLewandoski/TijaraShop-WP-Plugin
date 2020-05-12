@@ -197,75 +197,77 @@ class Supplier_Model extends Model
                 if ($getBySiret[0]->idSupplier != $idSupplier) {
                     var_dump($getBySiret[0]);
                 }
-                   /*
-                    $this->helper->session->set_flashdata("error", "Le numéro de SIRET existe déja dans la base de donnée");
-                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-                }
+                /*
+                 $this->helper->session->set_flashdata("error", "Le numéro de SIRET existe déja dans la base de donnée");
+                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+             }
 
+         }
+     }
+     if ($tva != null) {
+         $getByTva = $this->getBy("tva", $tva);
+         if ($getByTva != null) {
+             if ($getByTva[0]->idSupplier != $idSupplier) {
+                 $this->helper->session->set_flashdata("error", "Le numéro de TVA existe déja dans la base de donnée");
+                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+             }
+         }
+     }
+     if ($refCode != null) {
+         $getByCode = $this->getBy("refCode", $refCode);
+         if ($getByCode != null) {
+             if ($getByCode[0]->idSupplier != $idSupplier) {
+                 $this->helper->session->set_flashdata("error", "Le numéro de référence Fournisseur existe déja dans la base de donnée");
+                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+             }
+         }
+     }
+     if ($societyName != null) {
+         $getByName = $this->getBy("societyName", $societyName);
+         if ($getByName != null) {
+             if ($getByName[0]->idSupplier != $idSupplier) {
+                 $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
+                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+             }
+         }
+     }
+
+     $data = array(
+         'isSociety' => $isSociety,
+         'societyName' => $societyName,
+         'gender' => $gender,
+         'firstName' => $firstName,
+         'lastName' => $lastName,
+         'address' => $address,
+         'zipCode' => $zipCode,
+         'city' => $city,
+         'country' => $country,
+         'phone' => $phone,
+         'mobilePhone' => $mobilePhone,
+         'mail' => $mail,
+         'refCode' => $refCode,
+         'webSite' => $webSite,
+         'paymentType' => $paymentType,
+         'iban' => $iban,
+         'bic' => $bic,
+         'tva' => $tva,
+         'siret' => $siret,
+         'contact' => $contactStr,
+         'notes' => $notes,
+         'isActive' => $isActive
+     );
+
+     if (!$this->helper->db->update($this->table, $data, array('idSupplier' => $idSupplier))) {
+         $this->helper->session->set_flashdata("error", "Erreur lors de la modification du fournisseur dans la base de donnée");
+         $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+     } else {
+         $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
+         $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+
+              */
             }
-        }
-        if ($tva != null) {
-            $getByTva = $this->getBy("tva", $tva);
-            if ($getByTva != null) {
-                if ($getByTva[0]->idSupplier != $idSupplier) {
-                    $this->helper->session->set_flashdata("error", "Le numéro de TVA existe déja dans la base de donnée");
-                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-                }
-            }
-        }
-        if ($refCode != null) {
-            $getByCode = $this->getBy("refCode", $refCode);
-            if ($getByCode != null) {
-                if ($getByCode[0]->idSupplier != $idSupplier) {
-                    $this->helper->session->set_flashdata("error", "Le numéro de référence Fournisseur existe déja dans la base de donnée");
-                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-                }
-            }
-        }
-        if ($societyName != null) {
-            $getByName = $this->getBy("societyName", $societyName);
-            if ($getByName != null) {
-                if ($getByName[0]->idSupplier != $idSupplier) {
-                    $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
-                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-                }
-            }
-        }
 
-        $data = array(
-            'isSociety' => $isSociety,
-            'societyName' => $societyName,
-            'gender' => $gender,
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'address' => $address,
-            'zipCode' => $zipCode,
-            'city' => $city,
-            'country' => $country,
-            'phone' => $phone,
-            'mobilePhone' => $mobilePhone,
-            'mail' => $mail,
-            'refCode' => $refCode,
-            'webSite' => $webSite,
-            'paymentType' => $paymentType,
-            'iban' => $iban,
-            'bic' => $bic,
-            'tva' => $tva,
-            'siret' => $siret,
-            'contact' => $contactStr,
-            'notes' => $notes,
-            'isActive' => $isActive
-        );
-
-        if (!$this->helper->db->update($this->table, $data, array('idSupplier' => $idSupplier))) {
-            $this->helper->session->set_flashdata("error", "Erreur lors de la modification du fournisseur dans la base de donnée");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-        } else {
-            $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-
-                 */
         }
-
     }
+//temp
 }
