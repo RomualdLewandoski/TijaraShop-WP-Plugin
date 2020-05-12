@@ -54,7 +54,7 @@
                                 <td><?= $supplier->societyName ?></td>
                                 <td><?= $supplier->lastName ?></td>
                                 <td><?= $supplier->firstName ?></td>
-                                <td><?= $supplier->phone ?> / <?= $supplier->mobileP¨hone ?></td>
+                                <td><?= $supplier->phone ?> / <?= $supplier->mobilePhone ?></td>
                                 <td><?= $supplier->address ?> <?= $supplier->zipCode ?>  <?= $supplier->city ?></td>
                                 <td>
                                     <a href="<?= $pageUrl?>&action=view&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-success">Voir</a>
