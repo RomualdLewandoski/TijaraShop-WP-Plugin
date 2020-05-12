@@ -57,7 +57,7 @@
                                 <td><?= $supplier->phone ?> / <?= $supplier->mobileP¨hone ?></td>
                                 <td><?= $supplier->address ?> <?= $supplier->zipCode ?>  <?= $supplier->city ?></td>
                                 <td>
-                                    <a href="<?= $siteUrl?>&action=view&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-success">Voir</a>
+                                    <a href="<?= $pageUrl?>&action=view&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-success">Voir</a>
                                     <button type="button" class="btn btn-sm btn-warning">Editer</button>
                                     <button type="button" class="btn btn-sm btn-danger">Supprimer</button>
                                 </td>
