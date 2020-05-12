@@ -48,13 +48,13 @@
                     <div class="card-header">
                         <div class="row mb-1 aic">
                             <div class="col-md-2">
-                               <?= $supplier->gender ?>
+                                <strong><?= $supplier->gender ?></strong>
                             </div>
                             <div class="col-md-5">
-                                <?= $supplier->firstName ?>
+                                <strong><?= $supplier->firstName ?></strong>
                             </div>
                             <div class="col-md-5">
-                                <?= $supplier->lastName ?>
+                                <strong><?= $supplier->lastName ?></strong>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -73,16 +73,16 @@
                                 Adresse
                             </div>
                             <div class="col-md-10">
-                                <?= $supplier->address ?>
+                                <strong><?= $supplier->address ?></strong>
                             </div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-2">CP / Ville</div>
                             <div class="col-md-3">
-                                <?= $supplier->zipCode ?>
+                                <strong><?= $supplier->zipCode ?></strong>
                             </div>
                             <div class="col-md-7">
-                                <?= $supplier->city ?>
+                                <strong><?= $supplier->city ?></strong>
                             </div>
                         </div>
                         <div class="row aic">
@@ -90,7 +90,7 @@
                                 Pays
                             </div>
                             <div class="col-md-10">
-                                <?= $supplier->country ?>
+                                <strong><?= $supplier->country ?></strong>
                             </div>
                         </div>
                     </div>
@@ -101,19 +101,22 @@
                         <div class="row mb-1 aic">
                             <div class="col-md-2">Code Ref.</div>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" id="refCode" name="refCode">
+                                <strong><?= $supplier->refCode ?></strong>
                             </div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-2">Site Web</div>
-                            <div class="col-md-10"><input type="text" class="form-control" id="webSite"
-                                                          name="webSite"></div>
+                            <div class="col-md-10">
+                                <strong><?= $supplier->webSite ?></strong>
+                            </div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-1 offset-10 text-right mb-1">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="isActive" name="isActive"
-                                           checked>
+                                        <?php if ($supplier->isActive == 1) {
+                                            echo "checked";
+                                        } ?>>
                                     <label class="form-check-label" for="isActive">Actif</label>
                                 </div>
                             </div>
@@ -129,17 +132,20 @@
                     <div class="card-header">
                         <div class="row mb-1 aic">
                             <div class="col-md-3">Téléphone</div>
-                            <div class="col-md-9"><input type="text" class="form-control" id="phone" name="phone">
+                            <div class="col-md-9">
+                                <strong><?= $supplier->phone ?></strong>
                             </div>
                         </div>
                         <div class="row mb-1 aic">
                             <div class="col-md-3">Mobile</div>
-                            <div class="col-md-9"><input type="text" class="form-control" id="mobilePhone"
-                                                         name="mobilePhone"></div>
+                            <div class="col-md-9">
+                                <strong><?= $supplier->mobilePhone ?></strong>
+                            </div>
                         </div>
                         <div class="row aic">
                             <div class="col-md-3">Mail</div>
-                            <div class="col-md-9"><input type="email" class="form-control" id="mail" name="mail">
+                            <div class="col-md-9">
+                                <strong><?= $supplier->mail ?></strong>
                             </div>
                         </div>
                     </div>
@@ -200,13 +206,19 @@
                             <div class="row aic">
                                 <div class="col-md-5">Mode de règlement</div>
                                 <div class="col-md-7">
-                                    <select class="form-control" id="paymentType" name="paymentType">
-                                        <option value="0">Tous</option>
-                                        <option value="1">Virement</option>
-                                        <option value="2">Espèces</option>
-                                        <option value="3">CB</option>
-                                        <option value="4">Autre</option>
-                                    </select>
+                                    <?php
+                                    if ($supplier->paymentType == 0) {
+                                        echo "<strong>Tous</strong>";
+                                    } else if ($supplier->paymentType == 1) {
+                                        echo "<strong>Virement</strong>";
+                                    } else if ($supplier->paymentType == 2) {
+                                        echo "<strong>Espèces</strong>";
+                                    } else if ($supplier->paymentType == 3) {
+                                        echo "<strong>CB</strong>";
+                                    } else if ($supplier->paymentType == 4) {
+                                        echo "<strong>Autre</strong>";
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -217,12 +229,16 @@
                         <h5 class="card-title-info mb-2">Coordonnées bancaires</h5>
                         <div class="row mb-2 aic">
                             <div class="col-md-2">IBAN</div>
-                            <div class="col-md-10"><input type="text" class="form-control" id="iban" name="iban">
+                            <div class="col-md-10">
+                                <strong><?= $supplier->iban ?></strong>
+
                             </div>
                         </div>
                         <div class="row aic">
                             <div class="col-md-2">BIC</div>
-                            <div class="col-md-10"><input type="text" class="form-control" id="bic" name="bic">
+                            <div class="col-md-10">
+                                <strong><?= $supplier->bic ?></strong>
+
                             </div>
                         </div>
                     </div>
@@ -238,13 +254,15 @@
                             <div class="col-md-7 offset-5">
                                 <div class="row aic mb-2">
                                     <div class="col-md-4">N° TVA</div>
-                                    <div class="col-md-8"><input type="text" class="form-control" id="tva"
-                                                                 name="tva"></div>
+                                    <div class="col-md-8">
+                                        <strong><?= $supplier->tva ?></strong>
+                                    </div>
                                 </div>
                                 <div class="row aic mb-2">
                                     <div class="col-md-4">N° SIRET</div>
-                                    <div class="col-md-8"><input type="text" class="form-control" id="siret"
-                                                                 name="siret"></div>
+                                    <div class="col-md-8">
+                                        <strong><?= $supplier->siret ?></strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -261,34 +279,46 @@
                             <div class="col-md-5 "><h6 class="card-title-info">Mail</h6></div>
                             <div class="col-md-2 "><h6 class="card-title-info">Tel</h6></div>
                         </div>
+                        <?php
+                        $contact = json_decode($supplier->contact);
+                        ?>
                         <div class="row aic mb-2">
                             <div class="col-md-2">Direction</div>
-                            <div class="col-md-3"><input type="text" class="form-control" id="directionName"
-                                                         name="directionName"></div>
-                            <div class="col-md-5"><input type="email" class="form-control" id="directionMail"
-                                                         name="directionMail"></div>
-                            <div class="col-md-2"><input type="text" class="form-control" id="directionPhone"
-                                                         name="DirectionPhone"></div>
+                            <div class="col-md-3">
+                                <strong><?= $contact->directionName ?></strong>
+
+                            </div>
+                            <div class="col-md-5">
+                                <strong><?= $contact->directionMail ?></strong>
+                            </div>
+                            <div class="col-md-2"><strong><?= $contact->directionPhon ?></strong>
+                            </div>
                         </div>
                         <div class="row aic mb-2">
                             <div class="col-md-2">Comptabilité</div>
-                            <div class="col-md-3"><input type="text" class="form-control" id="comptaName"
-                                                         name="comptaName"></div>
-                            <div class="col-md-5"><input type="email" class="form-control" id="comptaMail"
-                                                         name="comptaMail"></div>
-                            <div class="col-md-2"><input type="text" class="form-control" id="comptaPhone"
-                                                         name="comptaPhone"></div>
+                            <div class="col-md-3">
+                                <strong><?= $contact->comptaName ?></strong>
+                            </div>
+                            <div class="col-md-5">
+                                <strong><?= $contact->comptaMail ?></strong>
+                            </div>
+                            <div class="col-md-2">
+                                <strong><?= $contact->comptaPhone ?></strong>
+                            </div>
                         </div>
                         <div class="row aic mb-4">
                             <div class="col-md-2">Commercial</div>
-                            <div class="col-md-3"><input type="text" class="form-control" id="comName"
-                                                         name="comName"></div>
-                            <div class="col-md-5"><input type="email" class="form-control" id="comMail"
-                                                         name="comMail"></div>
-                            <div class="col-md-2"><input type="text" class="form-control" id="comPhone"
-                                                         name="comPhone"></div>
+                            <div class="col-md-3">
+                                <strong><?= $contact->comName ?></strong>
+                            </div>
+                            <div class="col-md-5">
+                                <strong><?= $contact->comMail ?></strong>
+                            </div>
+                            <div class="col-md-2">
+                                <strong><?= $contact->comPhone ?></strong>
+                            </div>
                         </div>
-                        <textarea placeholder="Note" class="form-control" id="notes" name="notes"></textarea>
+                        <p> <?= $supplier->notes ?> </p>
                     </div>
                 </div>
             </div>
