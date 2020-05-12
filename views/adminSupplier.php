@@ -59,7 +59,7 @@
                                 <td>
                                     <a href="<?= $pageUrl?>&action=view&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-success">Voir</a>
                                     <button type="button" class="btn btn-sm btn-warning">Editer</button>
-                                    <a href="<?= $pageUrl?>&action=delete&idSupplier=<?$supplier->idSupplier?>" class="btn btn-sm btn-danger">Supprimer</a>
+                                    <a href="<?= $pageUrl?>&action=delete&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-danger">Supprimer</a>
                                 </td>
                             </tr>
                         <?php
