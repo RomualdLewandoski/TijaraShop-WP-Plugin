@@ -77,7 +77,9 @@ class Supplier_Model extends Model
             }
         }
         if ($societyName != null) {
-            if ($this->getBy("societyName", $societyName) != null) {
+            $tempo = $this->getBy("societyName", $societyName);
+            var_dump($tempo);
+           /* if ($this->getBy("societyName", $societyName) != null) {
                 $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
@@ -114,6 +116,7 @@ class Supplier_Model extends Model
         } else {
             $this->helper->session->set_flashdata("success", "La société a bien été ajoutée");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+       */
         }
 
     }

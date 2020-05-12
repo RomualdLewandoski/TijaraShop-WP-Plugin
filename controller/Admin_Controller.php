@@ -174,7 +174,14 @@ class Admin_Controller extends Controller
             if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName'))) {
                 $this->model->supplier->addSupplier($request);
             } else {
-                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification du modèle de permission");
+                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire d'ajout de fournisseur");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
+        } else if ($action == "view") {
+            if ($request->get('idSupplier') != null) {
+                
+            } else {
+                $this->helper->session->set_flashdata("error", "Impossible de récupérer l'identifiant du fournisseur");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
         }
