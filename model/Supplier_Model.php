@@ -110,10 +110,10 @@ class Supplier_Model extends Model
         );
 
         if (!$this->helper->db->insert($this->table, $data)) {
-            $this->helper->session->set_flashdata("error", "Erreur lors de l'ajout de la société dans la base de donnée");
+            $this->helper->session->set_flashdata("error", "Erreur lors de l'ajout du fournisseur dans la base de donnée");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
         } else {
-            $this->helper->session->set_flashdata("success", "La société a bien été ajoutée");
+            $this->helper->session->set_flashdata("success", "Le fournisseur a bien été ajouté");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
 
         }
@@ -133,5 +133,16 @@ class Supplier_Model extends Model
     public function isExist($row, $value)
     {
         return count($this->getBy($row, $value)) != 0 ? TRUE : FALSE;
+    }
+
+    public function deleteSupplier($id)
+    {
+        if (!$this->helper->db->delete($this->table, array('idSupplier' => $id))) {
+            $this->helper->session->set_flashdata("error", "Erreur lors de la suppression du fournisseur dans la base de donnée");
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+        } else {
+            $this->helper->session->set_flashdata("success", "Le fournisseur a bien été supprimé");
+            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+        }
     }
 }

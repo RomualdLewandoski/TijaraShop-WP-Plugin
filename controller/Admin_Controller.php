@@ -191,17 +191,32 @@ class Admin_Controller extends Controller
                 $this->helper->session->set_flashdata("error", "Impossible de récupérer l'identifiant du fournisseur");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
+        } else if ($action == "delete") {
+            if ($request->get('idSupplier') != null) {
+                $idSupplier = $request->get('idSupplier');
+                if ($this->model->supplier->isExist('idSupplier', $idSupplier)) {
+                    $this->model->supplier->deleteSupplier($idSupplier);
+                } else {
+                    $this->helper->session->set_flashdata("error", "L'identifiant du fournisseur est inconnu dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
+            } else {
+                $this->helper->session->set_flashdata("error", "Impossible de récupérer l'identifiant du fournisseur");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
         }
     }
 
-    public function adminLogs()
+    public
+    function adminLogs()
     {
         $this->checkInstall();
         //todo we ll not use a request here we just have a form to get our logs who are send to a DataTable
     }
 
 
-    public function getJsonConf()
+    public
+    function getJsonConf()
     {
         $json_string = json_encode($this->model->api->generateJson(), JSON_PRETTY_PRINT);
         return $json_string;

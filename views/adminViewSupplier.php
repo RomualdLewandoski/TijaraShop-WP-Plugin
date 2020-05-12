@@ -318,7 +318,8 @@
                                 <strong><?= $contact->comPhone ?></strong>
                             </div>
                         </div>
-                        <textarea placeholder="Note" class="form-control" id="notes" name="notes" disabled><?= $supplier->notes ?> </textarea>
+                        <textarea placeholder="Note" class="form-control" id="notes" name="notes"
+                                  disabled><?= $supplier->notes ?> </textarea>
                     </div>
                 </div>
             </div>
@@ -331,8 +332,9 @@
         <div class="col-md-12">
             <div class="card col-12 card-success text-center">
                 <div class="card-header text-center">
-                    <button type="submit" id="addSupplierAction" class="btn btn-success">Ajouter le fournisseur
-                    </button>
+                    <a href="admin.php?page=TijaraShop%2Fsupplier&action=edit&idSupplier=<?= $supplier->idSupplier ?>"
+                       class="btn btn-warning">Editer le fournisseur
+                    </a>
                     <a href="admin.php?page=TijaraShop%2Fsupplier" class="btn btn-danger">Retour à la liste des
                         fournisseurs</a>
                 </div>
