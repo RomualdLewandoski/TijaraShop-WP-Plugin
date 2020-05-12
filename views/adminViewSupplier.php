@@ -318,7 +318,7 @@
                                 <strong><?= $contact->comPhone ?></strong>
                             </div>
                         </div>
-                        <p> <?= $supplier->notes ?> </p>
+                        <textarea placeholder="Note" class="form-control" id="notes" name="notes" disabled><?= $supplier->notes ?> </textarea>
                     </div>
                 </div>
             </div>
