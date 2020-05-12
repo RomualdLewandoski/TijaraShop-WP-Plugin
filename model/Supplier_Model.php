@@ -195,6 +195,9 @@ class Supplier_Model extends Model
             $getBySiret = $this->getBy("siret", $siret);
             if ($getBySiret != null) {
                 if ($getBySiret[0]->idSupplier != $idSupplier) {
+                    var_dump($getBySiret[0]);
+                }
+                   /*
                     $this->helper->session->set_flashdata("error", "Le numéro de SIRET existe déja dans la base de donnée");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
                 }
@@ -260,6 +263,8 @@ class Supplier_Model extends Model
         } else {
             $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+
+                 */
         }
 
     }
