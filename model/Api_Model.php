@@ -64,4 +64,5 @@ class Api_Model extends Model
     {
         return $key == $this->getApiKey();
     }
+
 }
