@@ -615,9 +615,7 @@
                                 <div class="col-md-2"><input type="text" class="form-control" id="comPhone"
                                                              name="comPhone" value="<?= $contact->comPhone ?>"></div>
                             </div>
-                            <textarea placeholder="Note" class="form-control" id="notes" name="notes">
-                                <?= $supplier->notes ?>
-                            </textarea>
+                            <textarea placeholder="Note" class="form-control" id="notes" name="notes"><?= $supplier->notes ?></textarea>
                         </div>
                     </div>
                 </div>
