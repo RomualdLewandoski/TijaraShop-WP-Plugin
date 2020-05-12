@@ -18,11 +18,14 @@
         <?php
     }
     ?>
-    <form method="post" action="admin.php?page=TijaraShop/supplier&action=add">
+    <form method="post" action="admin.php?page=TijaraShop/supplier&action=edit">
         <div class="row text-black bg-lightblue px-2 align-items-center">
             <div class="col-md-1 text-right">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="isSociety" name="isSociety">
+                    <input class="form-check-input" type="checkbox" id="isSociety"
+                           name="isSociety" <?php if ($supplier->isSociety == 1) {
+                        echo "checked";
+                    } ?>>
                     <label class="form-check-label" for="isSociety">Société</label>
                 </div>
             </div>
@@ -30,7 +33,8 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-3 col-form-label">Raison Sociale</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control bg-white" id="societyName" name="societyName">
+                        <input type="text" class="form-control bg-white" id="societyName" name="societyName"
+                               value="<?= $supplier->societyName ?>">
                     </div>
                 </div>
             </div>
@@ -46,16 +50,27 @@
                             <div class="row mb-1">
                                 <div class="col-md-2">
                                     <select class="custom-select" name="gender" id="gender">
-                                        <option value="ND">ND</option>
-                                        <option value="Mr">Mr</option>
-                                        <option value="Mme">Mme</option>
+                                        <option value="ND" <?php if ($supplier->gender == "ND") {
+                                            echo "selected";
+                                        } ?>>ND
+                                        </option>
+                                        <option value="Mr" <?php if ($supplier->gender == "Mr") {
+                                            echo "selected";
+                                        } ?>>Mr
+                                        </option>
+                                        <option value="Mme" <?php if ($supplier->gender == "Mme") {
+                                            echo "selected";
+                                        } ?>>Mme
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" name="firstName" id="firstName">
+                                    <input type="text" class="form-control" name="firstName" id="firstName"
+                                           value="<?= $supplier->firstName ?>">
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" name="lastName" id="lastName">
+                                    <input type="text" class="form-control" name="lastName" id="lastName"
+                                           value="<?= $supplier->lastName ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -74,16 +89,19 @@
                                     Adresse
                                 </div>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" id="address" name="address">
+                                    <input type="text" class="form-control" id="address" name="address"
+                                           value="<?= $supplier->address ?>">
                                 </div>
                             </div>
                             <div class="row mb-1 aic">
                                 <div class="col-md-2">CP / Ville</div>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" id="zipCode" name="zipCode">
+                                    <input type="text" class="form-control" id="zipCode" name="zipCode"
+                                           value="<?= $supplier->zipCode ?>">
                                 </div>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" id="city" name="city">
+                                    <input type="text" class="form-control" id="city" name="city"
+                                           value="<?= $supplier->city ?>">
                                 </div>
                             </div>
                             <div class="row aic">
@@ -92,6 +110,9 @@
                                 </div>
                                 <div class="col-md-10">
                                     <select id="country" name="country" class="form-control chosen-select col-12">
+                                        <option value="<?= $supplier->country ?>" selected><?= $supplier->country ?>
+                                            (Origine)
+                                        </option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Åland Islands">Åland Islands</option>
                                         <option value="Albania">Albania</option>
@@ -374,19 +395,23 @@
                             <div class="row mb-1 aic">
                                 <div class="col-md-2">Code Ref.</div>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" id="refCode" name="refCode">
+                                    <input type="text" class="form-control" id="refCode" name="refCode"
+                                           value="<?= $supplier->refCode ?>">
                                 </div>
                             </div>
                             <div class="row mb-1 aic">
                                 <div class="col-md-2">Site Web</div>
                                 <div class="col-md-10"><input type="text" class="form-control" id="webSite"
-                                                              name="webSite"></div>
+                                                              name="webSite" value="<?= $supplier->webSite ?>"></div>
                             </div>
                             <div class="row mb-1 aic">
                                 <div class="col-md-1 offset-10 text-right mb-1">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="isActive" name="isActive"
-                                               checked>
+                                            <?php if ($supplier->isActive == "1") {
+                                                echo "checked";
+                                            } ?>
+                                        >
                                         <label class="form-check-label" for="isActive">Actif</label>
                                     </div>
                                 </div>
@@ -402,17 +427,20 @@
                         <div class="card-header">
                             <div class="row mb-1 aic">
                                 <div class="col-md-3">Téléphone</div>
-                                <div class="col-md-9"><input type="text" class="form-control" id="phone" name="phone">
+                                <div class="col-md-9"><input type="text" class="form-control" id="phone" name="phone"
+                                                             value="<?= $supplier->phone ?>">
                                 </div>
                             </div>
                             <div class="row mb-1 aic">
                                 <div class="col-md-3">Mobile</div>
                                 <div class="col-md-9"><input type="text" class="form-control" id="mobilePhone"
-                                                             name="mobilePhone"></div>
+                                                             name="mobilePhone" value="<?= $supplier->mobilePhone ?>">
+                                </div>
                             </div>
                             <div class="row aic">
                                 <div class="col-md-3">Mail</div>
-                                <div class="col-md-9"><input type="email" class="form-control" id="mail" name="mail">
+                                <div class="col-md-9"><input type="email" class="form-control" id="mail" name="mail"
+                                                             value="<?= $supplier->mail ?>">
                                 </div>
                             </div>
                         </div>
@@ -474,11 +502,26 @@
                                     <div class="col-md-5">Mode de règlement</div>
                                     <div class="col-md-7">
                                         <select class="form-control" id="paymentType" name="paymentType">
-                                            <option value="0">Tous</option>
-                                            <option value="1">Virement</option>
-                                            <option value="2">Espèces</option>
-                                            <option value="3">CB</option>
-                                            <option value="4">Autre</option>
+                                            <option value="0" <?php if ($supplier->paymentType == 0) {
+                                                echo "selected";
+                                            } ?>>Tous
+                                            </option>
+                                            <option value="1" <?php if ($supplier->paymentType == 1) {
+                                                echo "selected";
+                                            } ?>>Virement
+                                            </option>
+                                            <option value="2" <?php if ($supplier->paymentType == 2) {
+                                                echo "selected";
+                                            } ?>>Espèces
+                                            </option>
+                                            <option value="3" <?php if ($supplier->paymentType == 3) {
+                                                echo "selected";
+                                            } ?>>CB
+                                            </option>
+                                            <option value="4" <?php if ($supplier->paymentType == 4) {
+                                                echo "selected";
+                                            } ?>>Autre
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -490,12 +533,14 @@
                             <h5 class="card-title-info mb-2">Coordonnées bancaires</h5>
                             <div class="row mb-2 aic">
                                 <div class="col-md-2">IBAN</div>
-                                <div class="col-md-10"><input type="text" class="form-control" id="iban" name="iban">
+                                <div class="col-md-10"><input type="text" class="form-control" id="iban" name="iban"
+                                                              value="<?= $supplier->iban ?>">
                                 </div>
                             </div>
                             <div class="row aic">
                                 <div class="col-md-2">BIC</div>
-                                <div class="col-md-10"><input type="text" class="form-control" id="bic" name="bic">
+                                <div class="col-md-10"><input type="text" class="form-control" id="bic" name="bic"
+                                                              value="<?= $supplier->bic ?>">
                                 </div>
                             </div>
                         </div>
@@ -512,12 +557,12 @@
                                     <div class="row aic mb-2">
                                         <div class="col-md-4">N° TVA</div>
                                         <div class="col-md-8"><input type="text" class="form-control" id="tva"
-                                                                     name="tva"></div>
+                                                                     name="tva" value="<?= $supplier->tva ?>"></div>
                                     </div>
                                     <div class="row aic mb-2">
                                         <div class="col-md-4">N° SIRET</div>
                                         <div class="col-md-8"><input type="text" class="form-control" id="siret"
-                                                                     name="siret"></div>
+                                                                     name="siret" value="<?= $supplier->siret ?>"></div>
                                     </div>
                                 </div>
                             </div>
@@ -534,34 +579,45 @@
                                 <div class="col-md-5 "><h6 class="card-title-info">Mail</h6></div>
                                 <div class="col-md-2 "><h6 class="card-title-info">Tel</h6></div>
                             </div>
+                            <?php
+                            $contact = json_decode($supplier->contact);
+                            ?>
                             <div class="row aic mb-2">
                                 <div class="col-md-2">Direction</div>
                                 <div class="col-md-3"><input type="text" class="form-control" id="directionName"
-                                                             name="directionName"></div>
+                                                             name="directionName"
+                                                             value="<?= $contact->directionName ?>"></div>
                                 <div class="col-md-5"><input type="email" class="form-control" id="directionMail"
-                                                             name="directionMail"></div>
+                                                             name="directionMail"
+                                                             value="<?= $contact->directionMail ?>"></div>
                                 <div class="col-md-2"><input type="text" class="form-control" id="directionPhone"
-                                                             name="directionPhone"></div>
+                                                             name="directionPhone"
+                                                             value="<?= $contact->directionPhone ?>"></div>
                             </div>
                             <div class="row aic mb-2">
                                 <div class="col-md-2">Comptabilité</div>
                                 <div class="col-md-3"><input type="text" class="form-control" id="comptaName"
-                                                             name="comptaName"></div>
+                                                             name="comptaName" value="<?= $contact->comptaName ?>">
+                                </div>
                                 <div class="col-md-5"><input type="email" class="form-control" id="comptaMail"
-                                                             name="comptaMail"></div>
+                                                             name="comptaMail" value="<?= $contact->comptaMail ?>">
+                                </div>
                                 <div class="col-md-2"><input type="text" class="form-control" id="comptaPhone"
-                                                             name="comptaPhone"></div>
+                                                             name="comptaPhone" value="<?= $contact->comptaPhone ?>">
+                                </div>
                             </div>
                             <div class="row aic mb-4">
                                 <div class="col-md-2">Commercial</div>
                                 <div class="col-md-3"><input type="text" class="form-control" id="comName"
-                                                             name="comName"></div>
+                                                             name="comName" value="<?= $contact->comName ?>"></div>
                                 <div class="col-md-5"><input type="email" class="form-control" id="comMail"
-                                                             name="comMail"></div>
+                                                             name="comMail" value="<?= $contact->comMail ?>"></div>
                                 <div class="col-md-2"><input type="text" class="form-control" id="comPhone"
-                                                             name="comPhone"></div>
+                                                             name="comPhone" value="<?= $contact->comPhone ?>"></div>
                             </div>
-                            <textarea placeholder="Note" class="form-control" id="notes" name="notes"></textarea>
+                            <textarea placeholder="Note" class="form-control" id="notes" name="notes">
+                                <?= $supplier->notes ?>
+                            </textarea>
                         </div>
                     </div>
                 </div>
@@ -574,7 +630,8 @@
             <div class="col-md-12">
                 <div class="card col-12 card-success text-center">
                     <div class="card-header text-center">
-                        <button type="submit" id="addSupplierAction" class="btn btn-success">Ajouter le fournisseur
+                        <input type="hidden" name="idSupplier" value="<?= $supplier->idSupplier ?>">
+                        <button type="submit" id="addSupplierAction" class="btn btn-success">Editer le fournisseur
                         </button>
                         <a href="admin.php?page=TijaraShop%2Fsupplier" class="btn btn-danger">Retour à la liste des
                             fournisseurs</a>

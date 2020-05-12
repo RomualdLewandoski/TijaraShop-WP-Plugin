@@ -291,7 +291,7 @@
                             <div class="col-md-5">
                                 <strong><?= $contact->directionMail ?></strong>
                             </div>
-                            <div class="col-md-2"><strong><?= $contact->directionPhon ?></strong>
+                            <div class="col-md-2"><strong><?= $contact->directionPhone ?></strong>
                             </div>
                         </div>
                         <div class="row aic mb-2">
@@ -332,7 +332,7 @@
         <div class="col-md-12">
             <div class="card col-12 card-success text-center">
                 <div class="card-header text-center">
-                    <a href="admin.php?page=TijaraShop%2Fsupplier&action=edit&idSupplier=<?= $supplier->idSupplier ?>"
+                    <a href="admin.php?page=TijaraShop%2Fsupplier&action=editSupplier&idSupplier=<?= $supplier->idSupplier ?>"
                        class="btn btn-warning">Editer le fournisseur
                     </a>
                     <a href="admin.php?page=TijaraShop%2Fsupplier" class="btn btn-danger">Retour à la liste des

@@ -58,7 +58,7 @@
                                 <td><?= $supplier->address ?> <?= $supplier->zipCode ?>  <?= $supplier->city ?></td>
                                 <td>
                                     <a href="<?= $pageUrl?>&action=view&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-success">Voir</a>
-                                    <button type="button" class="btn btn-sm btn-warning">Editer</button>
+                                    <a href="<?= $pageUrl?>&action=editSupplier&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-warning">Editer</a>
                                     <a href="<?= $pageUrl?>&action=delete&idSupplier=<?=$supplier->idSupplier?>" class="btn btn-sm btn-danger">Supprimer</a>
                                 </td>
                             </tr>
