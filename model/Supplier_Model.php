@@ -17,7 +17,7 @@ class Supplier_Model extends Model
     public function addSupplier($request)
     {
         $isSociety = $request->get('isSociety') != null ? 1 : 0;
-        $societyName = htmlspecialchars($request->get('societyName'));
+        $societyName = htmlspecialchars($request->get('societyName'),3);
         $gender = htmlspecialchars($request->get('gender'));
         $firstName = htmlspecialchars($request->get('firstName'));
         $lastName = htmlspecialchars($request->get('lastName'));
@@ -78,6 +78,7 @@ class Supplier_Model extends Model
         }
         if ($societyName != null) {
             var_dump($this->helper->db->get_where($this->table, array('societyName' => $societyName)));
+            var_dump($societyName);
            /* if ($this->getBy("societyName", $societyName) != null) {
                 $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
