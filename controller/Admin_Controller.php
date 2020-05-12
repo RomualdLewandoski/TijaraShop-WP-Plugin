@@ -204,7 +204,7 @@ class Admin_Controller extends Controller
                 $this->helper->session->set_flashdata("error", "Impossible de récupérer l'identifiant du fournisseur");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
-        } else if ($action == "editSupplier"){
+        } else if ($action == "editSupplier") {
             if ($request->get('idSupplier') != null) {
                 $idSupplier = $request->get('idSupplier');
                 if ($this->model->supplier->isExist('idSupplier', $idSupplier)) {
@@ -216,6 +216,13 @@ class Admin_Controller extends Controller
                 }
             } else {
                 $this->helper->session->set_flashdata("error", "Impossible de récupérer l'identifiant du fournisseur");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
+        } else if ($action == "edit") {
+            if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName','idSupplier'))) {
+                $this->model->supplier->addSupplier($request);
+            } else {
+                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification du fournisseur");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
         }
