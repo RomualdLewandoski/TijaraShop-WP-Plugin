@@ -179,7 +179,14 @@ class Admin_Controller extends Controller
             }
         } else if ($action == "view") {
             if ($request->get('idSupplier') != null) {
-                
+                $idSupplier = $request->get('idSupplier');
+                if ($this->model->supplier->isExist('idSupplier', $idSupplier)) {
+                    $data['supplier'] = $this->model->supplier->getBy('idSupplier', $idSupplier)[0];
+                    $this->loadView('adminViewSupplier', $data);
+                } else {
+                    $this->helper->session->set_flashdata("error", "L'identifiant du fournisseur est inconnu dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             } else {
                 $this->helper->session->set_flashdata("error", "Impossible de récupérer l'identifiant du fournisseur");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");

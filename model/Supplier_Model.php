@@ -115,7 +115,7 @@ class Supplier_Model extends Model
         } else {
             $this->helper->session->set_flashdata("success", "La société a bien été ajoutée");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-            
+
         }
 
     }
@@ -128,5 +128,10 @@ class Supplier_Model extends Model
     public function listSupplier()
     {
         return $this->helper->db->get($this->table);
+    }
+
+    public function isExist($row, $value)
+    {
+        return count($this->getBy($row, $value)) != 0 ? TRUE : FALSE;
     }
 }
