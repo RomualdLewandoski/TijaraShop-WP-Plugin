@@ -14,7 +14,11 @@ class Supplier_Model extends Model
 
     }
 
-    public function addSupplier($request)
+    /**
+     * @param $request
+     * @param bool $isApi => this will be helpfull to know wath is return type we ll use
+     */
+    public function addSupplier($request, $isApi = false)
     {
         $isSociety = $request->get('isSociety') != null ? 1 : 0;
         $societyName = $request->get('societyName');
@@ -44,43 +48,69 @@ class Supplier_Model extends Model
         $comName = htmlspecialchars($request->get('comName'));
         $comMail = htmlspecialchars($request->get('comMail'));
         $comPhone = htmlspecialchars($request->get('comPhone'));
-        $contact = new stdClass();
-        $contact->directionName = $directionName;
-        $contact->directionMail = $directionMail;
-        $contact->directionPhone = $directionPhone;
-        $contact->comptaName = $comptaName;
-        $contact->comptaMail = $comptaMail;
-        $contact->comptaPhone = $comptaPhone;
-        $contact->comName = $comName;
-        $contact->comMail = $comMail;
-        $contact->comPhone = $comPhone;
-        $contactStr = json_encode($contact);
+        if ($isApi) {
+            $contactStr = base64_decode($request->get('contact'));
+        } else {
+            $contact = new stdClass();
+            $contact->directionName = $directionName;
+            $contact->directionMail = $directionMail;
+            $contact->directionPhone = $directionPhone;
+            $contact->comptaName = $comptaName;
+            $contact->comptaMail = $comptaMail;
+            $contact->comptaPhone = $comptaPhone;
+            $contact->comName = $comName;
+            $contact->comMail = $comMail;
+            $contact->comPhone = $comPhone;
+            $contactStr = json_encode($contact);
+        }
         $notes = htmlspecialchars($request->get('notes'));
         $isActive = $request->get('isActive') != null ? 1 : 0;
-
+        if ($isApi) {
+            $result = new stdClass();
+        }
         if ($siret != null) {
             if ($this->getBy("siret", $siret) != null) {
-                $this->helper->session->set_flashdata("error", "Le numéro de SIRET existe déja dans la base de donnée");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                if ($isActive) {
+                    $result->state = 0;
+                    $result->error = "Le numéro de SIRET existe déja dans la base de donnée";
+                } else {
+                    $this->helper->session->set_flashdata("error", "Le numéro de SIRET existe déja dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             }
         }
         if ($tva != null) {
             if ($this->getBy("tva", $tva) != null) {
-                $this->helper->session->set_flashdata("error", "Le numéro de TVA existe déja dans la base de donnée");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                if ($isApi) {
+                    $result->state = 0;
+                    $result->error = "Le numéro de TVA existe déja dans la base de donnée";
+                } else {
+                    $this->helper->session->set_flashdata("error", "Le numéro de TVA existe déja dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             }
         }
         if ($refCode != null) {
             if ($this->getBy("refCode", $refCode) != null) {
-                $this->helper->session->set_flashdata("error", "Le numéro de référence Fournisseur existe déja dans la base de donnée");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                if ($isApi) {
+                    $result->state = 0;
+                    $result->error = "Le numéro de référence Fournisseur existe déja dans la base de donnée";
+                } else {
+                    $this->helper->session->set_flashdata("error", "Le numéro de référence Fournisseur existe déja dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             }
         }
         if ($societyName != null) {
 
             if ($this->getBy("societyName", $societyName) != null) {
-                $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                if ($isApi) {
+                    $result->state = 0;
+                    $result->error = "La société existe déja dans la base de donnée";
+                } else {
+                    $this->helper->session->set_flashdata("error", "La société existe déja dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             }
         }
 
@@ -110,12 +140,26 @@ class Supplier_Model extends Model
         );
 
         if (!$this->helper->db->insert($this->table, $data)) {
-            $this->helper->session->set_flashdata("error", "Erreur lors de l'ajout du fournisseur dans la base de donnée");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            if ($isApi) {
+                $result->state = 0;
+                $result->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée";
+            } else {
+                $this->helper->session->set_flashdata("error", "Erreur lors de l'ajout du fournisseur dans la base de donnée");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
         } else {
-            $this->helper->session->set_flashdata("success", "Le fournisseur a bien été ajouté");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            if ($isApi) {
+                $result->state = 1;
+                $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
+                
+            } else {
+                $this->helper->session->set_flashdata("success", "Le fournisseur a bien été ajouté");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
+        }
 
+        if ($isApi) {
+            return $result;
         }
 
     }

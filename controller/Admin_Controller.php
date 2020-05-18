@@ -172,7 +172,7 @@ class Admin_Controller extends Controller
             $this->loadView('adminAddSupplier', $data);
         } else if ($action == "add") {
             if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName'))) {
-                $this->model->supplier->addSupplier($request);
+                $this->model->supplier->addSupplier($request, false);
             } else {
                 $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire d'ajout de fournisseur");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");

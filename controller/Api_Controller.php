@@ -58,9 +58,24 @@ class Api_Controller extends Controller
             $obj = $this->model->user->updatePassword($request->get('idWp'), $request->get('newPass'));
         } else {
             $obj->state = 1;
-            $obj->error = "Des champs sont manquants dans l'envoie de la modification du login";
+            $obj->error = "Des champs sont manquants dans l'envoi de la modification du login";
         }
         echo json_encode($obj);
+    }
+
+    public function addSupplier()
+    {
+        $this->checkApi();
+        $obj = new stdClass();
+        $request = $this->request();
+        if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName'))) {
+            $obj = $this->model->supplier->addSupplier($request, true);
+        } else {
+            $obj->state = 0;
+            $obj->error = "Des champs sont manquants dans l'envoi de l'ajout fournisseur";
+        }
+        echo json_encode($obj);
+
     }
 
     public function updater()
