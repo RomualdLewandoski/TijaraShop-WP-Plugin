@@ -21,7 +21,7 @@ class Supplier_Model extends Model
     public function addSupplier($request, $isApi = false)
     {
         if ($isApi) {
-            $isSociety = $request->get('isSociety') ? 1 : 0;
+            $isSociety = $request->get('isSociety');
         } else {
             $isSociety = $request->get('isSociety') != null ? 1 : 0;
         }
