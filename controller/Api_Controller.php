@@ -78,6 +78,20 @@ class Api_Controller extends Controller
 
     }
 
+    public function editSupplier()
+    {
+        $this->checkApi();
+        $obj = new stdClass();
+        $request = $this->request();
+        if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName'))) {
+            $obj = $this->model->supplier->editSupplier($request, true);
+        } else {
+            $obj->state = 0;
+            $obj->error = "Des champs sont manquants dans l'envoi de l'ajout fournisseur";
+        }
+        echo json_encode($obj);
+    }
+
     public function updater()
     {
         $this->checkApi();
