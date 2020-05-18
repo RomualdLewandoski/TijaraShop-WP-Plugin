@@ -20,7 +20,11 @@ class Supplier_Model extends Model
      */
     public function addSupplier($request, $isApi = false)
     {
-        $isSociety = $request->get('isSociety') != null ? 1 : 0;
+        if ($isApi) {
+            $isSociety = $request->get('isSociety') ? 1 : 0;
+        } else {
+            $isSociety = $request->get('isSociety') != null ? 1 : 0;
+        }
         $societyName = $request->get('societyName');
         $gender = htmlspecialchars($request->get('gender'));
         $firstName = htmlspecialchars($request->get('firstName'));
@@ -151,7 +155,7 @@ class Supplier_Model extends Model
             if ($isApi) {
                 $result->state = 1;
                 $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
-                
+
             } else {
                 $this->helper->session->set_flashdata("success", "Le fournisseur a bien été ajouté");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
