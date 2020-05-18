@@ -68,7 +68,11 @@ class Supplier_Model extends Model
             $contactStr = json_encode($contact);
         }
         $notes = htmlspecialchars($request->get('notes'));
-        $isActive = $request->get('isActive') != null ? 1 : 0;
+        if ($isApi) {
+            $isActive = $request->get('isActive');
+        } else {
+            $isActive = $request->get('isActive') != null ? 1 : 0;
+        }
         if ($isApi) {
             $result = new stdClass();
         }
@@ -194,10 +198,16 @@ class Supplier_Model extends Model
         }
     }
 
-    public function editSupplier($request)
+    public function editSupplier($request, $isApi = false)
     {
-        $idSupplier = $request->get('idSupplier');
-        $isSociety = $request->get('isSociety') != null ? 1 : 0;
+        if ($isApi) {
+            $idSupplier = $request->get('idWp');
+            $isSociety = $request->get('isSociety');
+        } else {
+            $idSupplier = $request->get('idSupplier');
+            $isSociety = $request->get('isSociety') != null ? 1 : 0;
+        }
+
         $societyName = $request->get('societyName');
         $gender = htmlspecialchars($request->get('gender'));
         $firstName = htmlspecialchars($request->get('firstName'));
@@ -225,19 +235,30 @@ class Supplier_Model extends Model
         $comName = htmlspecialchars($request->get('comName'));
         $comMail = htmlspecialchars($request->get('comMail'));
         $comPhone = htmlspecialchars($request->get('comPhone'));
-        $contact = new stdClass();
-        $contact->directionName = $directionName;
-        $contact->directionMail = $directionMail;
-        $contact->directionPhone = $directionPhone;
-        $contact->comptaName = $comptaName;
-        $contact->comptaMail = $comptaMail;
-        $contact->comptaPhone = $comptaPhone;
-        $contact->comName = $comName;
-        $contact->comMail = $comMail;
-        $contact->comPhone = $comPhone;
-        $contactStr = json_encode($contact);
+        if ($isApi) {
+            $contactStr = base64_decode($request->get('contact'));
+        } else {
+            $contact = new stdClass();
+            $contact->directionName = $directionName;
+            $contact->directionMail = $directionMail;
+            $contact->directionPhone = $directionPhone;
+            $contact->comptaName = $comptaName;
+            $contact->comptaMail = $comptaMail;
+            $contact->comptaPhone = $comptaPhone;
+            $contact->comName = $comName;
+            $contact->comMail = $comMail;
+            $contact->comPhone = $comPhone;
+            $contactStr = json_encode($contact);
+        }
         $notes = htmlspecialchars($request->get('notes'));
-        $isActive = $request->get('isActive') != null ? 1 : 0;
+        if ($isApi) {
+            $isActive = $request->get('isActive');
+        } else {
+            $isActive = $request->get('isActive') != null ? 1 : 0;
+        }
+        if ($isApi) {
+            $result = new stdClass();
+        }
 
         if ($siret != null) {
             $getBySiret = $this->getBy("siret", $siret);
@@ -303,12 +324,25 @@ class Supplier_Model extends Model
         );
 
         if (!$this->helper->db->update($this->table, $data, array('idSupplier' => $idSupplier))) {
-            $this->helper->session->set_flashdata("error", "Erreur lors de la modification du fournisseur dans la base de donnée");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            if ($isApi) {
+                $result->state = 0;
+                $result->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée";
+            } else {
+                $this->helper->session->set_flashdata("error", "Erreur lors de la modification du fournisseur dans la base de donnée");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
         } else {
-            $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
-        }
+            if ($isApi) {
+                $result->state = 1;
+                $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
 
+            } else {
+                $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
+        }
+        if ($isApi) {
+            return $result;
+        }
     }
 }
