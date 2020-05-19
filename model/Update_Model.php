@@ -21,22 +21,16 @@ class Update_Model extends Model
         unset($value->apiKey);
         $value->contact = base64_decode($value->contact);
         $array = json_decode(json_encode($value), true);
-
-       /* if (!$this->helper->db->insert($this->supplierTable, $array)) {
+        if (!$this->helper->db->insert($this->supplierTable, $array)) {
             $obj->state = 0;
             $obj->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée (site)";
         } else {
-            $idWp = $this->helper->db->get_where($this->supplierTable, array('societyName'=> $value->societyName))[0]->idSupplier;
+            $idWp = $this->helper->db->get_where($this->supplierTable, array('societyName' => $value->societyName))[0]->idSupplier;
             $obj->state = 1;
             $obj->action = "AddSupplier";
             $obj->idWp = $idWp;
             $obj->societyName = $value->societyName;
-        }*/
-        $idWp = $this->helper->db->get_where($this->supplierTable, array('societyName'=> $value->societyName))[0]->idSupplier;
-        $obj->state = 1;
-        $obj->action = "AddSupplier";
-        $obj->idWp = $idWp;
-        $obj->societyName = $value->societyName;
+        }
         return $obj;
 
     }
