@@ -21,7 +21,9 @@ class Update_Model extends Model
         unset($value->apiKey);
         $value->contact = base64_decode($value->contact);
         //todo we ll insert here and return $obj based on result
-        if (!$this->helper->db->insert($this->supplierTable, $value)) {
+        $array = json_decode(json_encode($value), true);
+
+        if (!$this->helper->db->insert($this->supplierTable, $array)) {
             $obj->state = 0;
             $obj->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée (site)";
         } else {
