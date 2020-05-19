@@ -26,17 +26,16 @@ class Update_Model extends Model
             $obj->state = 0;
             $obj->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée (site)";
         } else {
-            $idWp = $this->helper->db->get_where($this->supplierTable, array('societyName', $value->societyName))[0]->idSupplier;
+            $idWp = $this->helper->db->get_where($this->supplierTable, array('societyName'=> $value->societyName))[0]->idSupplier;
             $obj->state = 1;
             $obj->action = "AddSupplier";
             $obj->idWp = $idWp;
             $obj->societyName = $value->societyName;
         }*/
-        $select = $this->helper->db->get_where($this->supplierTable, array('societyName' => $value->societyName));
-        var_dump($select);
+        $idWp = $this->helper->db->get_where($this->supplierTable, array('societyName'=> $value->societyName))[0]->idSupplier;
         $obj->state = 1;
         $obj->action = "AddSupplier";
-        //$obj->idWp = $idWp;
+        $obj->idWp = $idWp;
         $obj->societyName = $value->societyName;
         return $obj;
 
