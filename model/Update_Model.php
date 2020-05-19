@@ -18,7 +18,7 @@ class Update_Model extends Model
     public function addSupplier($value)
     {
         $obj = new stdClass();
-        unset($value->privateKey);
+        unset($value->apiKey);
         var_dump($value);
 
     }
