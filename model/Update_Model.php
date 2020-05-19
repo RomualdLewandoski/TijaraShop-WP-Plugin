@@ -20,7 +20,14 @@ class Update_Model extends Model
         $obj = new stdClass();
         unset($value->apiKey);
         $value->contact = base64_decode($value->contact);
-        var_dump($value);
+        //todo we ll insert here and return $obj based on result
+        if (!$this->helper->db->insert($this->supplierTable, $value)) {
+            $obj->state = 0;
+            $obj->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée (site)";
+        } else {
+            $obj->state = 1;
+        }
+        return $obj;
 
     }
 
