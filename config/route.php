@@ -15,6 +15,7 @@ $route['api/update'] = "api/updater";
 $route['api/users/changepass'] = "api/changeUserPass";
 $route['api/suppliers/add'] = "api/addSupplier";
 $route['api/suppliers/edit'] = "api/editSupplier";
+$route['api/suppliers/delete'] = "api/deleteSupplier";
 
 /**
  * API GETTER

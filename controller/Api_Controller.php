@@ -93,6 +93,26 @@ class Api_Controller extends Controller
         echo json_encode($obj);
     }
 
+    public function deleteSupplier()
+    {
+        $this->checkApi();
+        $obj = new stdClass();
+        $request = $this->request();
+        if ($this->helper->form->verify(array('idWp'))) {
+            $idSupplier = $request->get('idWp');
+            if ($this->model->supplier->isExist('idSupplier', $idSupplier)) {
+                $obj = $this->model->supplier->deleteSupplier($idSupplier, true);
+            } else {
+                $obj->sate = 0;
+                $obj->error = "Le fournisseur n'existe pas sur le site il a été supprimé de la caisse";
+            }
+        } else {
+            $obj->state = 0;
+            $obj->error = "Des champs sont manquants dans l'envoi de la suppression fournisseur";
+        }
+        echo json_encode($obj);
+    }
+
     public function updater()
     {
         $this->checkApi();

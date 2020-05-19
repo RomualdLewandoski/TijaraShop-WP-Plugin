@@ -187,14 +187,28 @@ class Supplier_Model extends Model
         return count($this->getBy($row, $value)) != 0 ? TRUE : FALSE;
     }
 
-    public function deleteSupplier($id)
+    public function deleteSupplier($id, $isApi = false)
     {
+        $obj = new stdClass();
         if (!$this->helper->db->delete($this->table, array('idSupplier' => $id))) {
-            $this->helper->session->set_flashdata("error", "Erreur lors de la suppression du fournisseur dans la base de donnée");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            if ($isApi) {
+                $obj->state = 0;
+                $obj->error = "Erreur lors de la suppression du fournisseur dans la base de donnée (site)";
+            } else {
+                $this->helper->session->set_flashdata("error", "Erreur lors de la suppression du fournisseur dans la base de donnée");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
         } else {
-            $this->helper->session->set_flashdata("success", "Le fournisseur a bien été supprimé");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            if ($isApi) {
+                $obj->state = 1;
+            } else {
+                $this->helper->session->set_flashdata("success", "Le fournisseur a bien été supprimé");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            }
+
+        }
+        if ($isApi) {
+            return $obj;
         }
     }
 
