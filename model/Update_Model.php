@@ -20,7 +20,6 @@ class Update_Model extends Model
         $obj = new stdClass();
         unset($value->apiKey);
         $value->contact = base64_decode($value->contact);
-        //todo we ll insert here and return $obj based on result
         $array = json_decode(json_encode($value), true);
 
         if (!$this->helper->db->insert($this->supplierTable, $array)) {
@@ -35,6 +34,19 @@ class Update_Model extends Model
 
     public function editSupplier($value)
     {
+        $obj = new stdClass();
+        $idSupplier = $value->idWp;
+        unset($value->idWp);
+        unset($value->apiKey);
+        $value->contact = base64_decode($value->contact);
+        $array = json_decode(json_encode($value), true);
 
+        if (!$this->helper->db->update($this->supplierTable, $array, array('idSupplier' => $idSupplier))) {
+            $obj->state = 0;
+            $obj->error = "Erreur lors de l'edition du fournisseur dans la base de donnée";
+        } else {
+            $obj->state = 1;
+        }
+        return $obj;
     }
 }

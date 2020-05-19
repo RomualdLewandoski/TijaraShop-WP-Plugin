@@ -127,7 +127,7 @@ class Api_Controller extends Controller
                             $obj = $this->model->update->addSupplier($value);
                             break;
                         case "edit":
-
+                            $obj = $this->model->update->editSupplier($value);
                             break;
                         default:
                             $obj->state = 0;
