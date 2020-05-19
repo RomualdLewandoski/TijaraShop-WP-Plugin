@@ -22,7 +22,7 @@ class Update_Model extends Model
         $value->contact = base64_decode($value->contact);
         $array = json_decode(json_encode($value), true);
 
-        if (!$this->helper->db->insert($this->supplierTable, $array)) {
+       /* if (!$this->helper->db->insert($this->supplierTable, $array)) {
             $obj->state = 0;
             $obj->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée (site)";
         } else {
@@ -31,7 +31,13 @@ class Update_Model extends Model
             $obj->action = "AddSupplier";
             $obj->idWp = $idWp;
             $obj->societyName = $value->societyName;
-        }
+        }*/
+        $select = $this->helper->db->get_where($this->supplierTable, array('societyName', $value->societyName));
+        var_dump($select);
+        $obj->state = 1;
+        $obj->action = "AddSupplier";
+        //$obj->idWp = $idWp;
+        $obj->societyName = $value->societyName;
         return $obj;
 
     }
