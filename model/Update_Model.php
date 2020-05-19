@@ -30,6 +30,7 @@ class Update_Model extends Model
             $obj->state = 1;
             $obj->action = "AddSupplier";
             $obj->idWp = $idWp;
+            $obj->societyName = $value->societyName;
         }
         return $obj;
 
