@@ -19,6 +19,7 @@ class Update_Model extends Model
     {
         $obj = new stdClass();
         unset($value->apiKey);
+        $value->contact = base64_decode($value->contact);
         var_dump($value);
 
     }

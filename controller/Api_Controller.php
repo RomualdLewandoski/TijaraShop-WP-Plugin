@@ -124,7 +124,7 @@ class Api_Controller extends Controller
                     //todo add, edit, delete
                     switch ($action) {
                         case "add":
-                            $this->model->update->addSupplier($value);
+                            $obj = $this->model->update->addSupplier($value);
                             break;
                         case "edit":
 
