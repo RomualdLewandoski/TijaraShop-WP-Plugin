@@ -214,10 +214,10 @@ class User_Model extends Model
         );
         $obj = new stdClass();
         if (!$this->helper->db->update($this->table, $data, array('idShopLogin' => $idShopLogin))) {
-            $obj->state = 1;
+            $obj->state = 0;
             $obj->error = "Erreur interne dans l'api lors de la mise a jour du mot de passe";
         } else {
-            $obj->state = 0;
+            $obj->state = 1;
         }
         return $obj;
     }

@@ -9,6 +9,7 @@ class Api_Controller extends Controller
         $this->loadModel('perms');
         $this->loadModel('user');
         $this->loadModel('supplier');
+        $this->loadModel('update');
         $this->loadHelper('url');
         $this->loadHelper('form');
 
@@ -111,7 +112,7 @@ class Api_Controller extends Controller
                             break;
 
                         default:
-                            $obj->state = 1;
+                            $obj->state = 0;
                             $obj->error = "Unknown user action";
                     }
                     //todo createUser, deleteUser, editUser
@@ -121,6 +122,17 @@ class Api_Controller extends Controller
                     break;
                 case "supplier":
                     //todo add, edit, delete
+                    switch ($action) {
+                        case "add":
+                            $this->model->update->addSupplier($value);
+                            break;
+                        case "edit":
+
+                            break;
+                        default:
+                            $obj->state = 0;
+                            $obj->error = "Unknown supplier action";
+                    }
                     break;
 
                 default:

@@ -34,6 +34,7 @@ die('This file is used for development purposes only.');
  * @property User_Model $user                       Our user model
  * @property Install_Model $install                 Our install model
  * @property Supplier_Model $supplier               Our supplier model
+ * @property Update_Model $update                   Our Update model
  */
 class System
 {
