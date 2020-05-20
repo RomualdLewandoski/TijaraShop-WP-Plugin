@@ -8,8 +8,8 @@ Author: Romuald Detrait
 License: Closed-Sources
  */
 
-define("version", 1.3);
-define("apiVersion", "1.3");
+define("version", 1.4);
+define("apiVersion", "1.4");
 define("dbVersion", 1);
 include_once plugin_dir_path(__FILE__) . '/core/System.php';
 $GLOBALS['tijarashop'] = start();

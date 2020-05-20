@@ -64,6 +64,5 @@ class Update_Model extends Model
             $obj->state = 1;
         }
         return $obj;
-
     }
 }

@@ -1,13 +1,13 @@
 {
-  "version" :"1.3",
-  "download_url" : "https://github.com/RomualdLewandoski/TijaraShop-WP-Plugin/raw/master/TijaraShop.zip",
+  "version": "1.4",
+  "download_url": "https://github.com/RomualdLewandoski/TijaraShop-WP-Plugin/raw/master/TijaraShop.zip",
   "required": "5.0",
-  "tested" : "5.4",
-  "requires_php" : "5.3",
-  "last_updated" : "2020-04-21 16:59:00",
-  "sections" : {
+  "tested": "5.4",
+  "requires_php": "5.3",
+  "last_updated": "2020-04-21 16:59:00",
+  "sections": {
     "description": "This is the plugin to connect TijaraShop App to TijaraShop Wordpress",
     "instalation": "Upload the plugin, activate it and it's done, you also need to configure the plugin the first time",
-    "changelog": "<h4>1.3 - 21 Avril 2020</h4><ul><li>Install script</li><li>Base for API</li><li>know bug fixed</li></ul><br><h4>1.2 - 21 Avril 2020</h4><ul><li>Auto update directly from Wordpress Panel</li></ul><br><h4>1.1 - 16 Avril 2020</h4><ul><li>Add MVC mode</li><li>Edit Api</li><li>Edit perms model</li></ul>"
+    "changelog": "<h4>1.4 - 20 Mai 2020</h4><ul><li>Supplier manager</li><li>Add/edit/delete supplier</li><li>List suplier</li><li>Api for Supplier</li><li>Update Thread Api for pending action if software is not connected on internet</li></ul><br><h4>1.3 - 21 Avril 2020</h4><ul><li>Install script</li><li>Base for API</li><li>know bug fixed</li></ul><br><h4>1.2 - 21 Avril 2020</h4><ul><li>Auto update directly from Wordpress Panel</li></ul><br><h4>1.1 - 16 Avril 2020</h4><ul><li>Add MVC mode</li><li>Edit Api</li><li>Edit perms model</li></ul>"
   }
 }
