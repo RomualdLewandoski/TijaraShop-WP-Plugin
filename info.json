@@ -4,7 +4,7 @@
   "required": "5.0",
   "tested": "5.4",
   "requires_php": "5.3",
-  "last_updated": "2020-04-21 16:59:00",
+  "last_updated": "2020-05-20 16:10:00",
   "sections": {
     "description": "This is the plugin to connect TijaraShop App to TijaraShop Wordpress",
     "instalation": "Upload the plugin, activate it and it's done, you also need to configure the plugin the first time",
