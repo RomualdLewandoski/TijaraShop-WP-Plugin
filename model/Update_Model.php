@@ -53,9 +53,17 @@ class Update_Model extends Model
         return $obj;
     }
 
-    public function deleteSupplier($value){
+    public function deleteSupplier($value)
+    {
         $obj = new stdClass();
         $idSupplier = $value->idWp;
+        if (!$this->helper->db->delete($this->table, array('idSupplier' => $idSupplier))) {
+            $obj->state = 0;
+            $obj->error = "Erreur lors de la suppression du fournisseur (site)";
+        } else {
+            $obj->state = 1;
+        }
+        return $obj;
 
     }
 }
