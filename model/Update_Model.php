@@ -57,7 +57,7 @@ class Update_Model extends Model
     {
         $obj = new stdClass();
         $idSupplier = $value->idWp;
-        if (!$this->helper->db->delete($this->table, array('idSupplier' => $idSupplier))) {
+        if (!$this->helper->db->delete($this->supplierTable, array('idSupplier' => $idSupplier))) {
             $obj->state = 0;
             $obj->error = "Erreur lors de la suppression du fournisseur (site)";
         } else {
