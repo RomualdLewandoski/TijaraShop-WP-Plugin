@@ -149,6 +149,14 @@ class Api_Controller extends Controller
                         case "edit":
                             $obj = $this->model->update->editSupplier($value);
                             break;
+                        case "delete":
+                            if ($this->model->supplier->isExist('idSupplier', $value->idWp)) {
+                                $obj = $this->model->update->deleteSupplier($value);
+                            } else {
+                                $obj->state = 0;
+                                $obj->error = "Supplier Not found while trying delete";
+                            }
+                            break;
                         default:
                             $obj->state = 0;
                             $obj->error = "Unknown supplier action";

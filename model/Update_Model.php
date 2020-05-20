@@ -52,4 +52,10 @@ class Update_Model extends Model
         }
         return $obj;
     }
+
+    public function deleteSupplier($value){
+        $obj = new stdClass();
+        $idSupplier = $value->idWp;
+
+    }
 }
