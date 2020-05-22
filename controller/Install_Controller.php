@@ -89,7 +89,7 @@ class Install_Controller extends Controller
                                 notes TEXT,
                                 isActive TINYINT(1)
 );";
-        $shopLogTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_log(
+        $shopLogTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Log(
                             idLog INT AUTO_INCREMENT PRIMARY KEY,
                             userLog VARCHAR(255) NOT NULL,
                             dateLOG DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
