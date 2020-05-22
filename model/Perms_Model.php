@@ -10,6 +10,7 @@ class Perms_Model extends Model
         $this->loadHelper('db');
         $this->loadHelper('url');
         $this->loadHelper('session');
+        $this->loadModel('log');
         $this->table = $this->helper->db->getPrefix() . '_shop_PermissionModel';
 
     }
@@ -41,13 +42,19 @@ class Perms_Model extends Model
             'hasStock' => $stock,
             'hasCaisse' => $caisse
         );
-        if (!$this->helper->db->insert($this->table, $data)) {
-            $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout du modèle de permission");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+        if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "Perms", "Create", "", "", json_encode($data))) {
+            if (!$this->helper->db->insert($this->table, $data)) {
+                $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout du modèle de permission");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+            } else {
+                $this->helper->session->set_flashdata("success", "Le modèle de permission a bien été ajouté");
+                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+            }
         } else {
-            $this->helper->session->set_flashdata("success", "Le modèle de permission a bien été ajouté");
+            $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout du log. Le modèle de permission n'as pas été ajouté");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
         }
+
     }
 
     /**

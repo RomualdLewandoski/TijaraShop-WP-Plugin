@@ -35,6 +35,7 @@ die('This file is used for development purposes only.');
  * @property Install_Model $install                 Our install model
  * @property Supplier_Model $supplier               Our supplier model
  * @property Update_Model $update                   Our Update model
+ * @property Log_Model $log                         Model for login all actions (also known as BigBorther's model)
  */
 class System
 {
