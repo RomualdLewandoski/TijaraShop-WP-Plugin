@@ -92,7 +92,7 @@ class Install_Controller extends Controller
         $shopLogTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Log(
                             idLog INT AUTO_INCREMENT PRIMARY KEY,
                             userLog VARCHAR(255) NOT NULL,
-                            dateLOG DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                            dateLog DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                             typeLog VARCHAR(255) NOT NULL,
                             actionLog VARCHAR(255) NOT NULL,
                             targetIdLog INT,
