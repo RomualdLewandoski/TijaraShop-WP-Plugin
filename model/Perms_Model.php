@@ -132,11 +132,17 @@ class Perms_Model extends Model
     {
         $id = $request->get('permsId');
         if ($this->isPermsExist($id)) {
-            if (!$this->helper->db->delete($this->table, array('idPermissionModel' => $id))) {
-                $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de la suppression du modèle de permission");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+            $oldPerms = $this->getPerm($id);
+            if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "PermissionModel", "Delete", $id, json_encode($oldPerms))) {
+                if (!$this->helper->db->delete($this->table, array('idPermissionModel' => $id))) {
+                    $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de la suppression du modèle de permission");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+                } else {
+                    $this->helper->session->set_flashdata("success", "Le modèle de permission à bien été supprimé");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+                }
             } else {
-                $this->helper->session->set_flashdata("success", "Le modèle de permission à bien été supprimé");
+                $this->helper->session->set_flashdata("error", "Une erreur interne est survenue pendant l'ajout du log. La suppression du modèle de permission n'as pas été effectuée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
             }
         } else {
