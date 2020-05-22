@@ -58,13 +58,6 @@ class Install_Controller extends Controller
                             isDefaultPass TINYINT(1)
 );";
 
-        $shopLoginLogTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_ShopLoginLog (
-                                idShopLoginLog INT AUTO_INCREMENT PRIMARY KEY ,
-                                idShopLogin INT NOT NULL,
-                                dateShopLoginLog VARCHAR(255),
-                                statusShopLoginLog INT
-);";
-
         $shopConfigTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Config(
                                 idConfig INT AUTO_INCREMENT PRIMARY KEY,
                                 host VARCHAR(255) NOT NULL,
@@ -96,13 +89,22 @@ class Install_Controller extends Controller
                                 notes TEXT,
                                 isActive TINYINT(1)
 );";
-
+        $shopLogTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_log(
+                            idLog INT AUTO_INCREMENT PRIMARY KEY,
+                            userLog VARCHAR(255) NOT NULL,
+                            dateLOG DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                            typeLog VARCHAR(255) NOT NULL,
+                            actionLog VARCHAR(255) NOT NULL,
+                            targetIdLog INT,
+                            beforeLog TEXT,
+                            afterLog TEXT
+);";
         $this->helper->db->custom($apiCredentialsTable);
         $this->helper->db->custom($permissionModelTable);
         $this->helper->db->custom($shopLoginTable);
-        $this->helper->db->custom($shopLoginLogTable);
         $this->helper->db->custom($shopConfigTable);
         $this->helper->db->custom($shopSupplierTable);
+        $this->helper->db->custom($shopLogTable);
     }
 
     public function displayInstall()
