@@ -1,9 +1,7 @@
 <div class="navbar nav bg-light tijara-nav text-black-50">
     TijaraShop / Panneau de Configuration
 </div>
-<?php
- var_dump(wp_get_current_user())
-?>
+
 <div class="container-fluid ">
     <?php
     if ($error != null) {
