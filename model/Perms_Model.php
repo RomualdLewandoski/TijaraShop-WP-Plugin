@@ -42,7 +42,7 @@ class Perms_Model extends Model
             'hasStock' => $stock,
             'hasCaisse' => $caisse
         );
-        if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "Perms", "Create", "", "", json_encode($data))) {
+        if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "PermissionModel", "Create", "", "", json_encode($data))) {
             if (!$this->helper->db->insert($this->table, $data)) {
                 $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout du modèle de permission");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
@@ -102,13 +102,21 @@ class Perms_Model extends Model
                 'hasStock' => $stock,
                 'hasCaisse' => $caisse
             );
-            if (!$this->helper->db->update($this->table, $data, array('idPermissionModel' => $id))) {
-                $this->helper->session->set_flashdata("error", "Une erreur interne est survenue pendant la modification du modèle de permission");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+
+            if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "PermissionModel", "Edit", $id, json_encode($oldPerms), json_encode($data))) {
+
+                if (!$this->helper->db->update($this->table, $data, array('idPermissionModel' => $id))) {
+                    $this->helper->session->set_flashdata("error", "Une erreur interne est survenue pendant la modification du modèle de permission");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+                } else {
+                    $this->helper->session->set_flashdata("success", "Le modèle de permission à bien été modifié");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
+                }
             } else {
-                $this->helper->session->set_flashdata("success", "Le modèle de permission à bien été modifié");
+                $this->helper->session->set_flashdata("error", "Une erreur interne est survenue pendant l'ajout du log. La modification du modèle de permission n'as pas été effectuée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
             }
+
         } else {
             $this->helper->session->set_flashdata("error", "L'id du modèle de permission n'existe pas dans la base de donnée");
             $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
