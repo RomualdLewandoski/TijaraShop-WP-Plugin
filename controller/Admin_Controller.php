@@ -257,6 +257,8 @@ class Admin_Controller extends Controller
             $obj_b->val1 = "plop";
             $obj_a->val2 = "coucou";
             $obj_b->val2 = "salut";
+            $obj_a->val3 = "yo";
+            $obj_b->val4 = "wsh";
             $a = json_encode($obj_a, JSON_PRETTY_PRINT);
             $b = json_encode($obj_b, JSON_PRETTY_PRINT);
 
@@ -268,22 +270,6 @@ class Admin_Controller extends Controller
             $renderer = new Diff_Renderer_Html_SideBySide;
             $data['diff'] = $diff->Render($renderer);
 
-            // Generate an inline diff
-            require_once dirname(__FILE__) . '/../helper/Diff/Renderer/Html/Inline.php';
-            $renderer = new Diff_Renderer_Html_Inline;
-            $data['inline'] = $diff->render($renderer);
-
-
-            // Generate a unified diff
-            require_once dirname(__FILE__) . '/../helper/Diff/Renderer/Text/Unified.php';
-            $renderer = new Diff_Renderer_Text_Unified;
-            $data['unified'] = htmlspecialchars($diff->render($renderer));
-
-
-            // Generate a context diff
-            require_once dirname(__FILE__) . '/../helper/Diff/Renderer/Text/Context.php';
-            $renderer = new Diff_Renderer_Text_Context;
-            $data['context'] = htmlspecialchars($diff->render($renderer));
 
             $this->loadView("adminLogs", $data);
         }
