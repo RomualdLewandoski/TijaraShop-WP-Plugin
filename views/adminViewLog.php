@@ -28,19 +28,16 @@
 
         .Differences thead th {
             text-align: left;
-            border-bottom: 1px solid #000;
-            background: #aaa;
-            color: #000;
             padding: 4px;
         }
         .Differences tbody th {
             text-align: right;
-            background: #ccc;
             width: 4em;
             padding: 1px 2px;
-            border-right: 1px solid #000;
+            border-right: 8px solid rgba(0,0,0,0);
             vertical-align: top;
             font-size: 13px;
+            color: #2e92af;
         }
 
         .Differences td {
