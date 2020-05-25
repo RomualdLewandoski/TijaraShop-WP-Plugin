@@ -45,7 +45,7 @@
                         foreach ($logList as $log):
                             ?>
                             <tr class="<?php
-                            switch ($log->actionLog){
+                            switch ($log->actionLog) {
                                 case "Create":
                                     echo "alert-success";
                                     break;
@@ -96,8 +96,8 @@
     );
 
     // Initialize the diff class
-    $this->loadHelper('Diff');
-    $diff = $this->helper->diff->register("salut", "plop", $options);
+    $diff = $this->loadHelper('Diff');
+    $diff->register("salut", "plop", $options);
     ?>
     <!--END PAGE-->
 </div>
