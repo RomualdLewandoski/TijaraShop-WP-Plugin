@@ -34,6 +34,9 @@ class Admin_Controller extends Controller
         $this->helper->wp->getScript('bootstrap.bundle.min');
         $this->helper->wp->getScript('chosen.jquery');
 
+        require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
+
+
     }
 
     public function index()
@@ -252,7 +255,6 @@ class Admin_Controller extends Controller
             $diff = $this->helper->diff->register("salut", "plop", $options);
 
 
-            require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
             $renderer = new Diff_Renderer_Html_SideBySide;
             $data['diff'] = $diff->Render($renderer);
 
