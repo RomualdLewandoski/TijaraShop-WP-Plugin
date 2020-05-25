@@ -252,7 +252,7 @@ class Admin_Controller extends Controller
             $diff = $this->helper->diff->register("salut", "plop", $options);
 
 
-            require_once dirname(__FILE__)."../helper/Diff/Renderer/Html/SideBySide.php";
+            require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
             $renderer = new Diff_Renderer_Html_SideBySide;
             $data['diff'] = $diff->Render($renderer);
 
