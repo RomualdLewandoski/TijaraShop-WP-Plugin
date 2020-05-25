@@ -259,8 +259,8 @@ class Admin_Controller extends Controller
             );
 
 
-            $a = json_encode($log->beforeLog, JSON_PRETTY_PRINT);
-            $b = json_encode($log->afterLog, JSON_PRETTY_PRINT);
+            $a = json_encode(json_decode($log->beforeLog), JSON_PRETTY_PRINT);
+            $b = json_encode(json_decode($log->afterLog), JSON_PRETTY_PRINT);
 
             // Initialize the diff class
             $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
