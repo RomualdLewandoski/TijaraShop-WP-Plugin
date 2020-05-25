@@ -89,15 +89,6 @@
         </div>
     </div>
 
-    <?php
-    $options = array(
-        //'ignoreWhitespace' => true,
-        //'ignoreCase' => true,
-    );
-
-    // Initialize the diff class
-    $diff = $this->loadHelper('Diff');
-    $diff->register("salut", "plop", $options);
-    ?>
+    <?= $diff ?>
     <!--END PAGE-->
 </div>

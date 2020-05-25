@@ -240,6 +240,21 @@ class Admin_Controller extends Controller
         $action = $request->get('action');
         if ($action == null){
             $data['logList'] = $this->model->log->getList();
+
+            $options = array(
+                //'ignoreWhitespace' => true,
+                //'ignoreCase' => true,
+            );
+
+            // Initialize the diff class
+            $this->loadHelper('Diff');
+            $diff = $this->helper->diff->register("salut", "plop", $options);
+
+
+            require_once dirname(__FILE__)."../helper/Diff/Renderer/Html/SideBySide.php";
+            $renderer = new Diff_Renderer_Html_SideBySide;
+            $data['diff'] = $diff->Render($renderer);
+
             $this->loadView("adminLogs", $data);
         }
     }
