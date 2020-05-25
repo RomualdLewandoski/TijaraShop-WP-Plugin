@@ -63,8 +63,8 @@ class System
         $this->helper->wp->addSubMenu("TijaraShop", "Api", "manage_options", "TijaraShop/api", 'Admin', 'adminApi');
         $this->helper->wp->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", 'Admin', 'adminUsers');
         $this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Admin', 'adminPerms');
-        $this->helper->wp->addSubMenu("TijaraShop", "Logs user", "manage_options", "TijaraShop/logs", 'Admin', 'adminLogs');
         $this->helper->wp->addSubMenu("TijaraShop", "Fournisseurs", "manage_options", "TijaraShop/supplier", 'Admin', 'adminSupplier');
+        $this->helper->wp->addSubMenu("TijaraShop", "Logs", "manage_options", "TijaraShop/logs", 'Admin', 'adminLogs');
         $this->helper->wp->addSubMenu("null", "Install TijaraShop", "manage_options", "TijaraShop/install", 'Install', 'displayInstall');
 
     }

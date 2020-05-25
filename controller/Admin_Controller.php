@@ -10,6 +10,7 @@ class Admin_Controller extends Controller
         $this->loadModel('perms');
         $this->loadModel("user");
         $this->loadModel('supplier');
+        $this->loadModel("log");
         $this->loadHelper('wp');
         $this->loadHelper('form');
         $this->loadHelper('session');
@@ -232,7 +233,15 @@ class Admin_Controller extends Controller
     function adminLogs()
     {
         $this->checkInstall();
-        //todo we ll not use a request here we just have a form to get our logs who are send to a DataTable
+        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['error'] = $this->helper->session->flashdata("error");
+        $data['success'] = $this->helper->session->flashdata("success");
+        $request = $this->request();
+        $action = $request->get('action');
+        if ($action == null){
+            $data['logList'] = $this->model->log->getList();
+            $this->loadView("adminLogs", $data);
+        }
     }
 
 
