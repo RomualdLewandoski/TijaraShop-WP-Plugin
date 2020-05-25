@@ -251,8 +251,17 @@ class Admin_Controller extends Controller
                 //'ignoreCase' => true,
             );
 
+            $obj_a = new stdClass();
+            $obj_b = new stdClass();
+            $obj_a->val1 = "plop";
+            $obj_b->val1 = "plop";
+            $obj_a->val2 = "coucou";
+            $obj_b->val2 = "salut";
+            $a = json_encode($obj_a, JSON_PRETTY_PRINT);
+            $b = json_encode($obj_b, JSON_PRETTY_PRINT);
+
             // Initialize the diff class
-            $diff = new Diff(explode("\n", "{ 'plop' : 'salut'}"), explode("\n", "{ 'plop' : 'coucou'}"), $options);
+            $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
 
             require_once dirname(__FILE__) . "/../helper/Diff/Renderer/Html/SideBySide.php";
 
