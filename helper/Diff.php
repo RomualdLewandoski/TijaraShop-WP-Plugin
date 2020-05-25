@@ -22,7 +22,7 @@ class Diff
      * @var array Associative array of the default options available for the diff class and their default value.
      */
     private $defaultOptions = array(
-        'context' => 3,
+        'context' => 100,
         'ignoreNewLines' => false,
         'ignoreWhitespace' => false,
         'ignoreCase' => false

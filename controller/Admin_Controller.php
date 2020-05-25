@@ -254,7 +254,7 @@ class Admin_Controller extends Controller
 
             // Options for generating the diff
             $options = array(
-                'ignoreWhitespace' => true,
+                //'ignoreWhitespace' => true,
                 //'ignoreCase' => true,
             );
 
