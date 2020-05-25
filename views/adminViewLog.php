@@ -118,8 +118,8 @@
                 </div>
                 <div class="card-body table-responsive">
                     <strong>Auteur : </strong><?= $log->userLog ?><br>
-                    <strong>Date : </strong><?= $log->date ?><br>
-                    <strong>Type : </strong><?= $log->typeLog ?>
+                    <strong>Date : </strong><?= $log->dateLog ?><br>
+                    <strong>Type : </strong><?= $log->typeLog ?><br>
                     <strong>Action : </strong><?= $log->actionLog ?>
                     <hr>
                    <?= $diff ?>
