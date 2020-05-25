@@ -34,7 +34,6 @@ class Admin_Controller extends Controller
         $this->helper->wp->getScript('chosen.jquery');
 
 
-
     }
 
     public function index()
@@ -223,7 +222,7 @@ class Admin_Controller extends Controller
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
             }
         } else if ($action == "edit") {
-            if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName','idSupplier'))) {
+            if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName', 'idSupplier'))) {
                 $this->model->supplier->editSupplier($request);
             } else {
                 $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification du fournisseur");
@@ -241,7 +240,7 @@ class Admin_Controller extends Controller
         $data['success'] = $this->helper->session->flashdata("success");
         $request = $this->request();
         $action = $request->get('action');
-        if ($action == null){
+        if ($action == null) {
             $data['logList'] = $this->model->log->getList();
 
             require_once dirname(__FILE__) . '/../helper/Diff.php';
@@ -253,12 +252,29 @@ class Admin_Controller extends Controller
             );
 
             // Initialize the diff class
-            $diff = new Diff(explode("\n","{ 'plop' : 'salut'}"), explode("\n","{ 'plop' : 'coucou'}"), $options);
+            $diff = new Diff(explode("\n", "{ 'plop' : 'salut'}"), explode("\n", "{ 'plop' : 'coucou'}"), $options);
 
-            require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
+            require_once dirname(__FILE__) . "/../helper/Diff/Renderer/Html/SideBySide.php";
 
             $renderer = new Diff_Renderer_Html_SideBySide;
             $data['diff'] = $diff->Render($renderer);
+
+            // Generate an inline diff
+            require_once dirname(__FILE__) . '/../helper/Diff/Renderer/Html/Inline.php';
+            $renderer = new Diff_Renderer_Html_Inline;
+            $data['inline'] = $diff->render($renderer);
+
+
+            // Generate a unified diff
+            require_once dirname(__FILE__) . '/../helper/Diff/Renderer/Text/Unified.php';
+            $renderer = new Diff_Renderer_Text_Unified;
+            $data['unified'] = htmlspecialchars($diff->render($renderer));
+
+
+            // Generate a context diff
+            require_once dirname(__FILE__) . '/../helper/Diff/Renderer/Text/Context.php';
+            $renderer = new Diff_Renderer_Text_Context;
+            $data['context'] = htmlspecialchars($diff->render($renderer));
 
             $this->loadView("adminLogs", $data);
         }

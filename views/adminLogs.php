@@ -89,6 +89,13 @@
         </div>
     </div>
 
+    <h2>SideBySide</h2>
     <?= $diff ?>
+    <h2>Inline</h2>
+    <?= $inline ?>
+    <h2>Unified</h2>
+    <?= $unified ?>
+    <h2>Context</h2>
+    <?= $context ?>
     <!--END PAGE-->
 </div>
