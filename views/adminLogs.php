@@ -47,20 +47,20 @@
                             <tr class="<?php
                             switch ($log->actionLog){
                                 case "Create":
-                                    echo "bg-success";
+                                    echo "alert-success";
                                     break;
                                 case "Edit":
-                                    echo "bg-warning";
+                                    echo "alert-warning";
                                     break;
                                 case "Delete":
-                                    echo "bg-danger";
+                                    echo "alert-danger";
                                     break;
 
                                 default:
                                     echo "";
                                     break;
                             }
-                            ?>">
+                            ?> text-black">
                                 <td><?= $log->idLog ?></td>
                                 <td><?= $log->userLog ?></td>
                                 <td><?= $log->typeLog ?></td>
