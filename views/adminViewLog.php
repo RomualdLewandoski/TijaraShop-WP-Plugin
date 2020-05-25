@@ -117,6 +117,11 @@
                     </ul>
                 </div>
                 <div class="card-body table-responsive">
+                    <strong>Auteur : </strong><?= $log->userLog ?><br>
+                    <strong>Date : </strong><?= $log->date ?><br>
+                    <strong>Type : </strong><?= $log->typeLog ?>
+                    <strong>Action : </strong><?= $log->actionLog ?>
+                    <hr>
                    <?= $diff ?>
 
                 </div>
