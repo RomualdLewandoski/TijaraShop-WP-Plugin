@@ -15,6 +15,8 @@ class Admin_Controller extends Controller
         $this->loadHelper('form');
         $this->loadHelper('session');
         $this->loadHelper('url');
+        $this->loadHelper('diff');
+
         $this->helper->wp->addStyle('bootstrap');
         $this->helper->wp->addStyle('TijaraShop');
         $this->helper->wp->addStyle('datatables');
@@ -247,7 +249,6 @@ class Admin_Controller extends Controller
             );
 
             // Initialize the diff class
-            $this->loadHelper('Diff');
             $diff = $this->helper->diff->register("salut", "plop", $options);
 
 
