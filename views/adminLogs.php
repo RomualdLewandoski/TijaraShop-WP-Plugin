@@ -88,5 +88,16 @@
             </div>
         </div>
     </div>
+
+    <?php
+    $options = array(
+        //'ignoreWhitespace' => true,
+        //'ignoreCase' => true,
+    );
+
+    // Initialize the diff class
+    $this->loadHelper('Diff');
+    $diff = new Diff_Helper($a, $b, $options);
+    ?>
     <!--END PAGE-->
 </div>
