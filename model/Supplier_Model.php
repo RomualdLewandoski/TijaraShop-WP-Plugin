@@ -295,7 +295,7 @@ class Supplier_Model extends Model
             $contact->comName = $comName;
             $contact->comMail = $comMail;
             $contact->comPhone = $comPhone;
-            $contactStr = json_encode($contact);
+            $contactStr = json_encode($contact, JSON_PRETTY_PRINT);
         }
         $notes = htmlspecialchars($request->get('notes'));
         if ($isApi) {
@@ -395,6 +395,10 @@ class Supplier_Model extends Model
         } else {
             $userName = $request->get('loginUserName');
         }
+        unset($oldSupplier->idSupplier);
+        $oldSupplier->isSociety = intval($oldSupplier->isSociety);
+        $oldSupplier->isActive = intval($oldSupplier->isActive);
+        $oldSupplier->contact = json_encode(json_decode($oldSupplier->contact), JSON_PRETTY_PRINT);
         if ($this->model->log->addLog($userName, "SupplierModel", "Edit", $idSupplier, json_encode($oldSupplier), json_encode($data))) {
             if (!$this->helper->db->update($this->table, $data, array('idSupplier' => $idSupplier))) {
                 if ($isApi) {
