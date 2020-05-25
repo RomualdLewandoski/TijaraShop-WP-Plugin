@@ -41,6 +41,10 @@ class Diff_Helper
      */
     public function __construct($a, $b, $options=array())
     {
+
+    }
+
+    public function register($a, $b, $options=array()){
         $this->a = $a;
         $this->b = $b;
 
@@ -49,7 +53,6 @@ class Diff_Helper
         else
             $this->options = $this->defaultOptions;
     }
-
     /**
      * Render a diff using the supplied rendering class and return it.
      *
