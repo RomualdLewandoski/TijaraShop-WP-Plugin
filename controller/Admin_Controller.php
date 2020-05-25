@@ -253,7 +253,7 @@ class Admin_Controller extends Controller
             );
 
             // Initialize the diff class
-            $diff = new Diff_Helper("salut", "plop", $options);
+            $diff = new Diff_Helper("{ 'plop' : 'salut'}", "{ 'plop' : 'coucou'}", $options);
 
             require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
 
