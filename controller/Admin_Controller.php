@@ -15,7 +15,6 @@ class Admin_Controller extends Controller
         $this->loadHelper('form');
         $this->loadHelper('session');
         $this->loadHelper('url');
-        $this->loadHelper('diff');
 
         $this->helper->wp->addStyle('bootstrap');
         $this->helper->wp->addStyle('TijaraShop');
@@ -34,7 +33,6 @@ class Admin_Controller extends Controller
         $this->helper->wp->getScript('bootstrap.bundle.min');
         $this->helper->wp->getScript('chosen.jquery');
 
-        require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
 
 
     }
@@ -246,15 +244,18 @@ class Admin_Controller extends Controller
         if ($action == null){
             $data['logList'] = $this->model->log->getList();
 
+            require_once dirname(__FILE__).'/../helper/Diff_Helper.php';
+
+            // Options for generating the diff
             $options = array(
                 //'ignoreWhitespace' => true,
                 //'ignoreCase' => true,
             );
 
             // Initialize the diff class
-            $diff = $this->helper->diff->register("salut", "plop", $options);
-
-            var_dump($diff);
+            $diff = new Diff("salut", "plop", $options);
+            
+            require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
 
             $renderer = new Diff_Renderer_Html_SideBySide;
             $data['diff'] = $diff->Render($renderer);

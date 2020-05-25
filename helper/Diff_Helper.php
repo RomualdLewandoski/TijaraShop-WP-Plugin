@@ -1,7 +1,7 @@
 <?php
 
 
-class Diff_Helper extends Helper
+class Diff_Helper
 {
     /**
      * @var array The "old" sequence to use as the basis for the comparison.
@@ -39,12 +39,8 @@ class Diff_Helper extends Helper
      * @param array $a Array containing the lines of the first string to compare.
      * @param array $b Array containing the lines for the second string to compare.
      */
-    public function __construct()
+    public function __construct($a, $b, $options=array())
     {
-
-    }
-
-    public function register($a, $b, $options=array()){
         $this->a = $a;
         $this->b = $b;
 
@@ -52,6 +48,10 @@ class Diff_Helper extends Helper
             $this->options = array_merge($this->defaultOptions, $options);
         else
             $this->options = $this->defaultOptions;
+    }
+
+    public function register($a, $b, $options=array()){
+
     }
     /**
      * Render a diff using the supplied rendering class and return it.
