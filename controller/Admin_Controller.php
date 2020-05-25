@@ -264,7 +264,7 @@ class Admin_Controller extends Controller
             $b = json_encode($obj_b, JSON_PRETTY_PRINT);
 
             // Initialize the diff class
-            $diff = new Diff(explode(",", $a), explode(",", $b), $options);
+            $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
 
             require_once dirname(__FILE__) . "/../helper/Diff/Renderer/Html/SideBySide.php";
 
