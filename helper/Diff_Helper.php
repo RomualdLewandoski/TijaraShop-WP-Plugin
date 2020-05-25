@@ -39,7 +39,7 @@ class Diff_Helper
      * @param array $a Array containing the lines of the first string to compare.
      * @param array $b Array containing the lines for the second string to compare.
      */
-    public function __construct($a, $b, $options=array())
+    public function __construct()
     {
 
     }
