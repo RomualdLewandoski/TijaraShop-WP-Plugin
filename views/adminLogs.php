@@ -44,7 +44,23 @@
                         <?php
                         foreach ($logList as $log):
                             ?>
-                            <tr>
+                            <tr class="<?php
+                            switch ($log->actionLog){
+                                case "Create":
+                                    echo "bg-success";
+                                    break;
+                                case "Edit":
+                                    echo "bg-warning";
+                                    break;
+                                case "Delete":
+                                    echo "bg-danger";
+                                    break;
+
+                                default:
+                                    echo "";
+                                    break;
+                            }
+                            ?>">
                                 <td><?= $log->idLog ?></td>
                                 <td><?= $log->userLog ?></td>
                                 <td><?= $log->typeLog ?></td>
