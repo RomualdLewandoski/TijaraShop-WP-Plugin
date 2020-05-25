@@ -42,22 +42,19 @@
                         </thead>
                         <tbody>
                         <?php
-                        foreach ($listSupplier as $supplier):
+                        foreach ($logList as $log):
                             ?>
                             <tr>
-                                <td><?= $supplier->idSupplier ?></td>
-                                <td><?= $supplier->societyName ?></td>
-                                <td><?= $supplier->lastName ?></td>
-                                <td><?= $supplier->firstName ?></td>
-                                <td><?= $supplier->phone ?> / <?= $supplier->mobilePhone ?></td>
-                                <td><?= $supplier->address ?> <?= $supplier->zipCode ?>  <?= $supplier->city ?></td>
+                                <td><?= $log->idLog ?></td>
+                                <td><?= $log->userLog ?></td>
+                                <td><?= $log->typeLog ?></td>
+                                <td><?= $log->actionLog ?></td>
+                                <td><?= $log->dateLog ?></td>
                                 <td>
-                                    <a href="<?= $pageUrl ?>&action=view&idSupplier=<?= $supplier->idSupplier ?>"
+                                    <a href="<?= $pageUrl ?>&action=view&idLog=<?= $log->idLog ?>"
                                        class="btn btn-sm btn-success">Voir</a>
-                                    <a href="<?= $pageUrl ?>&action=editSupplier&idSupplier=<?= $supplier->idSupplier ?>"
-                                       class="btn btn-sm btn-warning">Editer</a>
-                                    <a href="<?= $pageUrl ?>&action=delete&idSupplier=<?= $supplier->idSupplier ?>"
-                                       class="btn btn-sm btn-danger">Supprimer</a>
+                                    <a href="<?= $pageUrl ?>&action=rollback&idLog=<?= $log->idLog ?>"
+                                       class="btn btn-sm btn-warning">Rollback</a>
                                 </td>
                             </tr>
                         <?php
