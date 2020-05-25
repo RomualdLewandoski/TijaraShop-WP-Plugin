@@ -254,6 +254,7 @@ class Admin_Controller extends Controller
             // Initialize the diff class
             $diff = $this->helper->diff->register("salut", "plop", $options);
 
+            var_dump($diff);
 
             $renderer = new Diff_Renderer_Html_SideBySide;
             $data['diff'] = $diff->Render($renderer);
