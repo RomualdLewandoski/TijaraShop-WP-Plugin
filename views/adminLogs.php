@@ -97,7 +97,7 @@
 
     // Initialize the diff class
     $this->loadHelper('Diff');
-    $diff = new Diff_Helper($a, $b, $options);
+    $diff = new Diff_Helper("salut", "plop", $options);
     ?>
     <!--END PAGE-->
 </div>
