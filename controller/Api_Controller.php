@@ -56,7 +56,7 @@ class Api_Controller extends Controller
         $obj = new stdClass();
         $request = $this->request();
         if ($this->helper->form->verify(array('idWp', 'newPass'))) {
-            $obj = $this->model->user->updatePassword($request->get('idWp'), $request->get('newPass'));
+            $obj = $this->model->user->updatePassword($request->get('idWp'), $request->get('newPass'), $request->get('loginUserName'));
         } else {
             $obj->state = 1;
             $obj->error = "Des champs sont manquants dans l'envoi de la modification du login";
@@ -128,7 +128,7 @@ class Api_Controller extends Controller
                         case "editpass":
                             $id = $value->idWp;
                             $newPass = $value->newPass;
-                            $obj = $this->model->user->updatePassword($id, $newPass);
+                            $obj = $this->model->user->updatePassword($id, $newPass, $value->loginUserName);
                             break;
 
                         default:

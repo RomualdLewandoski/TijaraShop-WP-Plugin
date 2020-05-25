@@ -86,7 +86,7 @@ class Update_Model extends Model
             $obj->state = 0;
             $obj->error = "Erreur lors de l'ajout du log. Le fournisseur n'as pas été supprimé";
         }
-        
+
         return $obj;
     }
 }
