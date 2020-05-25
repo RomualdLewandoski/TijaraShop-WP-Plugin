@@ -268,7 +268,9 @@ class Admin_Controller extends Controller
             require_once dirname(__FILE__) . "/../helper/Diff/Renderer/Html/SideBySide.php";
 
             $renderer = new Diff_Renderer_Html_SideBySide;
-            $data['diff'] = str_replace("\\n", "<br>",$diff->Render($renderer));
+            $tempDiff = str_replace("\\n", "<br>",$diff->Render($renderer));
+            $tempDiff = str_replace("\\", "", $tempDiff);
+            $data['diff'] =$tempDiff ;
 
             $this->loadView("adminViewLog", $data);
 
