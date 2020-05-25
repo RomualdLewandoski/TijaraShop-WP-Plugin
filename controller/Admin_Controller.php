@@ -243,25 +243,24 @@ class Admin_Controller extends Controller
         if ($action == null) {
             $data['logList'] = $this->model->log->getList();
 
+
+
+            $this->loadView("adminLogs", $data);
+        } else if ($action == "view") {
+            $idLog = $request->get('idLog');
+
+            $log = $this->model->log->getLog($idLog);
             require_once dirname(__FILE__) . '/../helper/Diff.php';
 
             // Options for generating the diff
             $options = array(
-                //'ignoreWhitespace' => true,
+                'ignoreWhitespace' => true,
                 //'ignoreCase' => true,
             );
 
-            $obj_a = new stdClass();
-            $obj_b = new stdClass();
-            $obj_a->val1 = "plop";
-            $obj_b->val1 = "plop";
-            $obj_a->val2 = "coucou";
-            $obj_b->val2 = "coucou";
-            $obj_a->val3 = "yo";
-            $obj_b->val3 = "yo";
-            $obj_a->val6 = "deleteme";
-            $a = json_encode($obj_a, JSON_PRETTY_PRINT);
-            $b = json_encode($obj_b, JSON_PRETTY_PRINT);
+
+            $a = json_encode($log->beforeLog, JSON_PRETTY_PRINT);
+            $b = json_encode($log->afterLog, JSON_PRETTY_PRINT);
 
             // Initialize the diff class
             $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
@@ -271,8 +270,8 @@ class Admin_Controller extends Controller
             $renderer = new Diff_Renderer_Html_SideBySide;
             $data['diff'] = $diff->Render($renderer);
 
+            $this->loadView("adminViewLog", $data);
 
-            $this->loadView("adminLogs", $data);
         }
     }
 

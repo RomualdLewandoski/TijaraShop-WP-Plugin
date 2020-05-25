@@ -35,8 +35,13 @@ class Log_Model extends Model
         return !$this->helper->db->insert($this->table, $data) ? false : true;
     }
 
-    public function getList(){
+    public function getList()
+    {
         return $this->helper->db->get($this->table, "dateLog ASC");
     }
 
+    public function getLog($idLog)
+    {
+        return $this->helper->db->get_where($this->table, array('idLog' => $idLog))[0];
+    }
 }
