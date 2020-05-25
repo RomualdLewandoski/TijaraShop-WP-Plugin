@@ -63,11 +63,11 @@
         }
 
         .DifferencesSideBySide .ChangeReplace .Left {
-            background: #fe9;
+            background: #faa;
         }
 
         .DifferencesSideBySide .ChangeReplace .Right {
-            background: #fd8;
+            background: #cfc;
         }
 
         .Differences ins, .Differences del {
