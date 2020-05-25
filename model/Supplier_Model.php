@@ -10,6 +10,7 @@ class Supplier_Model extends Model
         $this->loadHelper('db');
         $this->loadHelper('session');
         $this->loadHelper('url');
+        $this->loadModel('log');
         $this->table = $this->helper->db->getPrefix() . '_shop_Supplier';
 
     }
@@ -147,22 +148,38 @@ class Supplier_Model extends Model
             'isActive' => $isActive
         );
 
-        if (!$this->helper->db->insert($this->table, $data)) {
-            if ($isApi) {
-                $result->state = 0;
-                $result->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée";
+        if (!$isApi) {
+            $userName = wp_get_current_user()->user_login . "(site)";
+        } else {
+            $userName = $request->get('loginUserName');
+        }
+
+        if ($this->model->log->addLog($userName, "SupplierModel", "Create", "", "", json_encode($data))) {
+            if (!$this->helper->db->insert($this->table, $data)) {
+                if ($isApi) {
+                    $result->state = 0;
+                    $result->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée";
+                } else {
+                    $this->helper->session->set_flashdata("error", "Erreur lors de l'ajout du fournisseur dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             } else {
-                $this->helper->session->set_flashdata("error", "Erreur lors de l'ajout du fournisseur dans la base de donnée");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                if ($isApi) {
+                    $result->state = 1;
+                    $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
+
+                } else {
+                    $this->helper->session->set_flashdata("success", "Le fournisseur a bien été ajouté");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             }
         } else {
-            if ($isApi) {
-                $result->state = 1;
-                $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
-
-            } else {
-                $this->helper->session->set_flashdata("success", "Le fournisseur a bien été ajouté");
+            if (!$isApi) {
+                $this->helper->session->set_flashdata("error", "Erreur interne lors de l'ajout du log le fournisseur n'as pas été ajouté dans la base de donnée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            } else {
+                $result->state = 0;
+                $result->error = "Erreur interne lors de l'ajout du log le fournisseur n'as pas été ajouté dans la base de donnée";
             }
         }
 
@@ -187,26 +204,42 @@ class Supplier_Model extends Model
         return count($this->getBy($row, $value)) != 0 ? TRUE : FALSE;
     }
 
-    public function deleteSupplier($id, $isApi = false)
+    public function deleteSupplier($id, $isApi = false, $loginUserName = "")
     {
         $obj = new stdClass();
-        if (!$this->helper->db->delete($this->table, array('idSupplier' => $id))) {
-            if ($isApi) {
-                $obj->state = 0;
-                $obj->error = "Erreur lors de la suppression du fournisseur dans la base de donnée (site)";
+        $oldData = $this->getBy('idSupplier', $id)[0];
+        if (!$isApi) {
+            $userName = wp_get_current_user()->user_login . "(site)";
+        } else {
+            $userName = $loginUserName;
+        }
+        if ($this->model->log->addLog($userName, "SupplierModel", "Delete", $id, json_encode($oldData))) {
+            if (!$this->helper->db->delete($this->table, array('idSupplier' => $id))) {
+                if ($isApi) {
+                    $obj->state = 0;
+                    $obj->error = "Erreur lors de la suppression du fournisseur dans la base de donnée (site)";
+                } else {
+                    $this->helper->session->set_flashdata("error", "Erreur lors de la suppression du fournisseur dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             } else {
-                $this->helper->session->set_flashdata("error", "Erreur lors de la suppression du fournisseur dans la base de donnée");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                if ($isApi) {
+                    $obj->state = 1;
+                } else {
+                    $this->helper->session->set_flashdata("success", "Le fournisseur a bien été supprimé");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             }
         } else {
-            if ($isApi) {
-                $obj->state = 1;
-            } else {
-                $this->helper->session->set_flashdata("success", "Le fournisseur a bien été supprimé");
+            if (!$isApi) {
+                $this->helper->session->set_flashdata("error", "Erreur interne lors de l'ajout du log. Le fournisseur n'as pas été supprimé dans la base de donnée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            } else {
+                $obj->state = 0;
+                $obj->error = "Erreur interne lors de l'ajout du log. Le fournisseur n'as pas été supprimé dans la base de donnée";
             }
-
         }
+
         if ($isApi) {
             return $obj;
         }
@@ -270,9 +303,8 @@ class Supplier_Model extends Model
         } else {
             $isActive = $request->get('isActive') != null ? 1 : 0;
         }
-        if ($isApi) {
-            $result = new stdClass();
-        }
+        $result = new stdClass();
+
 
         if ($siret != null) {
             $getBySiret = $this->getBy("siret", $siret);
@@ -357,23 +389,40 @@ class Supplier_Model extends Model
             'isActive' => $isActive
         );
 
-        if (!$this->helper->db->update($this->table, $data, array('idSupplier' => $idSupplier))) {
-            if ($isApi) {
-                $result->state = 0;
-                $result->error = "Erreur lors de l'edition du fournisseur dans la base de donnée";
+        $oldSupplier = $this->getBy('idSupplier', $idSupplier)[0];
+        if (!$isApi) {
+            $userName = wp_get_current_user()->user_login . "(site)";
+        } else {
+            $userName = $request->get('loginUserName');
+        }
+        if ($this->model->log->addLog($userName, "SupplierModel", "Edit", $idSupplier, json_encode($oldSupplier), json_encode($data))) {
+            if (!$this->helper->db->update($this->table, $data, array('idSupplier' => $idSupplier))) {
+                if ($isApi) {
+                    $result->state = 0;
+                    $result->error = "Erreur lors de l'edition du fournisseur dans la base de donnée";
+                } else {
+                    $this->helper->session->set_flashdata("error", "Erreur lors de la modification du fournisseur dans la base de donnée");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             } else {
-                $this->helper->session->set_flashdata("error", "Erreur lors de la modification du fournisseur dans la base de donnée");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                if ($isApi) {
+                    $result->state = 1;
+                    $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
+                } else {
+                    $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
+                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+                }
             }
         } else {
-            if ($isApi) {
-                $result->state = 1;
-                $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
-            } else {
-                $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
+            if (!$isApi) {
+                $this->helper->session->set_flashdata("error", "Erreur interne lors de l'ajout du log. Le fournisseur n'as pas été modifié dans la base de donnée");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
+            } else {
+                $result->state = 0;
+                $result->error = "Erreur interne lors de l'ajout du log. Le fournisseur n'as pas été modifié dans la base de donnée";
             }
         }
+
         if ($isApi) {
             return $result;
         }

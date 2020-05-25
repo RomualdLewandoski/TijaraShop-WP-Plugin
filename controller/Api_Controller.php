@@ -101,7 +101,7 @@ class Api_Controller extends Controller
         if ($this->helper->form->verify(array('idWp'))) {
             $idSupplier = $request->get('idWp');
             if ($this->model->supplier->isExist('idSupplier', $idSupplier)) {
-                $obj = $this->model->supplier->deleteSupplier($idSupplier, true);
+                $obj = $this->model->supplier->deleteSupplier($idSupplier, true, $request->get('loginUserName'));
             } else {
                 $obj->sate = 0;
                 $obj->error = "Le fournisseur n'existe pas sur le site il a été supprimé de la caisse";
