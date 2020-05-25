@@ -256,10 +256,9 @@ class Admin_Controller extends Controller
             $obj_a->val1 = "plop";
             $obj_b->val1 = "plop";
             $obj_a->val2 = "coucou";
-            $obj_b->val2 = "salut";
+            $obj_b->val2 = "coucou";
             $obj_a->val3 = "yo";
             $obj_b->val3 = "yo";
-           
             $obj_a->val6 = "deleteme";
             $a = json_encode($obj_a, JSON_PRETTY_PRINT);
             $b = json_encode($obj_b, JSON_PRETTY_PRINT);
