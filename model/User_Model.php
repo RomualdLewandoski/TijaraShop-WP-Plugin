@@ -264,7 +264,7 @@ class User_Model extends Model
             "isDefaultPass" => 0
         );
         $obj = new stdClass();
-        
+
         if ($this->model->log->addLog($userName, "UserModel", "ChangePass", $idShopLogin)) {
             if (!$this->helper->db->update($this->table, $data, array('idShopLogin' => $idShopLogin))) {
                 $obj->state = 0;

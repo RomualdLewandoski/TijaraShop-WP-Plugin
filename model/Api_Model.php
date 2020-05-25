@@ -8,6 +8,7 @@ class Api_Model extends Model
     public function __construct()
     {
         $this->loadHelper('db');
+        $this->loadModel("log");
         $this->table = $this->helper->db->getPrefix() . '_shop_ApiCredentials';
     }
 
@@ -20,7 +21,12 @@ class Api_Model extends Model
         if ($this->getApiKey() == null) {
             $query = $this->helper->db->insert($this->table, array('privateKey' => $apiKey));
         } else {
-            $query = $this->helper->db->update($this->table, array('privateKey' => $apiKey), array('idApiCredentials' => 1));
+            $userName = wp_get_current_user()->user_login . "(site)";
+            if ($this->model->log->addLog($userName, "ApiModel", "ChangeKey")) {
+                $query = $this->helper->db->update($this->table, array('privateKey' => $apiKey), array('idApiCredentials' => 1));
+            } else {
+                return false;
+            }
         }
         return $query;
     }
