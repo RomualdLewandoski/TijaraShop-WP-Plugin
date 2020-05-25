@@ -20,7 +20,7 @@
     ?>
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-primary col-12">
+            <div class="card card-success col-12">
                 <div class="card-header">
                     <ul class="nav">
                         <li class="nav-item">
