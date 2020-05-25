@@ -244,7 +244,7 @@ class Admin_Controller extends Controller
         if ($action == null){
             $data['logList'] = $this->model->log->getList();
 
-            require_once dirname(__FILE__).'/../helper/Diff_Helper.php';
+            require_once dirname(__FILE__) . '/../helper/Diff.php';
 
             // Options for generating the diff
             $options = array(
@@ -253,7 +253,7 @@ class Admin_Controller extends Controller
             );
 
             // Initialize the diff class
-            $diff = new Diff_Helper("{ 'plop' : 'salut'}", "{ 'plop' : 'coucou'}", $options);
+            $diff = new Diff("{ 'plop' : 'salut'}", "{ 'plop' : 'coucou'}", $options);
 
             require_once dirname(__FILE__)."/../helper/Diff/Renderer/Html/SideBySide.php";
 

@@ -1,7 +1,7 @@
 <?php
 
 
-class Diff_Helper
+class Diff
 {
     /**
      * @var array The "old" sequence to use as the basis for the comparison.
