@@ -155,12 +155,14 @@ class User_Model extends Model
 
             $data = array(
                 'usernameShopLogin' => $userName,
+                'passwordShopLogin' => $oldUser->passwordShopLogin,
                 'hasAdmin' => $admin,
                 'hasCompta' => $compta,
                 'hasProductManagement' => $product,
                 'hasSupplierManagement' => $supplier,
                 'hasStock' => $stock,
                 'hasCaisse' => $caisse,
+                'isDefaultPass' => intval($oldUser->isDefaultPass)
             );
 
             unset($oldUser->idShopLogin);
@@ -171,7 +173,7 @@ class User_Model extends Model
             $oldUser->hasStock = intval($oldUser->hasStock);
             $oldUser->hasCaisse = intval($oldUser->hasCaisse);
             $oldUser->isDefaultPass = intval($oldUser->isDefaultPass);
-            
+
             if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "UserModel", "Edit", $id, json_encode($oldUser), json_encode($data))) {
                 if (!$this->helper->db->update($this->table, $data, array('idShopLogin' => $id))) {
                     $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de la modification de l'utilisateur");
