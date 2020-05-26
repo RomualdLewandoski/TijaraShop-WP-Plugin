@@ -84,13 +84,13 @@
 
         <div class="col-lg-3">
             <div class="card card-danger">
-                <div class="card-header">Logs de connexion</div>
-                <div class="card-body">Consultez ici les logs de connexions
+                <div class="card-header">Logs</div>
+                <div class="card-body">Consultez ici les logs
                     <br><b>Ne liste que les actions enregistré sur le site</b> si une information n'apparait pas
                     essayez de mettre a jour la caisse (bouton en haut mise a jour)
                 </div>
                 <div class="card-footer text-center">
-                    <a href="admin.php?page=TijaraShop/logd" class="btn btn-primary">
+                    <a href="admin.php?page=TijaraShop/logs" class="btn btn-primary">
                         Consulter les logs de connexion
                     </a>
                 </div>
