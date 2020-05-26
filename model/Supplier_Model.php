@@ -66,7 +66,7 @@ class Supplier_Model extends Model
             $contact->comName = $comName;
             $contact->comMail = $comMail;
             $contact->comPhone = $comPhone;
-            $contactStr = json_encode($contact);
+            $contactStr = json_encode($contact, JSON_PRETTY_PRINT);
         }
         $notes = htmlspecialchars($request->get('notes'));
         if ($isApi) {
@@ -154,6 +154,7 @@ class Supplier_Model extends Model
             $userName = $request->get('loginUserName');
         }
 
+
         if ($this->model->log->addLog($userName, "SupplierModel", "Create", "", "", json_encode($data))) {
             if (!$this->helper->db->insert($this->table, $data)) {
                 if ($isApi) {
@@ -213,6 +214,8 @@ class Supplier_Model extends Model
         } else {
             $userName = $loginUserName;
         }
+        $oldData->contact = json_encode(json_decode($oldData->contact), JSON_PRETTY_PRINT);
+
         if ($this->model->log->addLog($userName, "SupplierModel", "Delete", $id, json_encode($oldData))) {
             if (!$this->helper->db->delete($this->table, array('idSupplier' => $id))) {
                 if ($isApi) {

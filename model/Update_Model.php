@@ -23,6 +23,8 @@ class Update_Model extends Model
         $userName = $value->loginnUserName . " (UpdateThread)";
         unset($value->loginUserName);
         $value->contact = base64_decode($value->contact);
+        $value->contact = json_encode(json_decode($value->contact), JSON_PRETTY_PRINT);
+
         $array = json_decode(json_encode($value), true);
         if ($this->model->log->addLog($userName, "SupplierModel", "Create", "", "", json_encode($value))) {
             if (!$this->helper->db->insert($this->supplierTable, $array)) {
@@ -54,6 +56,11 @@ class Update_Model extends Model
         $array = json_decode(json_encode($value), true);
 
         $old = $this->helper->db->get_where($this->supplierTable, array('idSupplier' => $idSupplier))[0];
+        unset($old->idSupplier);
+        $old->isSociety = intval($old->isSociety);
+        $old->isActive = intval($old->isActive);
+        $old->contact = json_encode(json_decode($old->contact), JSON_PRETTY_PRINT);
+
         if ($this->model->log->addLog($userName, "SupplierModel", "Edit", $idSupplier, json_encode($old), json_encode($array))) {
             if (!$this->helper->db->update($this->supplierTable, $array, array('idSupplier' => $idSupplier))) {
                 $obj->state = 0;
@@ -75,6 +82,8 @@ class Update_Model extends Model
         $idSupplier = $value->idWp;
         $userName = $value->loginUserName;
         $old = $this->helper->db->get_where($this->supplierTable, array('idSupplier' => $idSupplier))[0];
+        $old->contact = json_encode(json_decode($old->contact), JSON_PRETTY_PRINT);
+
         if ($this->model->log->addLog($userName, "SupplierModel", "Delete", $idSupplier, json_encode($old))) {
             if (!$this->helper->db->delete($this->supplierTable, array('idSupplier' => $idSupplier))) {
                 $obj->state = 0;

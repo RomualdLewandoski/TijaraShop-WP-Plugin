@@ -102,6 +102,13 @@ class Perms_Model extends Model
                 'hasStock' => $stock,
                 'hasCaisse' => $caisse
             );
+            unset($oldPerms->idPermissionModel);
+            $oldPerms->hasAdmin = intval($oldPerms->hasAdmin);
+            $oldPerms->hasCompta = intval($oldPerms->hasCompta);
+            $oldPerms->hasProductManagement = intval($oldPerms->hasProductManagement);
+            $oldPerms->hasSupplierManagement = intval($oldPerms->hasSupplierManagement);
+            $oldPerms->hasStock = intval($oldPerms->hasStock);
+            $oldPerms->hasCaisse = intval($oldPerms->hasCaisse);
 
             if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "PermissionModel", "Edit", $id, json_encode($oldPerms), json_encode($data))) {
 
