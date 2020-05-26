@@ -91,7 +91,7 @@
                 </div>
                 <div class="card-footer text-center">
                     <a href="admin.php?page=TijaraShop/logs" class="btn btn-primary">
-                        Consulter les logs de connexion
+                        Consulter les logs
                     </a>
                 </div>
             </div>
