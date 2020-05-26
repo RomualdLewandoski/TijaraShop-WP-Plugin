@@ -103,7 +103,7 @@ class User_Model extends Model
                     $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout de l'utilisateur");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 } else {
-                    $this->helper->session->set_flashdata("success", "L'utilisateur' a bien été ajouté");
+                    $this->helper->session->set_flashdata("success", "L'utilisateur a bien été ajouté");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 }
             } else {
@@ -179,7 +179,7 @@ class User_Model extends Model
                     $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de la modification de l'utilisateur");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 } else {
-                    $this->helper->session->set_flashdata("success", "L'utilisateur' a bien été modifié");
+                    $this->helper->session->set_flashdata("success", "L'utilisateur a bien été modifié");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 }
             } else {
@@ -222,7 +222,7 @@ class User_Model extends Model
                     $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de la suppression de l'utilisateur");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 } else {
-                    $this->helper->session->set_flashdata("success", "L'utilisateur' a bien été supprimé");
+                    $this->helper->session->set_flashdata("success", "L'utilisateur a bien été supprimé");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 }
             } else {
@@ -251,7 +251,7 @@ class User_Model extends Model
                     $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de la reinitialisation du mot de passe de l'utilisateur");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 } else {
-                    $this->helper->session->set_flashdata("success", "Le mot de passe utilisateur' a bien été réinitialisé");
+                    $this->helper->session->set_flashdata("success", "Le mot de passe utilisateur a bien été réinitialisé");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 }
             } else {
