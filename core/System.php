@@ -2,6 +2,7 @@
 
 namespace TijaraShop\core;
 
+
 class System
 {
     public $model;
@@ -28,13 +29,13 @@ class System
 
 
         if (!isset($this->model)) {
-            $this->model = new stdClass();
+            $this->model = new \stdClass();
         }
         if (!isset($this->controller)) {
-            $this->controller = new stdClass();
+            $this->controller = new \stdClass();
         }
         if (!isset($this->helper)) {
-            $this->helper = new stdClass();
+            $this->helper = new \stdClass();
         }
 
 
