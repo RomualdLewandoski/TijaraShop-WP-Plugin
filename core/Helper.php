@@ -1,6 +1,7 @@
 <?php
 
-use TijaraShop\core\System\System;
+namespace TijaraShop\core;
+
 
 class Helper extends System
 {

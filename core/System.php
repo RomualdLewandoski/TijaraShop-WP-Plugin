@@ -1,6 +1,6 @@
 <?php
 
-namespace TijaraShop\core\System;
+namespace TijaraShop\core;
 
 class System
 {
@@ -18,9 +18,9 @@ class System
         require_once $pluginFolder . '/helper/ServerBag.php';
         require_once $pluginFolder . '/helper/HeaderBag.php';
         require_once $pluginFolder . '/helper/Request.php';
-        require_once $pluginFolder . '/core/Model.php';
+       /* require_once $pluginFolder . '/core/Model.php';
         require_once $pluginFolder . '/core/Controller.php';
-        require_once $pluginFolder . '/core/Helper.php';
+        require_once $pluginFolder . '/core/Helper.php';*/
 
         new Model();
         new Controller();

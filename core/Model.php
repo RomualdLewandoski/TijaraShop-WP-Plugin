@@ -1,6 +1,6 @@
 <?php
+namespace TijaraShop\core;
 
-use TijaraShop\core\System\System;
 
 class Model extends System
 {
