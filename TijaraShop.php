@@ -8,6 +8,8 @@ Author: Romuald Detrait
 License: Closed-Sources
  */
 
+namespace TijaraShop;
+
 define("version", 1.4);
 define("apiVersion", "1.4");
 define("dbVersion", 1);

@@ -72,7 +72,7 @@ class Log_Model extends Model
         $obj = new stdClass();
         $log = $this->getLog($idLog);
         if (!$isApi) {
-            $userName = wp_get_current_user()->user_login . "(site)";
+            $userName = wp_get_current_user()->user_login . "(site)(RB)";
         }
         if ($log == null) {
             if (!$isApi) {
