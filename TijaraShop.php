@@ -10,6 +10,8 @@ License: Closed-Sources
 
 namespace TijaraShop;
 
+use TijaraShop\core\System\System;
+
 define("version", 1.4);
 define("apiVersion", "1.4");
 define("dbVersion", 1);
