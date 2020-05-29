@@ -94,8 +94,8 @@ class Log_Model extends Model
                             if (!$this->helper->db->delete($temp->table, array($temp->id => $log->targetIdLog))) {
                                 $this->deleteLog($tempIdLog);
                                 if (!$isApi) {
-                                    //$this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
-                                    //$this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
+                                    $this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
+                                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
                                 } else {
                                     $obj->state = 0;
                                     $obj->error = "Erreur interne lors de l'opération";
