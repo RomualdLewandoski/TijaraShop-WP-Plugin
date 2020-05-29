@@ -176,12 +176,13 @@ class Log_Model extends Model
                         if ($this->addLog($userName, $log->typeLog, "Create", $log->targetIdLog, null, $log->beforeLog)) {
                             $tempIdLog = $this->helper->db->getLastId();
                             $data = json_decode($log->beforeLog, true);
+                            var_dump($temp, $data);
 
                             if (!$this->helper->db->insert($temp->table, $data)) {
                                 $this->deleteLog($tempIdLog);
                                 if (!$isApi) {
-                                    $this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
-                                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
+                                    //$this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
+                                    //$this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
                                 } else {
                                     $obj->state = 0;
                                     $obj->error = "Erreur interne lors de l'opération";
