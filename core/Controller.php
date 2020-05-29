@@ -1,5 +1,5 @@
 <?php
-namespace TijaraShop\core;
+
 
 class Controller extends System
 {

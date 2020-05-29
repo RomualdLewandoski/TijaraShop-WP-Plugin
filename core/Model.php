@@ -1,5 +1,4 @@
 <?php
-namespace TijaraShop\core;
 
 
 class Model extends System

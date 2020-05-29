@@ -1,7 +1,5 @@
 <?php
 
-namespace TijaraShop\core;
-
 
 class System
 {
@@ -29,13 +27,13 @@ class System
 
 
         if (!isset($this->model)) {
-            $this->model = new \stdClass();
+            $this->model = new stdClass();
         }
         if (!isset($this->controller)) {
-            $this->controller = new \stdClass();
+            $this->controller = new stdClass();
         }
         if (!isset($this->helper)) {
-            $this->helper = new \stdClass();
+            $this->helper = new stdClass();
         }
 
 
@@ -94,7 +92,7 @@ class System
 
     public function loadView($view, $data = null)
     {
-        $realView = $view;
+        $realView = $view ;
         if ($data != null) {
             foreach ($data as $key => $value) {
                 $$key = $value;
