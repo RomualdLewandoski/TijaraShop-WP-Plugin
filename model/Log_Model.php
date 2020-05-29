@@ -164,6 +164,7 @@ class Log_Model extends Model
                     $temp = $this->getTable($log->typeLog);
                     if (!$this->isExistOnTable($temp, $log->targetIdLog)) {
                         if ($this->addLog($userName, $log->typeLog, "Create", $log->targetIdLog, null, $log->beforeLog)) {
+
                             $data = json_decode($log->beforeLog, true);
 
                             if (!$this->helper->db->insert($temp->table, $data)) {

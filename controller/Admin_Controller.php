@@ -244,7 +244,6 @@ class Admin_Controller extends Controller
             $data['logList'] = $this->model->log->getList();
 
 
-
             $this->loadView("adminLogs", $data);
         } else if ($action == "view") {
             $idLog = $request->get('idLog');
@@ -268,13 +267,16 @@ class Admin_Controller extends Controller
             require_once dirname(__FILE__) . "/../helper/Diff/Renderer/Html/SideBySide.php";
 
             $renderer = new Diff_Renderer_Html_SideBySide;
-            $tempDiff = str_replace("\\n", "<br>",$diff->Render($renderer));
+            $tempDiff = str_replace("\\n", "<br>", $diff->Render($renderer));
             $tempDiff = str_replace("\\", "", $tempDiff);
             $data['log'] = $log;
-            $data['diff'] =$tempDiff ;
+            $data['diff'] = $tempDiff;
 
             $this->loadView("adminViewLog", $data);
 
+        } else if ($action == "rollback") {
+            $idLog = $request->get('idLog');
+            $this->model->log->rollback($idLog);
         }
     }
 
