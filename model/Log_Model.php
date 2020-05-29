@@ -181,8 +181,8 @@ class Log_Model extends Model
                             if (!$this->helper->db->insert($temp->table, $data)) {
                                 $this->deleteLog($tempIdLog);
                                 if (!$isApi) {
-                                    //$this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
-                                    //$this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
+                                    $this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
+                                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
                                 } else {
                                     $obj->state = 0;
                                     $obj->error = "Erreur interne lors de l'opération";
@@ -240,7 +240,7 @@ class Log_Model extends Model
     {
         $obj = new stdClass();
         switch (mb_strtolower($typeLog)) {
-            case "permsmodel":
+            case "permissionmodel":
                 $obj->table = $this->permsTable;
                 $obj->id = "idPermissionModel";
                 return $obj;
