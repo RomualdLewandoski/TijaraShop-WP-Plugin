@@ -99,10 +99,16 @@ class User_Model extends Model
             );
 
             if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "UserModel", "Create", "", "", json_encode($data))) {
+                $tempIdLog = $this->helper->db->getLastId();
+
+
                 if (!$this->helper->db->insert($this->table, $data)) {
                     $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout de l'utilisateur");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 } else {
+                    $tempIdAdd = $this->helper->db->getLastId();
+                    $this->model->log->addId($tempIdLog, $tempIdAdd);
+
                     $this->helper->session->set_flashdata("success", "L'utilisateur a bien été ajouté");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");
                 }

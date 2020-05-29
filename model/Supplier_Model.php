@@ -156,6 +156,8 @@ class Supplier_Model extends Model
 
 
         if ($this->model->log->addLog($userName, "SupplierModel", "Create", "", "", json_encode($data))) {
+            $tempIdLog = $this->helper->db->getLastId();
+
             if (!$this->helper->db->insert($this->table, $data)) {
                 if ($isApi) {
                     $result->state = 0;
@@ -165,6 +167,8 @@ class Supplier_Model extends Model
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
                 }
             } else {
+                $tempIdAdd = $this->helper->db->getLastId();
+                $this->model->log->addId($tempIdLog, $tempIdAdd);
                 if ($isApi) {
                     $result->state = 1;
                     $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;

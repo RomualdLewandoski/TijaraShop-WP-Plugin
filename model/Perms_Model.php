@@ -43,12 +43,14 @@ class Perms_Model extends Model
             'hasCaisse' => $caisse
         );
         if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "PermissionModel", "Create", "", "", json_encode($data))) {
+            $tempIdLog = $this->helper->db->getLastId();
             if (!$this->helper->db->insert($this->table, $data)) {
                 $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout du modèle de permission");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
             } else {
                 $tempIdAdd = $this->helper->db->getLastId();
-                $this->helper->session->set_flashdata("success", "Le modèle de permission a bien été ajouté ".$tempIdAdd);
+                $this->model->log->addId($tempIdLog, $tempIdAdd);
+                $this->helper->session->set_flashdata("success", "Le modèle de permission a bien été ajouté");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
             }
         } else {

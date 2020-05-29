@@ -27,10 +27,16 @@ class Update_Model extends Model
 
         $array = json_decode(json_encode($value), true);
         if ($this->model->log->addLog($userName, "SupplierModel", "Create", "", "", json_encode($value))) {
+            $tempIdLog = $this->helper->db->getLastId();
+
+
             if (!$this->helper->db->insert($this->supplierTable, $array)) {
                 $obj->state = 0;
                 $obj->error = "Erreur lors de l'ajout du fournisseur dans la base de donnée (site)";
             } else {
+                $tempIdAdd = $this->helper->db->getLastId();
+                $this->model->log->addId($tempIdLog, $tempIdAdd);
+
                 $idWp = $this->helper->db->get_where($this->supplierTable, array('societyName' => $value->societyName))[0]->idSupplier;
                 $obj->state = 1;
                 $obj->action = "AddSupplier";

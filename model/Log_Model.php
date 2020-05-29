@@ -43,6 +43,10 @@ class Log_Model extends Model
         return !$this->helper->db->insert($this->table, $data) ? false : true;
     }
 
+    public function addId($idLog, $targetId){
+        return $this->helper->db->update($this->table, array('targetIdLog' => $targetId), array("idLog" => $idLog));
+    }
+
     public function getList()
     {
         return $this->helper->db->get($this->table, "dateLog ASC");
