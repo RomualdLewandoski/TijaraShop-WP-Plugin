@@ -148,4 +148,8 @@ class Db_Helper extends Helper
     {
         return $this->db->prefix;
     }
+
+    public function getLastId(){
+        return $this->db->insert_id;
+    }
 }

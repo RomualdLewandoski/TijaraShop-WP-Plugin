@@ -47,7 +47,8 @@ class Perms_Model extends Model
                 $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de l'ajout du modèle de permission");
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
             } else {
-                $this->helper->session->set_flashdata("success", "Le modèle de permission a bien été ajouté");
+                $tempIdAdd = $this->helper->db->getLastId();
+                $this->helper->session->set_flashdata("success", "Le modèle de permission a bien été ajouté ".$tempIdAdd);
                 $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
             }
         } else {
