@@ -43,7 +43,8 @@ class Log_Model extends Model
         return !$this->helper->db->insert($this->table, $data) ? false : true;
     }
 
-    public function addId($idLog, $targetId){
+    public function addId($idLog, $targetId)
+    {
         return $this->helper->db->update($this->table, array('targetIdLog' => $targetId), array("idLog" => $idLog));
     }
 
@@ -55,6 +56,11 @@ class Log_Model extends Model
     public function getLog($idLog)
     {
         return $this->helper->db->get_where($this->table, array('idLog' => $idLog))[0];
+    }
+
+    public function deleteLog($idLog)
+    {
+        return $this->helper->db->delete($this->table, array('idLog' => $idLog));
     }
 
     /**
@@ -83,11 +89,13 @@ class Log_Model extends Model
                     $temp = $this->getTable($log->typeLog);
                     if ($this->isExistOnTable($temp, $log->targetIdLog)) {
                         if ($this->addLog($userName, $log->typeLog, "Delete", $log->targetIdLog, $log->afterLog)) {
-                            var_dump($temp, $log);
+                            $tempIdLog = $this->helper->db->getLastId();
+
                             if (!$this->helper->db->delete($temp->table, array($temp->id => $log->targetId))) {
+                                $this->deleteLog($tempIdLog);
                                 if (!$isApi) {
                                     $this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
-                                    //$this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
+                                    $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
                                 } else {
                                     $obj->state = 0;
                                     $obj->error = "Erreur interne lors de l'opération";
@@ -123,8 +131,10 @@ class Log_Model extends Model
                     $temp = $this->getTable($log->typeLog);
                     if ($this->isExistOnTable($temp, $log->targetIdLog)) {
                         if ($this->addLog($userName, $log->typeLog, "Edit", $log->targetIdLog, $log->afterLog, $log->beforeLog)) {
+                            $tempIdLog = $this->helper->db->getLastId();
                             $data = json_decode($log->beforeLog, true);
                             if (!$this->helper->db->update($temp->table, $data, array($temp->id => $log->targetIdLog))) {
+                                $this->deleteLog($tempIdLog);
                                 if (!$isApi) {
                                     $this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
                                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
@@ -164,10 +174,11 @@ class Log_Model extends Model
                     $temp = $this->getTable($log->typeLog);
                     if (!$this->isExistOnTable($temp, $log->targetIdLog)) {
                         if ($this->addLog($userName, $log->typeLog, "Create", $log->targetIdLog, null, $log->beforeLog)) {
-
+                            $tempIdLog = $this->helper->db->getLastId();
                             $data = json_decode($log->beforeLog, true);
 
                             if (!$this->helper->db->insert($temp->table, $data)) {
+                                $this->deleteLog($tempIdLog);
                                 if (!$isApi) {
                                     $this->helper->session->set_flashdata("error", "Erreur interne lors de l'opération");
                                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
@@ -235,7 +246,7 @@ class Log_Model extends Model
                 break;
             case "suppliermodel":
                 $obj->table = $this->supplierTable;
-                $obj->id = "idSUpplier";
+                $obj->id = "idSupplier";
                 return $obj;
                 break;
             case "usermodel":
