@@ -439,12 +439,12 @@ class Log_Model extends Model
             $obj = new stdClass();
             $obj = $log;
             if ($log->before == "" || $log->before == "NULL"){
-                $a = "";
+                $a = "\n";
             }else{
                 $a = $this->jsonToReadable($log->beforeLog);
             }
             if ($log->after == "" || $log->afer == "NULL"){
-                $b = "";
+                $b = "\n";
             }else{
                 $b = $this->jsonToReadable($log->afterLog);
             }
