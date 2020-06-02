@@ -438,7 +438,6 @@ class Log_Model extends Model
         foreach ($logs as $log) {
             $obj = new stdClass();
             $obj = $log;
-            var_dump($log);
             if ($log->before == "" || $log->before == "NULL"){
                 $a = "";
             }else{
@@ -449,7 +448,7 @@ class Log_Model extends Model
             }else{
                 $b = $this->jsonToReadable($log->afterLog);
             }
-            
+
             // Initialize the diff class
             $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
 
