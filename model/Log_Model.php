@@ -271,7 +271,7 @@ class Log_Model extends Model
         $str = "";
         try{
             $obj = json_decode($json, true);
-
+            var_dump($obj);
             foreach ($obj as $key => $value) {
                 if ($key == "contact") {
                     $temp1 = "";
