@@ -438,11 +438,15 @@ class Log_Model extends Model
         foreach ($logs as $log) {
             $obj = new stdClass();
             $obj->idLog = $log->idLog;
-
+            $a = "";
+            try{
                 $a = $this->jsonToReadable($log->beforeLog);
+            }catch (Exception $exception){
+                $a = "";
+            }
 
                 $b = $this->jsonToReadable($log->afterLog);
-            
+
 
             var_dump($a, $b);
             // Initialize the diff class
