@@ -270,23 +270,23 @@ class Log_Model extends Model
     {
         $str = "";
 
-            $obj = json_decode($json, true);
-            if ($obj != null){
-                foreach ($obj as $key => $value) {
-                    if ($key == "contact") {
-                        $temp1 = "";
-                        $obj2 = json_decode($value, true);
-                        foreach ($obj2 as $key2 => $val2) {
-                            $temp2 = "strongOpen" . $this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
-                            $temp1 .= $temp2;
-                        }
-                        $str .= $temp1;
-                    } else {
-                        $temp = "strongOpen" . $this->keyToRead($key) . "strongClose : " . $value . "\n";
-                        $str .= $temp;
+        $obj = json_decode($json, true);
+        if ($obj != null) {
+            foreach ($obj as $key => $value) {
+                if ($key == "contact") {
+                    $temp1 = "";
+                    $obj2 = json_decode($value, true);
+                    foreach ($obj2 as $key2 => $val2) {
+                        $temp2 = "strongOpen" . $this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
+                        $temp1 .= $temp2;
                     }
+                    $str .= $temp1;
+                } else {
+                    $temp = "strongOpen" . $this->keyToRead($key) . "strongClose : " . $value . "\n";
+                    $str .= $temp;
                 }
             }
+        }
         return $str;
     }
 
@@ -439,12 +439,11 @@ class Log_Model extends Model
         );
 
         foreach ($logs as $log) {
-            $obj = new stdClass();
-            $obj->idLog = $log->idLog;
+            $obj = $log;
 
-                $a = $this->jsonToReadable($log->beforeLog);
+            $a = $this->jsonToReadable($log->beforeLog);
 
-                $b = $this->jsonToReadable($log->afterLog);
+            $b = $this->jsonToReadable($log->afterLog);
 
 
             // Initialize the diff class
