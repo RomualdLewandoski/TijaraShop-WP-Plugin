@@ -268,21 +268,26 @@ class Log_Model extends Model
 
     public function jsonToReadable($json)
     {
-        $obj = json_decode($json, true);
         $str = "";
-        foreach ($obj as $key => $value) {
-            if ($key == "contact") {
-                $temp1 = "";
-                $obj2 = json_decode($value, true);
-                foreach ($obj2 as $key2 => $val2) {
-                    $temp2 = "strongOpen" . $this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
-                    $temp1 .= $temp2;
+        try{
+            $obj = json_decode($json, true);
+
+            foreach ($obj as $key => $value) {
+                if ($key == "contact") {
+                    $temp1 = "";
+                    $obj2 = json_decode($value, true);
+                    foreach ($obj2 as $key2 => $val2) {
+                        $temp2 = "strongOpen" . $this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
+                        $temp1 .= $temp2;
+                    }
+                    $str .= $temp1;
+                } else {
+                    $temp = "strongOpen" . $this->keyToRead($key) . "strongClose : " . $value . "\n";
+                    $str .= $temp;
                 }
-                $str .= $temp1;
-            } else {
-                $temp = "strongOpen" . $this->keyToRead($key) . "strongClose : " . $value . "\n";
-                $str .= $temp;
             }
+        }catch (JsonException $err){
+
         }
         return $str;
     }
@@ -438,12 +443,8 @@ class Log_Model extends Model
         foreach ($logs as $log) {
             $obj = new stdClass();
             $obj->idLog = $log->idLog;
-            $a = "";
-            try{
+
                 $a = $this->jsonToReadable($log->beforeLog);
-            }catch (Exception $exception){
-                $a = "";
-            }
 
                 $b = $this->jsonToReadable($log->afterLog);
 
