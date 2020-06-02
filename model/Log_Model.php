@@ -439,9 +439,17 @@ class Log_Model extends Model
             $obj = new stdClass();
             $obj = $log;
             var_dump($log);
-            $a = $this->jsonToReadable($log->beforeLog);
-            $b = $this->jsonToReadable($log->afterLog);
-
+            if ($log->before == "" || $log->before == "NULL"){
+                $a = "";
+            }else{
+                $a = $this->jsonToReadable($log->beforeLog);
+            }
+            if ($log->after == "" || $log->afer == "NULL"){
+                $b = "";
+            }else{
+                $b = $this->jsonToReadable($log->afterLog);
+            }
+            
             // Initialize the diff class
             $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
 
