@@ -275,12 +275,12 @@ class Log_Model extends Model
                 $temp1 = "";
                 $obj2 = json_decode($value, true);
                 foreach ($obj2 as $key2 => $val2) {
-                    $temp2 = $this->keyToRead($key2) . " : " . $val2 . "\n";
+                    $temp2 = "<strong>".$this->keyToRead($key2) . "</strong> : " . $val2 . "\n";
                     $temp1 .= $temp2;
                 }
                 $str .= $temp1;
             } else {
-                $temp = $this->keyToRead($key) . " : " . $value . "\n";
+                $temp = "<strong>".$this->keyToRead($key) . "</strong> : " . $value . "\n";
                 $str .= $temp;
             }
         }
