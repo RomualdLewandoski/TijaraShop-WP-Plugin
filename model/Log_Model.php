@@ -269,26 +269,24 @@ class Log_Model extends Model
     public function jsonToReadable($json)
     {
         $str = "";
-        try{
+
             $obj = json_decode($json, true);
-            var_dump($obj);
-            foreach ($obj as $key => $value) {
-                if ($key == "contact") {
-                    $temp1 = "";
-                    $obj2 = json_decode($value, true);
-                    foreach ($obj2 as $key2 => $val2) {
-                        $temp2 = "strongOpen" . $this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
-                        $temp1 .= $temp2;
+            if ($obj != null){
+                foreach ($obj as $key => $value) {
+                    if ($key == "contact") {
+                        $temp1 = "";
+                        $obj2 = json_decode($value, true);
+                        foreach ($obj2 as $key2 => $val2) {
+                            $temp2 = "strongOpen" . $this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
+                            $temp1 .= $temp2;
+                        }
+                        $str .= $temp1;
+                    } else {
+                        $temp = "strongOpen" . $this->keyToRead($key) . "strongClose : " . $value . "\n";
+                        $str .= $temp;
                     }
-                    $str .= $temp1;
-                } else {
-                    $temp = "strongOpen" . $this->keyToRead($key) . "strongClose : " . $value . "\n";
-                    $str .= $temp;
                 }
             }
-        }catch (JsonException $err){
-
-        }
         return $str;
     }
 
