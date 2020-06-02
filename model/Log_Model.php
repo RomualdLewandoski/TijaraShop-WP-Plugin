@@ -447,7 +447,6 @@ class Log_Model extends Model
                 $b = $this->jsonToReadable($log->afterLog);
 
 
-            var_dump($a, $b);
             // Initialize the diff class
             $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
 
@@ -459,6 +458,7 @@ class Log_Model extends Model
             $tempDiff = str_replace("strongOpen", "<strong>", $tempDiff);
             $tempDiff = str_replace("strongClose", "</strong>", $tempDiff);
             $obj->diff = $tempDiff;
+            echo $tempDiff."<br>";
            // array_push($arr, $obj);
         }
         return $arr;
