@@ -273,7 +273,7 @@ class Admin_Controller extends Controller
             $tempDiff = str_replace("\\n", "<br>", $diff->Render($renderer));
             $tempDiff = str_replace("\\", "", $tempDiff);
             $tempDiff = str_replace("strong", "<strong>", $tempDiff);
-            $tempDiff = str_replace("/strong", "</strong>", $tempDiff);
+            $tempDiff = str_replace(" /strong", "</strong>", $tempDiff);
             $data['log'] = $log;
             $data['diff'] = $tempDiff;
 
