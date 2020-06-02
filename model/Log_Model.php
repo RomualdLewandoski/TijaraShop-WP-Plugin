@@ -437,7 +437,7 @@ class Log_Model extends Model
 
         foreach ($logs as $log) {
             $obj = new stdClass();
-            $obj = $log;
+            $obj->idLog = $log->idLog;
             if ($log->before == "" || $log->before == "NULL"){
                 $a = "\n";
             }else{
@@ -461,7 +461,7 @@ class Log_Model extends Model
             $tempDiff = str_replace("strongClose", "</strong>", $tempDiff);
             var_dump($tempDiff);
             $obj->diff = $tempDiff;
-            array_push($arr, $obj);
+           // array_push($arr, $obj);
         }
         return $arr;
     }
