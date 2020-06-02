@@ -265,4 +265,161 @@ class Log_Model extends Model
     {
         return count($this->helper->db->get_where($temp->table, array($temp->id => $id))) != 0 ? TRUE : FALSE;
     }
+
+    public function jsonToReadable($json)
+    {
+        $obj = json_decode($json, true);
+        $str = "";
+        foreach ($obj as $key => $value) {
+            if ($key == "contact") {
+                $temp1 = "";
+                $obj2 = json_decode($value, true);
+                foreach ($obj2 as $key2 => $val2) {
+                    $temp2 = $this->keyToRead($key2) . " : " . $val2 . "\n";
+                    $temp1 .= $temp2;
+                }
+                $str .= $temp1;
+            } else {
+                $temp = $this->keyToRead($key) . " : " . $value . "\n";
+                $str .= $temp;
+            }
+        }
+        return $str;
+    }
+
+    function keyToRead($key)
+    {
+        $str = "";
+        switch ($key) {
+            case "idPermissionModel":
+            case "idShopLogin":
+            case "idSupplier":
+                $str = "ID";
+                break;
+            case "namePermissionModel":
+                $str = "Nom du modèle de permission";
+                break;
+            case "hasAdmin" :
+                $str = "Accès admin";
+                break;
+            case "hasCompta" :
+                $str = "Accès compta";
+                break;
+            case "hasProductManagement" :
+                $str = "Accès gestion produit";
+                break;
+            case "hasSupplierManagement" :
+                $str = "Accès gestion fournisseurs";
+                break;
+            case "hasStock" :
+                $str = "Gestion des stocks";
+                break;
+            case "hasCaisse":
+                $str = "Accès caisse";
+                break;
+            case "usernameShopLogin" :
+                $str = "Nom d'utilisateur";
+                break;
+            case "passwordShopLogin" :
+                $str = "Mot de passe utilisateur";
+                break;
+            case "isDefaultPass" :
+                $str = "Mot de passe par défaut";
+                break;
+            case "isSociety":
+                $str = "Est une société ?";
+                break;
+            case "societyName":
+                $str = "Nom de la société";
+                break;
+            case "gender" :
+                $str = "Genre";
+                break;
+            case "firstName":
+                $str = "Prénom";
+                break;
+            case "lastName":
+                $str = "Nom";
+                break;
+            case "address":
+                $str = "Adresse";
+                break;
+            case "zipCode":
+                $str = "Code Postal";
+                break;
+            case "city":
+                $str = "Ville";
+                break;
+            case "country":
+                $str = "Pays";
+                break;
+            case "phone":
+                $str = "Téléphone";
+                break;
+            case "mobilePhone":
+                $str = "Portable";
+                break;
+            case "mail":
+                $str = "Adresse mail";
+                break;
+            case "refCode" :
+                $str = "Code fournisseur";
+                break;
+            case "webSite":
+                $str = "Site web";
+                break;
+            case "paymentType":
+                $str = "Moyen de payement";
+                break;
+            case "iban":
+                $str = "IBAN";
+                break;
+            case "bic" :
+                $str = "BIC/SWIFT";
+                break;
+            case "tva" :
+                $str = "Numéro de TVA";
+                break;
+            case "siret":
+                $str = "Numéro de SIRET";
+                break;
+            case "contact" :
+                $str = "Contact";
+                break;
+            case "notes":
+                $str = "Notes";
+                break;
+            case "isActive" :
+                $str = "Actif";
+                break;
+            case "directionName":
+                $str = "Nom Direction";
+                break;
+            case "directionPhone":
+                $str = "Téléphone Direction";
+                break;
+            case "directionMail":
+                $str = "Mail Direction";
+                break;
+            case "comptaName":
+                $str = "Nom Compta";
+                break;
+            case "comptaMail":
+                $str = "Téléphone Compta";
+                break;
+            case "comptaPhone":
+                $str = "Mail Compta";
+                break;
+            case "comName":
+                $str = "Nom Commercial";
+                break;
+            case "comMail":
+                $str = "Téléphone Commercial";
+                break;
+            case "comPhone":
+                $str = "Mail Commercial";
+                break;
+        }
+        return $str;
+    }
 }

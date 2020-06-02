@@ -92,7 +92,7 @@ class System
 
     public function loadView($view, $data = null)
     {
-        $realView = $view ;
+        $realView = $view;
         if ($data != null) {
             foreach ($data as $key => $value) {
                 $$key = $value;
