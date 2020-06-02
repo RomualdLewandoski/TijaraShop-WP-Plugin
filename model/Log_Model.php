@@ -438,6 +438,7 @@ class Log_Model extends Model
         foreach ($logs as $log) {
             $obj = new stdClass();
             $obj = $log;
+            var_dump($log);
             $a = $this->jsonToReadable($log->beforeLog);
             $b = $this->jsonToReadable($log->afterLog);
 
