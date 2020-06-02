@@ -459,7 +459,7 @@ class Log_Model extends Model
             $tempDiff = str_replace("\\", "", $tempDiff);
             $tempDiff = str_replace("strongOpen", "<strong>", $tempDiff);
             $tempDiff = str_replace("strongClose", "</strong>", $tempDiff);
-            var_dump($tempDiff);
+            var_dump($diff->Render($renderer));
             $obj->diff = $tempDiff;
            // array_push($arr, $obj);
         }
