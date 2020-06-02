@@ -10,6 +10,7 @@ class Api_Controller extends Controller
         $this->loadModel('user');
         $this->loadModel('supplier');
         $this->loadModel('update');
+        $this->loadModel('log');
         $this->loadHelper('url');
         $this->loadHelper('form');
 
@@ -47,6 +48,13 @@ class Api_Controller extends Controller
         $obj = new stdClass();
         $suppliers = $this->model->supplier->listSupplier();
         $obj->suppliers = $suppliers;
+        echo json_encode($obj);
+    }
+
+    public function getLogs(){
+        $this->checkApi();
+        $obj = new stdClass();
+        $obj->logs = $this->model->log->getApiLogs();
         echo json_encode($obj);
     }
 

@@ -20,6 +20,7 @@ $route['api/suppliers/delete'] = "api/deleteSupplier";
 /**
  * API GETTER
  */
+$route['api/logs'] = "api/getLogs";
 $route['api/suppliers'] = "api/getSuppliers";
 $route['api/users'] = "api/getUsers";
 $route['api/perms'] = "api/getPerms";

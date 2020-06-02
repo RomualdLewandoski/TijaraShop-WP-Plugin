@@ -275,12 +275,12 @@ class Log_Model extends Model
                 $temp1 = "";
                 $obj2 = json_decode($value, true);
                 foreach ($obj2 as $key2 => $val2) {
-                    $temp2 = "strongOpen".$this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
+                    $temp2 = "strongOpen" . $this->keyToRead($key2) . "strongClose : " . $val2 . "\n";
                     $temp1 .= $temp2;
                 }
                 $str .= $temp1;
             } else {
-                $temp = "strongOpen".$this->keyToRead($key) . "strongClose : " . $value . "\n";
+                $temp = "strongOpen" . $this->keyToRead($key) . "strongClose : " . $value . "\n";
                 $str .= $temp;
             }
         }
@@ -421,5 +421,39 @@ class Log_Model extends Model
                 break;
         }
         return $str;
+    }
+
+    public function getApiLogs()
+    {
+        $logs = $this->getList();
+        $arr = array();
+        require_once dirname(__FILE__) . '/../helper/Diff.php';
+
+        // Options for generating the diff
+        $options = array(
+            //'ignoreWhitespace' => true,
+            //'ignoreCase' => true,
+        );
+
+        foreach ($logs as $log) {
+            $obj = new stdClass();
+            $obj = $log;
+            $a = $this->jsonToReadable($log->beforeLog);
+            $b = $this->jsonToReadable($log->afterLog);
+
+            // Initialize the diff class
+            $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
+
+            require_once dirname(__FILE__) . "/../helper/Diff/Renderer/Html/SideBySide.php";
+
+            $renderer = new Diff_Renderer_Html_SideBySide;
+            $tempDiff = str_replace("\\n", "<br>", $diff->Render($renderer));
+            $tempDiff = str_replace("\\", "", $tempDiff);
+            $tempDiff = str_replace("strongOpen", "<strong>", $tempDiff);
+            $tempDiff = str_replace("strongClose", "</strong>", $tempDiff);
+            $obj->diff = $tempDiff;
+            array_push($arr, $obj);
+        }
+        return $arr;
     }
 }
