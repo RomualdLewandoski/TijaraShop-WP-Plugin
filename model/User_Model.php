@@ -223,7 +223,7 @@ class User_Model extends Model
         if ($this->isUserId($id)) {
             $oldUser = $this->getUserById($id);
 
-            if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "USerModel", "Delete", $id, json_encode($oldUser))) {
+            if ($this->model->log->addLog(wp_get_current_user()->user_login . "(site)", "UserModel", "Delete", $id, json_encode($oldUser))) {
                 if (!$this->helper->db->delete($this->table, array('idShopLogin' => $id))) {
                     $this->helper->session->set_flashdata("error", "Une erreur interne est survenue lors de la suppression de l'utilisateur");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/users");

@@ -445,7 +445,6 @@ class Log_Model extends Model
 
             $b = $this->jsonToReadable($log->afterLog);
 
-
             // Initialize the diff class
             $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
 
@@ -460,5 +459,34 @@ class Log_Model extends Model
             array_push($arr, $obj);
         }
         return $arr;
+    }
+
+    public function getApiLogById($id)
+    {
+        $log = $this->getLog($id);
+        $obj = $log;
+        require_once dirname(__FILE__) . '/../helper/Diff.php';
+
+        $options = array(
+            //'ignoreWhitespace' => true,
+            //'ignoreCase' => true,
+        );
+
+        $a = $this->jsonToReadable($log->beforeLog);
+
+        $b = $this->jsonToReadable($log->afterLog);
+
+        // Initialize the diff class
+        $diff = new Diff(explode("\n", $a), explode("\n", $b), $options);
+
+        require_once dirname(__FILE__) . "/../helper/Diff/Renderer/Html/SideBySide.php";
+
+        $renderer = new Diff_Renderer_Html_SideBySide;
+        $tempDiff = str_replace("\\n", "<br>", $diff->Render($renderer));
+        $tempDiff = str_replace("\\", "", $tempDiff);
+        $tempDiff = str_replace("strongOpen", "<strong>", $tempDiff);
+        $tempDiff = str_replace("strongClose", "</strong>", $tempDiff);
+        $obj->diff = $tempDiff;
+        return $obj;
     }
 }

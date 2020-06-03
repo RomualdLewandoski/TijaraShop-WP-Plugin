@@ -58,6 +58,20 @@ class Api_Controller extends Controller
         echo json_encode($obj);
     }
 
+    public function getLogId(){
+        $this->checkApi();
+        $request = $this->request();
+        $obj = new stdClass();
+        if ($this->helper->form->verify(array('idLog'))){
+            $obj->logs = $this->model->log->getApiLogById($request->get('idLog'));
+        }else{
+            $obj->state = 1;
+            $obj->error = "Des champs sont manquants dans l'envoi de la récupération du log";
+        }
+
+        echo json_encode($obj);
+    }
+
     public function changeUserPass()
     {
         $this->checkApi();
