@@ -284,11 +284,13 @@ class User_Model extends Model
         $obj = new stdClass();
 
         if ($this->model->log->addLog($userName, "UserModel", "ChangePass", $idShopLogin)) {
+            $temp = $this->helper->db->getLastId();
             if (!$this->helper->db->update($this->table, $data, array('idShopLogin' => $idShopLogin))) {
                 $obj->state = 0;
                 $obj->error = "Erreur interne dans l'api lors de la mise a jour du mot de passe";
             } else {
                 $obj->state = 1;
+                $obj->idLog = $temp;
             }
         } else {
             $obj->state = 0;
