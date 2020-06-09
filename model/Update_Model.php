@@ -20,7 +20,7 @@ class Update_Model extends Model
     {
         $obj = new stdClass();
         unset($value->apiKey);
-        $userName = $value->loginnUserName . " (UpdateThread)";
+        $userName = $value->loginUserName . " (UpdateThread)";
         unset($value->loginUserName);
         $value->contact = base64_decode($value->contact);
         $value->contact = json_encode(json_decode($value->contact), JSON_PRETTY_PRINT);
@@ -42,6 +42,7 @@ class Update_Model extends Model
                 $obj->action = "AddSupplier";
                 $obj->idWp = $idWp;
                 $obj->societyName = $value->societyName;
+                $obj->idLog = $tempIdLog;
             }
         } else {
             $obj->state = 0;
@@ -68,11 +69,15 @@ class Update_Model extends Model
         $old->contact = json_encode(json_decode($old->contact), JSON_PRETTY_PRINT);
 
         if ($this->model->log->addLog($userName, "SupplierModel", "Edit", $idSupplier, json_encode($old), json_encode($array))) {
+            $tempIdLog = $this->helper->db->getLastId();
+
             if (!$this->helper->db->update($this->supplierTable, $array, array('idSupplier' => $idSupplier))) {
                 $obj->state = 0;
                 $obj->error = "Erreur lors de l'edition du fournisseur dans la base de donnée";
             } else {
                 $obj->state = 1;
+                $obj->idLog = $tempIdLog;
+
             }
         } else {
             $obj->state = 0;
@@ -86,16 +91,20 @@ class Update_Model extends Model
     {
         $obj = new stdClass();
         $idSupplier = $value->idWp;
-        $userName = $value->loginUserName;
+        $userName = $value->loginUserName . "(UpdateThread)";
         $old = $this->helper->db->get_where($this->supplierTable, array('idSupplier' => $idSupplier))[0];
         $old->contact = json_encode(json_decode($old->contact), JSON_PRETTY_PRINT);
 
         if ($this->model->log->addLog($userName, "SupplierModel", "Delete", $idSupplier, json_encode($old))) {
+            $tempIdLog = $this->helper->db->getLastId();
+
             if (!$this->helper->db->delete($this->supplierTable, array('idSupplier' => $idSupplier))) {
                 $obj->state = 0;
                 $obj->error = "Erreur lors de la suppression du fournisseur (site)";
             } else {
                 $obj->state = 1;
+                $obj->idLog = $tempIdLog;
+
             }
         } else {
             $obj->state = 0;

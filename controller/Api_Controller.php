@@ -182,11 +182,23 @@ class Api_Controller extends Controller
                         default:
                             $obj->state = 0;
                             $obj->error = "Unknown supplier action";
+
                     }
                     break;
-
+                case "log":
+                    switch ($action){
+                        case "rollback":
+                            $userName = $value->loginUserName;
+                            $idLog = $value->idLog;
+                            $obj = $this->model->log->rollback($idLog, true, $userName);
+                            break;
+                        default:
+                            $obj->state = 0;
+                            $obj->error = "Unknown log action";
+                    }
+                    break;
                 default:
-                    $obj->state = 1;
+                    $obj->state = 0;
                     $obj->error = "Unknown type";
             }
         } else {

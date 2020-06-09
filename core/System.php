@@ -21,6 +21,7 @@ class System
         require_once $pluginFolder . '/core/Controller.php';
         require_once $pluginFolder . '/core/Helper.php';
 
+
         new Model();
         new Controller();
         new Helper();
@@ -43,6 +44,9 @@ class System
         require_once wpPluginFolder . 'Routes/route.php';
         $router = new Route();
         $router->loadRoutes($route);
+        require_once wpPluginFolder . 'migration/Migration.php';
+        $migration = new Migration();
+        $migration->doMigration();
 
     }
 

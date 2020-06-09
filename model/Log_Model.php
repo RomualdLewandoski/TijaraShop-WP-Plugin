@@ -106,6 +106,10 @@ class Log_Model extends Model
                                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
                                 } else {
                                     $obj->state = 1;
+                                    $obj->idLog = $tempIdLog;
+                                    $obj->action = "delete";
+                                    $obj->type = $log->typeLog;
+                                    $obj->targetId = $log->targetIdLog;
                                 }
                             }
                         } else {
@@ -148,6 +152,7 @@ class Log_Model extends Model
                                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
                                 } else {
                                     $obj->state = 1;
+                                    $obj->idLog = $tempIdLog;
                                 }
                             }
                         } else {
@@ -176,7 +181,6 @@ class Log_Model extends Model
                         if ($this->addLog($userName, $log->typeLog, "Create", $log->targetIdLog, null, $log->beforeLog)) {
                             $tempIdLog = $this->helper->db->getLastId();
                             $data = json_decode($log->beforeLog, true);
-                            var_dump($temp, $data);
 
                             if (!$this->helper->db->insert($temp->table, $data)) {
                                 $this->deleteLog($tempIdLog);
@@ -193,6 +197,7 @@ class Log_Model extends Model
                                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/logs");
                                 } else {
                                     $obj->state = 1;
+                                    $obj->idLog = $tempIdLog;
                                 }
                             }
                         } else {

@@ -171,6 +171,7 @@ class Supplier_Model extends Model
                 $this->model->log->addId($tempIdLog, $tempIdAdd);
                 if ($isApi) {
                     $result->state = 1;
+                    $result->idLog = $tempIdLog;
                     $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
 
                 } else {
@@ -221,6 +222,7 @@ class Supplier_Model extends Model
         $oldData->contact = json_encode(json_decode($oldData->contact), JSON_PRETTY_PRINT);
 
         if ($this->model->log->addLog($userName, "SupplierModel", "Delete", $id, json_encode($oldData))) {
+            $temp = $this->helper->db->getLastId();
             if (!$this->helper->db->delete($this->table, array('idSupplier' => $id))) {
                 if ($isApi) {
                     $obj->state = 0;
@@ -232,6 +234,7 @@ class Supplier_Model extends Model
             } else {
                 if ($isApi) {
                     $obj->state = 1;
+                    $obj->idLog = $temp;
                 } else {
                     $this->helper->session->set_flashdata("success", "Le fournisseur a bien été supprimé");
                     $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/supplier");
@@ -407,6 +410,7 @@ class Supplier_Model extends Model
         $oldSupplier->isActive = intval($oldSupplier->isActive);
         $oldSupplier->contact = json_encode(json_decode($oldSupplier->contact), JSON_PRETTY_PRINT);
         if ($this->model->log->addLog($userName, "SupplierModel", "Edit", $idSupplier, json_encode($oldSupplier), json_encode($data))) {
+            $temp = $this->helper->db->getLastId();
             if (!$this->helper->db->update($this->table, $data, array('idSupplier' => $idSupplier))) {
                 if ($isApi) {
                     $result->state = 0;
@@ -418,6 +422,7 @@ class Supplier_Model extends Model
             } else {
                 if ($isApi) {
                     $result->state = 1;
+                    $result->idLog = $temp;
                     $result->idWp = $this->getBy("societyName", $societyName)[0]->idSupplier;
                 } else {
                     $this->helper->session->set_flashdata("success", "Le fournisseur a bien été modifié");
