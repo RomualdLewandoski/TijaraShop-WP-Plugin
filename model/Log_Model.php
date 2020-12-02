@@ -4,6 +4,7 @@
 class Log_Model extends Model
 {
     protected $table;
+    protected $tableDelete;
     protected $supplierTable;
     protected $userTable;
     protected $permsTable;
@@ -17,6 +18,8 @@ class Log_Model extends Model
         $this->supplierTable = $this->helper->db->getPrefix() . '_shop_Supplier';
         $this->userTable = $this->helper->db->getPrefix() . '_shop_ShopLogin';
         $this->permsTable = $this->helper->db->getPrefix() . '_shop_PermissionModel';
+        $this->catTable = $this->helper->db->getPrefix() . '_shop_categorie';
+        $this->tableDelete = $this->helper->db->getPrefix().'_shop_delete';
     }
 
     /**
@@ -40,7 +43,22 @@ class Log_Model extends Model
             'beforeLog' => $beforeLog,
             'afterLog' => $afterLog
         );
+        if ($actionLog == "Delete"){
+            $this->addDelete($typeLog, $targetIdLog);
+        }
         return !$this->helper->db->insert($this->table, $data) ? false : true;
+    }
+
+    public function listDelete(){
+        return $this->helper->db->get($this->tableDelete);
+    }
+
+    public function addDelete($type, $targetId){
+        $data = array(
+            'typeDelete' => $type,
+            'targetId' => $targetId
+        );
+        $this->helper->db->insert($this->tableDelete, $data);
     }
 
     public function addId($idLog, $targetId)
@@ -260,6 +278,11 @@ class Log_Model extends Model
                 $obj->id = "idShopLogin";
                 return $obj;
                 break;
+	        case "catmodel":
+	        	$obj->table = $this->catTable;
+	        	$obj->id = "id";
+	        	return $obj;
+	        	break;
             default:
                 return null;
                 break;
@@ -346,7 +369,8 @@ class Log_Model extends Model
             case "firstName":
                 $str = "Prénom";
                 break;
-            case "lastName":
+	        case "nom":
+	        case "lastName":
                 $str = "Nom";
                 break;
             case "address":
@@ -427,6 +451,20 @@ class Log_Model extends Model
             case "comPhone":
                 $str = "Mail Commercial";
                 break;
+	        case "id":
+	        	$str = "id";
+	        	break;
+	        case "position":
+	        	$str = "position";
+	        	break;
+	        case "parent":
+	        	$str = "parent";
+	        	break;
+
+	        default:
+	        	$str = $key;
+	        	break;
+
         }
         return $str;
     }

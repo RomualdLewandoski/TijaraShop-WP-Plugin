@@ -2,14 +2,12 @@
 
 abstract class Migrate extends System
 {
-    public $version;
     public $sql;
     public $wpdb;
 
-    final public function __construct($version)
+    final public function __construct()
     {
         $this->loadHelper("db");
-        $this->version = $version;
         global $wpdb;
         $this->wpdb = $wpdb;
     }

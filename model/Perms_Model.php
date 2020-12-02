@@ -70,7 +70,7 @@ class Perms_Model extends Model
 
     public function getPermsLike($request)
     {
-        return $this->helper->db->get_like($this->table, array('namePermissionModel' => array($request->get('searchPermsName'), 'before')));
+        return $this->helper->db->get_like($this->table, array('namePermissionModel' => array($request->request->get('searchPermsName'), 'before')));
     }
 
     /**

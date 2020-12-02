@@ -90,7 +90,6 @@ class Admin_Controller extends Controller
         $action = $request->get('action');
         if ($action == null) {
             $data['userList'] = $this->model->user->getUsers();
-            $data['search'] = null;
             $this->loadView('adminUser', $data);
         } else if ($action == "search") {
             $data['userList'] = $this->model->user->getUserLike($request);
@@ -123,42 +122,7 @@ class Admin_Controller extends Controller
         }
     }
 
-    public function adminPerms()
-    {
-        $this->checkInstall();
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
-        $request = $this->request();
-        $action = $request->get('action');
-        if ($action == null) {
-            $data['perms'] = $this->model->perms->listPerms();
-            $this->loadView("adminPermsList", $data);
-        } else if ($action == "search") {
-            $data['perms'] = $this->model->perms->getPermsLike($request);
-            $data['search'] = $request->get('searchPermsName');
-            $this->loadView('adminPermsList', $data);
-        } else if ($action == "addPermsModel") {
-            if ($this->helper->form->verify(array('permsName'))) {
-                $this->model->perms->addPerms($request);
-            } else {
-                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire d'ajout de modèle de permission");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
-            }
-        } else if ($action == "editPerms") {
-            if ($this->helper->form->verify(array('permsName'))) {
-                $this->model->perms->editPerms($request);
-            } else {
-                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire de modification du modèle de permission");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
-            }
-        } else if ($action == "deletePerms") {
-            $this->model->perms->deletePerms($request);
-        } else {
-            $this->helper->session->set_flashdata("error", "L'action demandée est inconnue");
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/perms");
-        }
-    }
+
 
     public function adminSupplier()
     {
@@ -174,7 +138,7 @@ class Admin_Controller extends Controller
         } else if ($action == "addSupplier") {
             $this->loadView('adminAddSupplier', $data);
         } else if ($action == "add") {
-            if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName'))) {
+            if ($this->helper->form->verify(array('societyName'))) {
                 $this->model->supplier->addSupplier($request, false);
             } else {
                 $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire d'ajout de fournisseur");

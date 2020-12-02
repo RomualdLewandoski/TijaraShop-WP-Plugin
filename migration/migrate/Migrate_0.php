@@ -78,7 +78,6 @@ class Migrate_0 extends Migrate
             );"
         );
     }
-
     public function execute()
     {
         $this->setSql();
@@ -97,6 +96,9 @@ class Migrate_0 extends Migrate
 
     public function updateVersion()
     {
-        $this->helper->db->insert($this->wpdb->prefix . "_shop_migration", array('version' => $this->version));
+        $this->helper->db->insert($this->wpdb->prefix . "_shop_migration", array('version' => 1));
     }
+
+
+
 }

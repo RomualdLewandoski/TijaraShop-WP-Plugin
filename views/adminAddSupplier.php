@@ -92,6 +92,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <select id="country" name="country" class="form-control chosen-select col-12">
+                                        <option value="null">Choisir le pays</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Åland Islands">Åland Islands</option>
                                         <option value="Albania">Albania</option>

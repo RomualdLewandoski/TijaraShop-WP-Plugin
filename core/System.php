@@ -6,6 +6,7 @@ class System
     public $model;
     public $controller;
     public $helper;
+    public $pluginFolder;
 
     protected static $_instance = null;
 
@@ -13,6 +14,7 @@ class System
     {
         session_start();
         define('wpPluginFolder', $pluginFolder);
+        $this->pluginFolder = $pluginFolder;
         require_once $pluginFolder . '/helper/ParameterBag.php';
         require_once $pluginFolder . '/helper/ServerBag.php';
         require_once $pluginFolder . '/helper/HeaderBag.php';
@@ -50,6 +52,9 @@ class System
 
     }
 
+	/**
+	 * @return Request
+	 */
     public function request()
     {
         return new Request();
@@ -66,9 +71,12 @@ class System
         $this->helper->wp->addMenu("TijaraShop", "manage_options", 'TijaraShop', 'Admin', 'index', '', 50.5);
         $this->helper->wp->addSubMenu("TijaraShop", "Api", "manage_options", "TijaraShop/api", 'Admin', 'adminApi');
         $this->helper->wp->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", 'Admin', 'adminUsers');
-        $this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Admin', 'adminPerms');
+        //$this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Admin', 'adminPerms');
+        $this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Permission', 'index');
         $this->helper->wp->addSubMenu("TijaraShop", "Fournisseurs", "manage_options", "TijaraShop/supplier", 'Admin', 'adminSupplier');
         $this->helper->wp->addSubMenu("TijaraShop", "Logs", "manage_options", "TijaraShop/logs", 'Admin', 'adminLogs');
+	    $this->helper->wp->addSubMenu("TijaraShop", "Catégorie", "manage_options", "TijaraShop/cat", 'Cat', 'index');
+	    $this->helper->wp->addSubMenu("TijaraShop", "Marque", "manage_options", "TijaraShop/brand", 'Brand', 'index');
         $this->helper->wp->addSubMenu("null", "Install TijaraShop", "manage_options", "TijaraShop/install", 'Install', 'displayInstall');
 
     }

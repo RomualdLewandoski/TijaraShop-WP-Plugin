@@ -58,6 +58,15 @@ class Api_Controller extends Controller
         echo json_encode($obj);
     }
 
+    public function getDelete()
+    {
+        $this->checkApi();
+        $obj = new stdClass();
+        $delete = $this->model->log->listDelete();
+        $obj->delete = $delete;
+        echo json_encode($obj);
+    }
+
     public function getLogId(){
         $this->checkApi();
         $request = $this->request();
@@ -91,7 +100,7 @@ class Api_Controller extends Controller
         $this->checkApi();
         $obj = new stdClass();
         $request = $this->request();
-        if ($this->helper->form->verify(array('societyName', 'firstName', 'lastName'))) {
+        if ($this->helper->form->verify(array('societyName'))) {
             $obj = $this->model->supplier->addSupplier($request, true);
         } else {
             $obj->state = 0;
