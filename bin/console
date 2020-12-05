@@ -1,0 +1,18 @@
+/** console.php **/
+#!/usr/bin/env php
+
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Console\Migration;
+use Console\MakeRoute;
+use Console\MakeController;
+
+$app = new Application('Console App', 'v1.0.0');
+$app -> add(new Migration());
+$app -> add(new MakeRoute());
+$app -> add(new MakeController());
+
+$app->run();

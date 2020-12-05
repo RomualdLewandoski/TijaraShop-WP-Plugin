@@ -3,15 +3,15 @@
 
 use App\Migration\Migrate\Migrate;
 
-class Migrate_4 extends Migrate {
+class Migrate_5 extends Migrate {
 
 	public function setSql() {
 		$this->sql = [
-			"CREATE TABLE IF NOT EXISTS {$this->wpdb->prefix}_shop_brand (
-			id int AUTO_INCREMENT PRIMARY KEY,
-			nom VARCHAR(255) NOT NULL, 
-			position INT
-		)"
+			"CREATE TABLE IF NOT EXISTS {$this->wpdb->prefix}_shop_shop (
+				id int AUTO_INCREMENT PRIMARY KEY,
+				nom VARCHAR(255) NOT NULL, 
+				isSending  BOOLEAN
+)"
 		];
 	}
 
@@ -21,7 +21,7 @@ class Migrate_4 extends Migrate {
 		foreach ( $this->sql as $sql ) {
 			if ( ! $this->helper->db->custom( $sql ) ) {
 				$flag = false;
-				echo "Err sql4";
+				echo "Err sql5";
 			}
 		}
 		if ( ! $flag ) {
@@ -32,6 +32,6 @@ class Migrate_4 extends Migrate {
 	}
 
 	public function updateVersion() {
-		$this->helper->db->insert( $this->wpdb->prefix . "_shop_migration", array( 'version' => 5 ) );
+		$this->helper->db->insert( $this->wpdb->prefix . "_shop_migration", array( 'version' => 6 ) );
 	}
 }

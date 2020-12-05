@@ -37,6 +37,8 @@ die('This file is used for development purposes only.');
  * @property Update_Model $update                   Our Update model
  * @property Log_Model $log                         Model for login all actions (also known as BigBorther's model)
  * @property Cat_Model $cat                         Model for managing products category
+ * @property Crud_Helper $crud                      CRUD Helper with log saver
+ * @property Brand_Model $brand                     Model for managing brands
  */
 class System
 {
@@ -84,6 +86,7 @@ class System
     }
 
 }
+
 
 class Model extends System
 {

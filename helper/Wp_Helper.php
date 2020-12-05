@@ -1,5 +1,7 @@
 <?php
+namespace App\Helper;
 
+use App\Helper;
 
 class Wp_Helper extends Helper
 {

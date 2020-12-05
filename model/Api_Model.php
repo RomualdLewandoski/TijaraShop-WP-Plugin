@@ -1,5 +1,9 @@
 <?php
+namespace App\Model;
 
+
+use App\Model;
+use stdClass;
 
 class Api_Model extends Model
 {

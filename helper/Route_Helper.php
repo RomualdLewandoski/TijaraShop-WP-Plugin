@@ -1,5 +1,7 @@
 <?php
+namespace App\Helper;
 
+use App\Helper;
 
 class Route_Helper extends Helper
 {

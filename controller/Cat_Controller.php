@@ -1,5 +1,7 @@
 <?php
+namespace App\Controller;
 
+use App\Controller;
 
 class Cat_Controller extends Controller {
 	public function __construct() {

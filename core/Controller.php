@@ -1,5 +1,7 @@
 <?php
+namespace App;
 
+use App\System;
 
 class Controller extends System
 {
@@ -17,4 +19,6 @@ class Controller extends System
 			$this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
 		}
 	}
+
+
 }

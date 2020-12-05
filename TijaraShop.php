@@ -1,5 +1,5 @@
 <?php
-
+namespace App;
 /*
 Plugin Name: TijaraShop Caisse Plugin
 Description: Plugin suplémentaire au bon fonctionnement de la caisse
@@ -8,25 +8,30 @@ Author: Romuald Detrait
 License: Closed-Sources
  */
 
+
+use stdClass;
+
 define("version", 1.4);
 define("apiVersion", "1.4");
 define("dbVersion", 1);
+require_once __DIR__ . '/vendor/autoload.php';
 
 include_once plugin_dir_path(__FILE__) . '/core/System.php';
 $GLOBALS['tijarashop'] = start();
 
 function start()
 {
+
     return System::instance(plugin_dir_path(__FILE__));
 }
 
 register_activation_hook(__FILE__, 'install');
-add_filter('plugins_api', 'tijarashop_plugin_info', 20, 3);
-add_filter('site_transient_update_plugins', 'tijarashop_push_update');
-add_action('upgrader_process_complete', 'tijarashop_after_update', 10, 2);
+add_filter('plugins_api', 'App\tijarashop_plugin_info', 20, 3);
+add_filter('site_transient_update_plugins', 'App\tijarashop_push_update');
+add_action('upgrader_process_complete', 'App\tijarashop_after_update', 10, 2);
 
 // Display the link with the plugin meta.
-add_filter('plugin_row_meta', 'plugin_links', 10, 4);
+add_filter('plugin_row_meta', 'App\plugin_links', 10, 4);
 
 function tijarashop_after_update($upgrader_object, $options)
 {

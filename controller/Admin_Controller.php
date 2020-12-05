@@ -1,5 +1,8 @@
 <?php
+namespace App\Controller;
 
+use App\Controller;
+use App\Model\Api_Model;
 
 class Admin_Controller extends Controller
 {
@@ -52,7 +55,10 @@ class Admin_Controller extends Controller
         $action = $request->get('action');
         if ($action == null) {
             $data['json'] = $this->getJsonConf();
-            $data['apiKey'] = $this->model->api->getApiKey();
+            $apiModel = new Api_Model();
+
+            $data['apiKey'] = $apiModel->getApiKey();
+            //$data['apiKey'] = $this->model->api->getApiKey();
             $data['error'] = $this->helper->session->flashdata("error");
             $data['success'] = $this->helper->session->flashdata("success");
             $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";

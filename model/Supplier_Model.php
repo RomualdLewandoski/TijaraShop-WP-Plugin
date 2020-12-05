@@ -1,5 +1,8 @@
 <?php
+namespace App\Model;
 
+
+use App\Model;
 
 class Supplier_Model extends Model
 {

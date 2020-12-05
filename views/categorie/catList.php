@@ -165,7 +165,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button type="submit" class="btn btn-success">Ajouter le modèle de permission</button>
+                        <button type="submit" class="btn btn-success">Ajouter la catégorie</button>
                     </div>
                 </form>
             </div>

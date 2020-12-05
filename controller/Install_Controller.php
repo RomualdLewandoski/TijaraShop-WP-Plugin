@@ -1,5 +1,7 @@
 <?php
+namespace App\Controller;
 
+use App\Controller;
 
 class Install_Controller extends Controller
 {

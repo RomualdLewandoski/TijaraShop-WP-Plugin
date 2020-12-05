@@ -1,5 +1,7 @@
 <?php
+namespace App;
 
+use App\System;
 
 class Route extends System
 {

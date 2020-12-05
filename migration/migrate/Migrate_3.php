@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Migration\Migrate\Migrate;
+
 class Migrate_3 extends Migrate {
 
 	public function setSql() {

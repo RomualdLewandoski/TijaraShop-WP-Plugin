@@ -1,4 +1,7 @@
 <?php
+namespace App\Model;
+
+use App\Model;
 
 class Cat_Model extends Model {
 	protected $table;
@@ -143,7 +146,7 @@ class Cat_Model extends Model {
 				$this->helper->url->redirect( "wp-admin/admin.php?page=TijaraShop/cat" );
 			}
 		} else {
-			$this->helper->session->set_flashdata( "error", "Impossible de trouvé la catégorie dans la base de donnée" );
+			$this->helper->session->set_flashdata( "error", "Impossible de trouver la catégorie dans la base de donnée" );
 			$this->helper->url->redirect( "wp-admin/admin.php?page=TijaraShop/cat" );
 		}
 	}
@@ -168,7 +171,7 @@ class Cat_Model extends Model {
 				}
 			}
 		}else{
-			$this->helper->session->set_flashdata( "error", "Impossible de trouvé la catégorie dans la base de donnée" );
+			$this->helper->session->set_flashdata( "error", "Impossible de trouver la catégorie dans la base de donnée" );
 			$this->helper->url->redirect( "wp-admin/admin.php?page=TijaraShop/cat" );
 		}
 	}

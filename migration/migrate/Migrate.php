@@ -1,4 +1,7 @@
 <?php
+namespace App\Migration\Migrate;
+
+use App\System;
 
 abstract class Migrate extends System
 {

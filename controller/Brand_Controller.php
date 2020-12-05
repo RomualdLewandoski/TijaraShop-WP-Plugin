@@ -1,5 +1,7 @@
 <?php
+namespace App\Controller;
 
+use App\Controller;
 
 class Brand_Controller extends Controller {
 	public function __construct() {
@@ -37,13 +39,36 @@ class Brand_Controller extends Controller {
 		$data['success'] = $this->helper->session->flashdata( "success" );
 
 		if ( $action == null ) {
-
 			$this->listBrand( $data );
+		} else if ( $action == "addBrand" ) {
+			$this->addBrand( $request );
+		} else if ( $action == "editBrand" ) {
+			$this->editBrand( $request );
+		} else if ($action == "deleteBrand") {
+			$this->model->brand->deleteBrand($request);
 		}
 	}
 
 	public function listBrand( $data ) {
 		$data['brands'] = $this->model->brand->listBrands();
 		$this->loadView( 'brand/brandList', $data );
+	}
+
+	public function addBrand( $request ) {
+		if ( $this->helper->form->verify( [ 'brandName' ] ) ) {
+			$this->model->brand->addBrand( $request );
+		} else {
+			$this->helper->session->set_flashdata( "error", "Des champs sont manquants dans le formulaire d'ajout de la marque" );
+			$this->helper->url->redirect( "wp-admin/admin.php?page=TijaraShop/brand" );
+		}
+	}
+
+	public function editBrand( $request ) {
+		if ( $this->helper->form->verify( [ 'brandName' ] ) ) {
+			$this->model->brand->editBrand( $request );
+		} else {
+			$this->helper->session->set_flashdata( "error", "Des champs sont manquants dans le formulaire d'édition de la marque" );
+			$this->helper->url->redirect( "wp-admin/admin.php?page=TijaraShop/brand" );
+		}
 	}
 }

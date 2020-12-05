@@ -1,0 +1,87 @@
+{
+    "menu": [
+        {
+            "name": "TijaraShop",
+            "perms": "manage_options",
+            "slug": "TijaraShop",
+            "controller": "Admin",
+            "method": "index",
+            "icon": "",
+            "position": 50.5
+        }
+    ],
+    "subMenu": [
+        {
+            "parent": "TijaraShop",
+            "name": "Api",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/api",
+            "controller": "Admin",
+            "method": "adminApi"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "Utilisateurs",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/users",
+            "controller": "Admin",
+            "method": "adminUsers"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "Permissions",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/perms",
+            "controller": "Permission",
+            "method": "index"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "Fournisseurs",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/supplier",
+            "controller": "Admin",
+            "method": "adminSupplier"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "Logs",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/logs",
+            "controller": "Admin",
+            "method": "adminLogs"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "Cat\u00e9gorie",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/cat",
+            "controller": "Cat",
+            "method": "index"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "Marque",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/brand",
+            "controller": "Brand",
+            "method": "index"
+        },
+        {
+            "parent": "null",
+            "name": "Install TijaraShop",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/install",
+            "controller": "Install",
+            "method": "displayInstall"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "test",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/test",
+            "controller": "Test",
+            "method": "index"
+        }
+    ]
+}

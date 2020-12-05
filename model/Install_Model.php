@@ -1,5 +1,8 @@
 <?php
+namespace App\Model;
 
+
+use App\Model;
 
 class Install_Model extends Model
 {

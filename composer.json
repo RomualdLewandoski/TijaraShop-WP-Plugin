@@ -1,0 +1,27 @@
+{
+    "name": "dev/tijara-shop",
+    "authors": [
+        {
+            "name": "HazielKaos",
+            "email": "romuald.lewanoski@yandex.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^5.2",
+        "kherge/file-manager": "^2.7",
+        "symfony/http-foundation": "^5.2",
+        "vlucas/spot2": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Console\\": "bin/src",
+            "App\\Model\\": "model/",
+            "App\\Controller\\": "controller/",
+            "App\\Helper\\" : "helper/",
+            "App\\Config\\" : "config/",
+            "App\\": "core/",
+            "Entity\\": "entity/"
+        },
+        "classmap": ["bin/src", "model/", "controller/", "helper/", "config/", "core/", "entity/"]
+    }
+}

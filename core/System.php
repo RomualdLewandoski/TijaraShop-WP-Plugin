@@ -1,8 +1,15 @@
 <?php
+namespace App;
 
+use App\ControllerRoute;
+use App\Migration\Migration;
+use stdClass;
+use Symfony\Component\HttpFoundation\Request;
 
 class System
 {
+
+
     public $model;
     public $controller;
     public $helper;
@@ -13,16 +20,14 @@ class System
     public function __construct($pluginFolder)
     {
         session_start();
-        define('wpPluginFolder', $pluginFolder);
-        $this->pluginFolder = $pluginFolder;
-        require_once $pluginFolder . '/helper/ParameterBag.php';
-        require_once $pluginFolder . '/helper/ServerBag.php';
-        require_once $pluginFolder . '/helper/HeaderBag.php';
-        require_once $pluginFolder . '/helper/Request.php';
-        require_once $pluginFolder . '/core/Model.php';
-        require_once $pluginFolder . '/core/Controller.php';
-        require_once $pluginFolder . '/core/Helper.php';
 
+	    define('wpPluginFolder', $pluginFolder);
+        $this->pluginFolder = $pluginFolder;
+
+        //require_once $pluginFolder . '/core/Model.php';
+        //require_once $pluginFolder . '/core/Controller.php';
+        //require_once $pluginFolder . '/core/Helper.php';
+		require_once $pluginFolder . "/config/ControllerRoute.php";
 
         new Model();
         new Controller();
@@ -57,7 +62,7 @@ class System
 	 */
     public function request()
     {
-        return new Request();
+        return Request::createFromGlobals();;
     }
 
     public function install()
@@ -68,17 +73,8 @@ class System
 
     public function createAdminMenu()
     {
-        $this->helper->wp->addMenu("TijaraShop", "manage_options", 'TijaraShop', 'Admin', 'index', '', 50.5);
-        $this->helper->wp->addSubMenu("TijaraShop", "Api", "manage_options", "TijaraShop/api", 'Admin', 'adminApi');
-        $this->helper->wp->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", 'Admin', 'adminUsers');
-        //$this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Admin', 'adminPerms');
-        $this->helper->wp->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms", 'Permission', 'index');
-        $this->helper->wp->addSubMenu("TijaraShop", "Fournisseurs", "manage_options", "TijaraShop/supplier", 'Admin', 'adminSupplier');
-        $this->helper->wp->addSubMenu("TijaraShop", "Logs", "manage_options", "TijaraShop/logs", 'Admin', 'adminLogs');
-	    $this->helper->wp->addSubMenu("TijaraShop", "Catégorie", "manage_options", "TijaraShop/cat", 'Cat', 'index');
-	    $this->helper->wp->addSubMenu("TijaraShop", "Marque", "manage_options", "TijaraShop/brand", 'Brand', 'index');
-        $this->helper->wp->addSubMenu("null", "Install TijaraShop", "manage_options", "TijaraShop/install", 'Install', 'displayInstall');
-
+	   $route = new ControllerRoute();
+	   $route->generateRoute();
     }
 
     public function loadController($controller)
@@ -88,7 +84,11 @@ class System
         if (!isset($this->controller)) {
             $this->controller = new stdClass();
         }
-        $this->controller->$controller = new $realController();
+
+	    $finalController = "\App\Controller\\".$realController;
+
+
+	    $this->controller->$controller = new $finalController();
         return $this->controller->$controller;
     }
 
@@ -99,7 +99,10 @@ class System
         if (!isset($this->model)) {
             $this->model = new stdClass();
         }
-        $this->model->$model = new $realModel();
+		$finalModel = "\App\Model\\".$realModel;
+
+
+        $this->model->$model = new $finalModel();
     }
 
     public function loadView($view, $data = null)
@@ -129,7 +132,9 @@ class System
         if (!isset($this->helper)) {
             $this->helper = new stdClass();
         }
-        $this->helper->$helper = new $realHelper();
+	    $finalHelper = "\App\Helper\\".$realHelper;
+
+	    $this->helper->$helper = new $finalHelper();
     }
 
     public static function instance($pluginFolder)
@@ -139,4 +144,8 @@ class System
         }
         return self::$_instance;
     }
+
+	public function getManager(){
+		return (new EntityManager())->getManager();
+	}
 }

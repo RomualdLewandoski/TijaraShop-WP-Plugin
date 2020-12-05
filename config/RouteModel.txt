@@ -1,0 +1,18 @@
+<?php
+
+namespace App;
+
+
+use App\Helper\Wp_Helper;
+
+class ControllerRoute{
+	public function generateRoute(){
+		$wpHelper = new Wp_Helper();
+
+		%Menu%
+		
+        %subMenu%
+
+	}
+}
+

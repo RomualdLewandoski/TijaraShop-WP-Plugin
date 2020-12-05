@@ -1,5 +1,8 @@
 <?php
+namespace App\Controller;
 
+use App\Controller;
+use stdClass;
 
 class Api_Controller extends Controller
 {
