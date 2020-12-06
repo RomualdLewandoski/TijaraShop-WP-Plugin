@@ -5,20 +5,23 @@ namespace Entity;
 use Spot\EntityInterface as Entity;
 use Spot\MapperInterface as Mapper;
 
-class Test extends \Spot\Entity {
-	protected static $table = "test";
+class %Name% extends \Spot\Entity {
+	protected static $table = "%tableName%";
 
 	public static function fields() {
 		return [
-			'id'    => [ 'type' => 'integer', 'autoincrement' => true, 'primary' => true ],
-			'title' => [ 'type' => 'string', 'required' => true ],
+			%Fields%
 		];
 	}
 
 	public static function relations( Mapper $mapper, Entity $entity ) {
 		return [
-
+            %Relations%
 		];
+	}
+
+	public function getTable(){
+		return self::$table;
 	}
 
 }

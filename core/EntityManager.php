@@ -38,7 +38,7 @@ class EntityManager {
 	public function getRepository( $entityName ) {
 		$db = $this->getDb();
 
-		return $db->mapper( 'Entity\Test' );
+		return $db->mapper( $entityName );
 	}
 
 	public function getDb() {

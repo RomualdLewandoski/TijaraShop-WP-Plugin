@@ -38,11 +38,10 @@ class Permission_Controller extends Controller
         $request = $this->request();
         $action = $request->get('action');
 
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
+	    $data = [];
 
-        if ($action == null){
+
+	    if ($action == null){
             $data['perms'] = $this->model->perms->listPerms();
             $this->loadList($data);
         }else if ($action == "search"){

@@ -42,8 +42,7 @@ class Admin_Controller extends Controller
     public function index()
     {
         $this->checkInstall();
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
+
         $data['apiKey'] = $this->model->api->getApiKey();
         $this->loadView('adminMain', $data);
     }
@@ -59,9 +58,7 @@ class Admin_Controller extends Controller
 
             $data['apiKey'] = $apiModel->getApiKey();
             //$data['apiKey'] = $this->model->api->getApiKey();
-            $data['error'] = $this->helper->session->flashdata("error");
-            $data['success'] = $this->helper->session->flashdata("success");
-            $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 
             $this->loadView('adminApi', $data);
         } elseif ($action == "saveApi") {
@@ -89,9 +86,7 @@ class Admin_Controller extends Controller
     public function adminUsers()
     {
         $this->checkInstall();
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
+
         $request = $this->request();
         $action = $request->get('action');
         if ($action == null) {
@@ -133,10 +128,9 @@ class Admin_Controller extends Controller
     public function adminSupplier()
     {
         $this->checkInstall();
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
-        $request = $this->request();
+	    $data = [];
+
+	    $request = $this->request();
         $action = $request->get('action');
         if ($action == null) {
             $data['listSupplier'] = $this->model->supplier->listSupplier();
@@ -205,10 +199,9 @@ class Admin_Controller extends Controller
     function adminLogs()
     {
         $this->checkInstall();
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
-        $request = $this->request();
+	    $data = [];
+
+	    $request = $this->request();
         $action = $request->get('action');
         if ($action == null) {
             $data['logList'] = $this->model->log->getList();

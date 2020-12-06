@@ -21,7 +21,7 @@ $wpHelper->addSubMenu("TijaraShop", "Catégorie", "manage_options", "TijaraShop/
 $wpHelper->addSubMenu("TijaraShop", "Marque", "manage_options", "TijaraShop/brand","Brand", "index");
 $wpHelper->addSubMenu("null", "Install TijaraShop", "manage_options", "TijaraShop/install","Install", "displayInstall");
 $wpHelper->addSubMenu("TijaraShop", "test", "manage_options", "TijaraShop/test","Test", "index");
-
+$wpHelper->addSubMenu("TijaraShop", "Boutique", "manage_options", "TijaraShop/boutique","Boutique", "index");
 
 
 	}

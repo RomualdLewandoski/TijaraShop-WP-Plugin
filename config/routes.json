@@ -82,6 +82,14 @@
             "slug": "TijaraShop\/test",
             "controller": "Test",
             "method": "index"
+        },
+        {
+            "parent": "TijaraShop",
+            "name": "Boutique",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/boutique",
+            "controller": "Boutique",
+            "method": "index"
         }
     ]
 }

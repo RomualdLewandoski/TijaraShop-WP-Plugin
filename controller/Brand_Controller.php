@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller;
@@ -32,11 +33,9 @@ class Brand_Controller extends Controller {
 
 	public function index() {
 		$this->checkInstall();
-		$request         = $this->request();
-		$action          = $request->get( 'action' );
-		$data['pageUrl'] = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-		$data['error']   = $this->helper->session->flashdata( "error" );
-		$data['success'] = $this->helper->session->flashdata( "success" );
+		$request = $this->request();
+		$action  = $request->get( 'action' );
+		$data    = [];
 
 		if ( $action == null ) {
 			$this->listBrand( $data );
@@ -44,8 +43,8 @@ class Brand_Controller extends Controller {
 			$this->addBrand( $request );
 		} else if ( $action == "editBrand" ) {
 			$this->editBrand( $request );
-		} else if ($action == "deleteBrand") {
-			$this->model->brand->deleteBrand($request);
+		} else if ( $action == "deleteBrand" ) {
+			$this->model->brand->deleteBrand( $request );
 		}
 	}
 

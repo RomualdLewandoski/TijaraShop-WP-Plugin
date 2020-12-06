@@ -23,7 +23,7 @@ class MakeController extends Command {
 		$controllerStr       = $modelControllerFile->read();
 
 		$questionName = new Question(
-			"<info>Please type the name of the new controller</info>"
+			"<info>Please type the name of the new controller </info>"
 		);
 		$questionName->setValidator( function ( $answer ) {
 			if ( ! is_string( $answer ) || $answer == "" ) {
@@ -32,12 +32,30 @@ class MakeController extends Command {
 				);
 			}
 
+
 			return $answer;
+
+
 		} );
 		$name = utf8_encode( $helper->ask( $input, $output, $questionName ) );
+		$name = mb_strtolower( $name );
+		if ( str_contains( $name, "_controller" ) ) {
+			$name = str_replace( "_controller", "", $name );
+		}
+		if ( str_contains( $name, "controller" ) ) {
+			$name = str_replace( "controller", "", $name );
+		}
 
-		$realControllerName = ucfirst($name)."_Controller.php";
 
+		$realControllerName = ucfirst( $name ) . "_Controller";
+
+		if ( file_exists( __DIR__ . "/../../controller/" . $realControllerName . ".php" ) ) {
+			$output->writeln( "<error>The controller " . $realControllerName . " already exist</error>" );
+		} else {
+			$controllerFile = new File( __DIR__ . "/../../controller/" . $realControllerName . ".php", "w" );
+			$controllerFile->write( str_replace( "%Name%", $realControllerName, $controllerStr ) );
+			$output->writeln( "<info>The controller $realControllerName has been created" );
+		}
 
 		return 1;
 	}

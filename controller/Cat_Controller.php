@@ -35,9 +35,7 @@ class Cat_Controller extends Controller {
 		$this->checkInstall();
 		$request         = $this->request();
 		$action          = $request->get( 'action' );
-		$data['pageUrl'] = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-		$data['error']   = $this->helper->session->flashdata( "error" );
-		$data['success'] = $this->helper->session->flashdata( "success" );
+		$data = [];
 
 		if ( $action == null ) {
 			$data['cats'] = $this->model->cat->listCats();

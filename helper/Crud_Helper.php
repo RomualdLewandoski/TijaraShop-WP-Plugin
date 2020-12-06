@@ -2,6 +2,7 @@
 namespace App\Helper;
 
 use App\Helper;
+use stdClass;
 
 class Crud_Helper extends Helper {
 

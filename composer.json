@@ -20,8 +20,9 @@
             "App\\Helper\\" : "helper/",
             "App\\Config\\" : "config/",
             "App\\": "core/",
-            "Entity\\": "entity/"
+            "Entity\\": "entity/",
+            "Form\\": "form/"
         },
-        "classmap": ["bin/src", "model/", "controller/", "helper/", "config/", "core/", "entity/"]
+        "classmap": ["bin/src", "model/", "controller/", "helper/", "config/", "core/", "entity/", "form/"]
     }
 }

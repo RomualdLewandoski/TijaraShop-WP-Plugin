@@ -2,11 +2,11 @@
 
 use App\Migration\Migrate\Migrate;
 
-class %ClassName% extends Migrate {
+class Migrate_6 extends Migrate {
 
 	public function setSql() {
 		$this->sql = [
-			%Sql%
+			"CREATE TABLE `boutique` (`id` INT UNSIGNED AUTO_INCREMENT NOT NULL, `nom` VARCHAR(255) DEFAULT NULL, PRIMARY KEY(`id`)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB",
 		];
 	}
 
@@ -16,7 +16,7 @@ class %ClassName% extends Migrate {
 		foreach ( $this->sql as $sql ) {
 			if ( ! $this->helper->db->custom( $sql ) ) {
 				$flag = false;
-				echo "Err sql %ClassName%";
+				echo "Err sql Migrate_6";
 			}
 		}
 		if ( ! $flag ) {
@@ -27,6 +27,6 @@ class %ClassName% extends Migrate {
 	}
 
 	public function updateVersion() {
-		$this->helper->db->insert( $this->wpdb->prefix . "_shop_migration", array( 'version' => %Version% ) );
+		$this->helper->db->insert( $this->wpdb->prefix . "_shop_migration", array( 'version' => 7 ) );
 	}
 }
