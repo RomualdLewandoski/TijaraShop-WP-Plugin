@@ -19,7 +19,7 @@ class Test_Controller extends Controller {
 
 		echo $form->formStart();
 		echo $form->createView();
-		echo "<div class='text-center'>";
+		echo "<div class='text-center mt-4'>";
 		echo $form->formSubmit();
 		echo "</div>";
 		echo $form->formClose();

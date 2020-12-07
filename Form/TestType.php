@@ -27,5 +27,6 @@ class TestType extends AbstractType {
 		] );
 		$builder->add( 'textArea', 'text' );
 		$builder->add( 'isDefault', "checkbox" );
+		$builder->add('numberType', 'number');
 	}
 }

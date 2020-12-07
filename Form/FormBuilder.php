@@ -97,20 +97,26 @@ class FormBuilder {
 
 			if ( $elem['type'] == "checkbox" || $elem['type'] == "radio" ) {
 
-				$str .= "<div class='form-check row'>";
+				$str .= "<div class='form-check row mb-1'>";
 
 				$str .= "<input class='form-check-input mt-2 ";
 				if ( $elem['options']['attr']['class'] !== null ) {
 					$str .= $elem['options']['attr']['class'];
 				}
-				$str .= "' type='" . $elem['type'] . "' id='" . $elem['options']['attr']['id'] . "' name='" . $elem['name'] . "'>";
-				$str .= "<label class='ml-4 form-check-label' for='" . $elem['options']['attr']['id'] . "'>" . $elem['options']['label'] . "</label>";
+				$str .= "' type='" . $elem['type'] . "' id='" . $elem['options']['attr']['id'] . "' name='" . $elem['name'] . "' >";
+				if ( $elem['options']['has_label'] ) {
+
+					$str .= "<label class='ml-4 form-check-label' for='" . $elem['options']['attr']['id'] . "'>" . $elem['options']['label'] . "</label>";
+				}
 				$str .= "</div>";
 
 
 			} else {
 				$str .= "<div class='form-group'>";
-				$str .= " <label for='" . $elem['options']['attr']['id'] . "'>" . $elem['options']['label'] . "</label>";
+				if ( $elem['options']['has_label'] ) {
+
+					$str .= " <label for='" . $elem['options']['attr']['id'] . "'>" . $elem['options']['label'] . "</label>";
+				}
 				if ( $elem['type'] == "text" ) {
 					$str .= "<textarea class='form-control ";
 					if ( $elem['options']['attr']['class'] !== null ) {
