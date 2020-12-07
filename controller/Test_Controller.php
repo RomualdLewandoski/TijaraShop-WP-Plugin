@@ -14,8 +14,15 @@ class Test_Controller extends Controller {
 
 	public function index() {
 
-		$form = $this->createForm(TestType::class);
-		$form->handleRequest($this->request());
+		$form = $this->createForm( TestType::class );
+		$form->handleRequest( $this->request() );
+
+		echo $form->formStart();
+		echo $form->createView();
+		echo "<div class='text-center'>";
+		echo $form->formSubmit();
+		echo "</div>";
+		echo $form->formClose();
 
 		//$em = $this->getManager()->getRepository( 'Entity\Test' );
 		/*foreach ( $em->all() as $data ) {

@@ -13,12 +13,14 @@ class FormBuilder {
 	 * @var Request
 	 */
 	protected $request;
-
+	protected $formName = "";
 	protected $formUrl;
 
 	public function __construct() {
 		$this->elements = [];
+
 	}
+
 
 	/**
 	 * @param $name
@@ -65,25 +67,93 @@ class FormBuilder {
 		if ( $options['mapped'] === null ) {
 			$options['mapped'] = true;
 		}
+		if ( $options['attr'] === null || $options['attr']['id'] === null ) {
+			$options['attr']['id'] = $name . "Id";
+		}
 		$elem['options'] = $options;
 
 		array_push( $this->elements, $elem );
 	}
 
+	public function formStart() {
+		return "<form method='post' action='$this->formUrl'>";
+	}
+
+	public function formSubmit() {
+		return "<button type='submit' name='" . $this->formName . "Submit" . "' class='btn btn-success'>valider</button>";
+	}
+
+	public function formClose() {
+		return "</form>";
+	}
 
 	/**
 	 *
 	 */
 	public function createView() {
-		//todo don't forget to generate input type submit at the end of the file with name : $formNameSubmit
+		//todo don't forget to generate input type submit at the end of the file with name : $formName."Submit"
+		$str = "";
+		foreach ( $this->elements as $elem ) {
+
+			if ( $elem['type'] == "checkbox" || $elem['type'] == "radio" ) {
+
+				$str .= "<div class='form-check row'>";
+
+				$str .= "<input class='form-check-input mt-2 ";
+				if ( $elem['options']['attr']['class'] !== null ) {
+					$str .= $elem['options']['attr']['class'];
+				}
+				$str .= "' type='" . $elem['type'] . "' id='" . $elem['options']['attr']['id'] . "' name='" . $elem['name'] . "'>";
+				$str .= "<label class='ml-4 form-check-label' for='" . $elem['options']['attr']['id'] . "'>" . $elem['options']['label'] . "</label>";
+				$str .= "</div>";
+
+
+			} else {
+				$str .= "<div class='form-group'>";
+				$str .= " <label for='" . $elem['options']['attr']['id'] . "'>" . $elem['options']['label'] . "</label>";
+				if ( $elem['type'] == "text" ) {
+					$str .= "<textarea class='form-control ";
+					if ( $elem['options']['attr']['class'] !== null ) {
+						$str .= $elem['options']['attr']['class'];
+					}
+					$str .= "' name='" . $elem['name'] . "' id='" . $elem['options']['attr']['id'] . "'></textarea>";
+
+				} else if ( $elem['type'] == "select" || $elem['type'] == 'entity' ) {
+					$str .= "<select class='form-control ";
+					if ( $elem['options']['attr']['class'] !== null ) {
+						$str .= $elem['options']['attr']['class'];
+					}
+					$str .= "' name='" . $elem['name'] . "' id='" . $elem['options']['attr']['id'] . "'>";
+					foreach ( $elem['options']['choice'] as $key => $value ) {
+						$str .= "<option value='" . $key . "'>$value</option>";
+					}
+					$str .= "</select>";
+				} else {
+					if ( $elem['type'] == "string" ) {
+						$elem['type'] = "text";
+					}
+					$str .= "<input type='" . $elem['type'] . "' class='form-control ";
+					if ( $elem['options']['attr']['class'] !== null ) {
+						$str .= $elem['options']['attr']['class'];
+					}
+					$str .= "' id='" . $elem['options']['attr']['id'] . "' name='" . $elem['name'] . "' ";
+					if ( $elem['options']['attr']['placeholder'] !== null ) {
+						$str .= "placeholder='" . $elem['options']['attr']['placeholder'] . "'";
+					}
+
+				}
+				$str .= " </div>";
+			}
+		}
+
+		return $str;
 	}
 
 	/**
 	 *
 	 */
 	public function isSubmitted() {
-		//on dois gen un bouton avec un name special ET on va ensuite verifier si ce name a été submit
-
+		return $this->request->request->get( $this->formName . "Submit" ) !== null;
 	}
 
 	/**
@@ -92,7 +162,7 @@ class FormBuilder {
 	public function isValid() {
 		foreach ( $this->elements as $elem ) {
 			if ( $elem['options']['required'] ) {
-				if ( $this->request->request->get( $elem['name'] ) === null ) {
+				if ( $this->request->request->get( $elem['name'] ) == null ) {
 					return false;
 				}
 			}
@@ -107,9 +177,9 @@ class FormBuilder {
 	public function handleRequest( Request $request ) {
 		$this->request = $request;
 		$this->formUrl = $request->server->get( 'REQUEST_URI' );
-		//if si valid on va set toutes les infos de notre entity ici
 		if ( $this->isSubmitted() && $this->isValid() ) {
 			foreach ( $this->elements as $elem ) {
+				//todo watchout to htmlspecialchars() except if type is ckeditor
 				$this->entity->set( $elem['name'], $request->request->get( $elem['name'] ) );
 			}
 		}
@@ -123,7 +193,7 @@ class FormBuilder {
 		if ( $entity != null ) {
 			$this->entity = $entity;
 		}
-
+		$this->formName = str_replace( "Form\\", "", $formTypeClass );
 		( new $formTypeClass() )->buildForm( $this );
 
 		return $this;

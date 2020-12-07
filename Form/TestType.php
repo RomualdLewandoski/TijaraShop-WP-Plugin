@@ -17,10 +17,15 @@ class TestType extends AbstractType {
 			'required' => false,
 			'label'    => "toto",
 			'attr'     => [
-				'class' => "form-control",
-				'id'    => 'myTitleId'
+				'id' => 'myTitleId'
 			]
 		] );
-		$builder->add( 'message', 'text', [] );
+		$builder->add( 'message', 'string', [
+			'attr' => [
+				'placeholder' => "Message ici"
+			]
+		] );
+		$builder->add( 'textArea', 'text' );
+		$builder->add( 'isDefault', "checkbox" );
 	}
 }
