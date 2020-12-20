@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/Array.php';
+namespace App\Helper;
 
 class Diff_Renderer_Html_SideBySide extends Diff_Renderer_Html_Array
 {

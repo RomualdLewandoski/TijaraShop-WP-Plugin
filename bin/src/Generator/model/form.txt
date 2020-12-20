@@ -1,0 +1,14 @@
+<?php
+
+
+namespace Form;
+
+
+class %formName% extends AbstractType {
+
+
+	public function buildForm( FormBuilder $builder ) {
+
+		%builder%
+	}
+}

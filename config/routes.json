@@ -90,6 +90,46 @@
             "slug": "TijaraShop\/boutique",
             "controller": "Boutique",
             "method": "index"
+        },
+        {
+            "parent": "null",
+            "name": "editBoutique",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/boutique\/edit",
+            "controller": "Boutique",
+            "method": "edit"
+        },
+        {
+            "parent": "null",
+            "name": "deleteBoutique",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/boutique\/delete",
+            "controller": "Boutique",
+            "method": "delete"
+        },
+        {
+            "parent": "null",
+            "name": "subCat",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/cat\/sub",
+            "controller": "Cat",
+            "method": "subCat"
+        },
+        {
+            "parent": "null",
+            "name": "editCat",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/cat\/edit",
+            "controller": "Cat",
+            "method": "edit"
+        },
+        {
+            "parent": "null",
+            "name": "deleteCat",
+            "perms": "manage_options",
+            "slug": "TijaraShop\/cat\/delete",
+            "controller": "cat",
+            "method": "delete"
         }
     ]
 }

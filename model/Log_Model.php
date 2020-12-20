@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Model;
 
 
 use App\Model;
+use Entity\Delete;
+use Entity\Log;
 
 class Log_Model extends Model {
 	protected $table;
@@ -23,6 +26,51 @@ class Log_Model extends Model {
 		$this->catTable      = $this->helper->db->getPrefix() . '_shop_categorie';
 		$this->brandTable    = $this->helper->db->getPrefix() . '_shop_brand';
 		$this->tableDelete   = $this->helper->db->getPrefix() . '_shop_delete';
+	}
+
+	/**
+	 * @param $user
+	 * @param $type
+	 * @param $action
+	 * @param null $target
+	 * @param null $before
+	 * @param null $after
+	 */
+	public function log( $user = null, $type, $action, $target = null, $before = null, $after = null ) {
+		if ( $user == null ) {
+			$user = wp_get_current_user()->user_login . "(site)";
+		}
+		if ( $before != null ) {
+			$before = json_encode( $before, JSON_PRETTY_PRINT );
+		}
+		if ( $after != null ) {
+			$after = json_encode( $after, JSON_PRETTY_PRINT );
+		}
+
+		if ( $action == "Delete" ) {
+			$this->delete( $type, $target );
+		}
+
+		$log = new Log();
+		$log->set( 'user', $user );
+		$log->set( 'date', new \DateTime( 'now' ) );
+		$log->set( 'type', $type );
+		$log->set( 'action', $action );
+		$log->set( 'target', $target );
+		$log->set( 'before', $before );
+		$log->set( 'after', $after );
+		$logEm = $this->getManager()->getRepository( Log::class );
+
+		return $logEm->save( $log );
+	}
+
+	public function delete( $type, $target ) {
+		$delete = new Delete();
+		$delete->set('typeDelete', $type);
+		$delete->set('targetId', $target);
+		$em     = $this->getManager()->getRepository( Delete::class );
+		$em->save( $delete );
+
 	}
 
 	/**

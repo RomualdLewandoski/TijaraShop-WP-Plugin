@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Edition de Brand {% endblock %}
+
+{% block body %}
+    <div class="col-12">
+        <div class="card card-warning col-12">
+            <div class="card-header">
+                <ul class="nav">
+                    <li class="nav-item">
+                        Edition de Brand
+                    </li>
+                </ul>
+            </div>
+            {{ form.formStart()|raw }}
+            <div class="card-body">
+                {{ form.createView(true)|raw }}
+                <div class='text-center mt-4'>
+                    {{ form.formSubmit( "Editer" )|raw }}
+                </div>
+                {{ form.formClose|raw }}
+            </div>
+
+            <div class="card-footer">
+                    <a href="{{ makeUrl("TijaraShop/brand") }}"><i class="fas fa-arrow-left"></i> Retour à
+                        la liste</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

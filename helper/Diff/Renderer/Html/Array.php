@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/../Abstract.php';
+namespace App\Helper;
 
 class Diff_Renderer_Html_Array extends Diff_Renderer_Abstract
 {

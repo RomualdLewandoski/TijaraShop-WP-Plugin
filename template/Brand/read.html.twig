@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Lire Brand {% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+        <tr>
+ <th>id</th>
+ <td>{{ Brand.id }}</td> </tr><tr>
+ <th>nom</th>
+ <td>{{ Brand.nom }}</td> </tr><tr>
+ <th>position</th>
+ <td>{{ Brand.position }}</td> </tr>
+
+        </tbody>
+    </table>
+
+
+    <a href="{{ makeUrl("TijaraShop/brand") }}"><i class="fa fa-arrow-left"></i> back to list</a>
+
+    </div>
+{% endblock %}

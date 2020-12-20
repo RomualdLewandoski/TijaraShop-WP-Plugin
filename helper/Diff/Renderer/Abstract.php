@@ -1,4 +1,5 @@
 <?php
+namespace App\Helper;
 
 
 abstract class Diff_Renderer_Abstract

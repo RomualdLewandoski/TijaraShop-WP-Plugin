@@ -10,8 +10,9 @@ class Boutique extends \Spot\Entity {
 
 	public static function fields() {
 		return [
-			'id' => ['type' => 'integer','autoincrement' => 'true','primary' => 'true',],
-'nom' => ['type' => 'string','required' => 'true',],
+			'id' => ['type' => 'integer','autoincrement' => true ,'primary' => true ,],
+'nom' => ['type' => 'string','required' => true ,],
+'isDefault' => ['type' => 'boolean','required' => true ,],
 
 		];
 	}

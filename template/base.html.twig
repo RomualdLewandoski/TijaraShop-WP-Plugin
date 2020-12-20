@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
+      media="all">
+<link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css"
+      media="all">
+<link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+      rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+<div class="navbar nav bg-light tijara-nav text-black-50">
+    TijaraShop / {% block menu %}{% endblock %}
+
+</div>
+<div class="container-fluid mt-3">
+    {% if error != null %}
+        <div class="alert alert-danger mt-3" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+    {% if success != null %}
+        <div class="alert alert-success mt-3" role="alert">
+            {{ success }}
+        </div>
+    {% endif %}
+    <div class="row">
+        {% block body %}{% endblock %}
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

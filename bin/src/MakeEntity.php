@@ -41,7 +41,6 @@ class MakeEntity extends Command {
 			$entityName = "\Entity\\" . $name;
 			$entity     = new $entityName();
 			$fields     = $entity->entity()::fields();
-			var_dump( $fields );
 			$entityFile = new File( __DIR__ . "/../../entity/" . ucfirst( $name ) . ".php", "r+" );
 		} else {
 			$fields       = [];
@@ -55,7 +54,7 @@ class MakeEntity extends Command {
 			if ( $data['state'] ) {
 
 				$fields[ $data['name'] ] = $data['data'];
-			}else{
+			} else {
 				break;
 			}
 		}
@@ -67,7 +66,15 @@ class MakeEntity extends Command {
 		foreach ( $fields as $key => $value ) {
 			$str .= "'" . $key . "' => [";
 			foreach ( $value as $key2 => $value2 ) {
-				$str .= "'" . $key2 . "' => '" . $value2 . "',";
+				if ( $value2 == "true" ) {
+					$str .= "'" . $key2 . "' => true ,";
+				} else if ( $value2 == "false" || $value2 == false) {
+					$str .= "'" . $key2 . "' => false ,";
+				} else {
+					$str .= "'" . $key2 . "' => '" . $value2 . "',";
+				}
+
+
 			}
 			$str .= "],\n";
 		}

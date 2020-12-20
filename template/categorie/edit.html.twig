@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Editer une catégorie {% endblock %}
+
+{% block body %}
+    <div class="col-12">
+        <div class="card card-warning col-12">
+            <div class="card-header">
+                <ul class="nav">
+                    <li class="nav-item">
+                        Edition de la catégorie
+                    </li>
+                </ul>
+            </div>
+            {{ form.formStart()|raw }}
+            <div class="card-body">
+                {{ form.createView(true)|raw }}
+                <div class='text-center mt-4'>
+                    {{ form.formSubmit( "Editer la catégorie" )|raw }}
+                </div>
+                {{ form.formClose|raw }}
+            </div>
+            
+            <div class="card-footer">
+                {% if cat.parent == null or cat.parent == false %}
+                    <a href="{{ makeUrl("TijaraShop/cat") }}"><i class="fas fa-arrow-left"></i> Retour à
+                        la liste</a>
+                {% else %}
+                    <a href="{{ makeUrl("TijaraShop/cat/sub") }}&catId={{ cat.getParent.id }}"><i
+                                class="fas fa-arrow-left"></i> Retour a la liste parente</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

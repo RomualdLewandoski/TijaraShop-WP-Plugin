@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Lire %name% {% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+        %generatedRead%
+
+        </tbody>
+    </table>
+
+
+    <a href="{{ makeUrl("TijaraShop/%slug%") }}"><i class="fa fa-arrow-left"></i> back to list</a>
+
+    </div>
+{% endblock %}

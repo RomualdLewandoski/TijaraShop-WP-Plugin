@@ -11,4 +11,12 @@ class %Name% extends Controller {
 
 	}
 
+	/**
+	 * @RouteAnnotation(parent="TijaraShop", title="%Name%", slug="%Name%")
+	 */
+	public function index(){
+
+
+	}
+
 }

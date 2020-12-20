@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Liste des Logs{% endblock %}
+{% block body %}
+    <div class="col-12">
+        <div class="card card-primary col-12">
+            <div class="card-header">
+                <ul class="nav">
+                    <li class="nav-item">
+                        Liste des Logs
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table " id="myTable">
+                    <thead class="thead-dark">
+                    <th>#</th>
+                    <th>Utilisateur</th>
+                    <th>type</th>
+                    <th>action</th>
+                    <th>date</th>
+                    <th>Gestion</th>
+                    </thead>
+                    <tbdody>
+                        {% for Log in Logs %}
+                            <tr class="{% if Log.action == "Create" %}
+                               alert-success
+                               {% elseif Log.action == "Edit" %}
+                               alert-warning
+                               {% elseif Log.action == "Delete" %}
+                               alert-danger
+                               {% endif %}
+                            text-black">
+                                <td>{{ Log.id }}</td>
+                                <td>{{ Log.user }}</td>
+                                <td>{{ Log.type }}</td>
+                                <td>{{ Log.action }}</td>
+                                <td>{{ Log.date|date("Y-m-d H:i:s") }}</td>
+
+
+                                <td>
+                                    <a href="{{ makeUrl('TijaraShop/log/read') }}&id={{ Log.id }}">
+                                        <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                                                title="Voir">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </a>
+
+                                    <div class="float-right">
+                                        <a href="{{ makeUrl('TijaraShop/log/edit') }}&id={{ Log.id }}">
+                                            <button class="btn btn-warning" data-toggle="tooltip" data-placement="top"
+                                                    title="Rollback">
+                                                <i class="fa fa-cogs"></i>
+                                            </button>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                    </tbdody>
+                </table>
+                <script>
+                    $(document).ready(function () {
+                        $('#myTable').dataTable({
+                            "searching": false
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}
