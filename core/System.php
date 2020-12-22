@@ -7,8 +7,8 @@ use App\Migration\Migration;
 use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
-use Twig\Loader\ArrayLoader;
 use Twig\Loader\FilesystemLoader;
+
 
 class System {
 
@@ -134,6 +134,8 @@ class System {
 		$data['error']   = $this->helper->session->flashdata( "error" );
 		$data['success'] = $this->helper->session->flashdata( "success" );
 		$data['pageUrl'] = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+
 		echo $twig->render( $view, $data );
 
 

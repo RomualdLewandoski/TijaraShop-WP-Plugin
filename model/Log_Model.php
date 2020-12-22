@@ -66,9 +66,9 @@ class Log_Model extends Model {
 
 	public function delete( $type, $target ) {
 		$delete = new Delete();
-		$delete->set('typeDelete', $type);
-		$delete->set('targetId', $target);
-		$em     = $this->getManager()->getRepository( Delete::class );
+		$delete->set( 'typeDelete', $type );
+		$delete->set( 'targetId', $target );
+		$em = $this->getManager()->getRepository( Delete::class );
 		$em->save( $delete );
 
 	}
@@ -355,16 +355,20 @@ class Log_Model extends Model {
 	public function jsonToReadable( $json ) {
 		$str = "";
 
+
 		$obj = json_decode( $json, true );
 		if ( $obj != null ) {
 			foreach ( $obj as $key => $value ) {
 				if ( $key == "contact" ) {
 					$temp1 = "";
 					$obj2  = json_decode( $value, true );
-					foreach ( $obj2 as $key2 => $val2 ) {
-						$temp2 = "strongOpen" . $this->keyToRead( $key2 ) . "strongClose : " . $val2 . "\n";
-						$temp1 .= $temp2;
+					if ( $obj2 != null ) {
+						foreach ( $obj2 as $key2 => $val2 ) {
+							$temp2 = "strongOpen" . $this->keyToRead( $key2 ) . "strongClose : " . $val2 . "\n";
+							$temp1 .= $temp2;
+						}
 					}
+
 					$str .= $temp1;
 				} else {
 					$temp = "strongOpen" . $this->keyToRead( $key ) . "strongClose : " . $value . "\n";

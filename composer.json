@@ -16,7 +16,8 @@
         "twig/twig": "^3.0",
         "jan-swiecki/simple-annotations": "^0.3.1",
         "doctrine/annotations": "^1.11",
-        "haydenpierce/class-finder": "^0.4.2"
+        "haydenpierce/class-finder": "^0.4.2",
+        "maximebf/debugbar": "^1.16"
     },
     "autoload": {
         "psr-4": {

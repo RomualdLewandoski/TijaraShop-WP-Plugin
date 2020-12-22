@@ -52,10 +52,10 @@ class FormBuilder {
 			$arr  = [];
 			if ( $options['getCatListed'] ) {
 				$temp = $repo->getCatListed();
-				if ($options['select-label'] !== null){
+				if ( $options['select-label'] !== null ) {
 					$arr[0] = $options['select-label'];
 				}
-				foreach ($temp as $data){
+				foreach ( $temp as $data ) {
 					$arr[ $data->id ] = $data->nom;
 				}
 			} else {
@@ -128,9 +128,15 @@ class FormBuilder {
 		return "</form>";
 	}
 
-	public function display( $name ) {
+	public function display( $name, $inline = false, $group = true, $val1 = null ) {
+
 		$str = "";
 		foreach ( $this->elements as $elem ) {
+			if ( $val1 == null ) {
+				$val = $this->entity->get( $elem['name'] );
+			} else {
+				$val = $val1;
+			}
 			if ( $elem['name'] == $name ) {
 
 				if ( $elem['type'] == "checkbox" || $elem['type'] == "radio" ) {
@@ -147,6 +153,12 @@ class FormBuilder {
 							$str .= " checked ";
 						}
 					}
+					foreach ( $elem['options']['attr'] as $attr => $prop ) {
+						r( $attr );
+						if ( $attr != 'class' && $attr != "id" ) {
+							$str .= " " . $attr . "='" . $prop . "' ";
+						}
+					}
 					$str .= ">";
 					if ( $elem['options']['has_label'] ) {
 
@@ -156,24 +168,54 @@ class FormBuilder {
 
 
 				} else {
-					$str .= "<div class='form-group'>";
+					if ( $group ) {
+						$str .= "<div class='form-group ";
+						if ( $inline ) {
+							$str .= "row";
+						}
+						$str .= "'>";
+					}
+
 					if ( $elem['options']['has_label'] ) {
 
-						$str .= " <label for='" . $elem['options']['attr']['id'] . "'>" . $elem['options']['label'] . "</label>";
+						$str .= " <label for='" . $elem['options']['attr']['id'] . "' ";
+						if ( $inline ) {
+							if ( $elem['name'] == "societyName" ) {
+								$str .= "class='col-sm-3 col-form-label' ";
+							} else {
+
+								$str .= "class='col-sm-2 col-form-label' ";
+							}
+						}
+						$str .= ">" . $elem['options']['label'] . "</label>";
 					}
 					if ( $elem['type'] == "text" ) {
+						if ( $inline ) {
+							$str .= "<div class='col-sm-10'>";
+						}
 						$str .= "<textarea class='form-control ";
+
 						if ( $elem['options']['attr']['class'] !== null ) {
 							$str .= $elem['options']['attr']['class'];
 						}
-						$str .= "' name='" . $elem['name'] . "' id='" . $elem['options']['attr']['id'] . "'>";
+						$str .= "' name='" . $elem['name'] . "'";
+						if ( $elem['options']['attr']['placeholder'] !== null ) {
+							$str .= "placeholder='" . $elem['options']['attr']['placeholder'] . "'";
+						}
+						$str .= " id='" . $elem['options']['attr']['id'] . "'>";
 						if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null ) {
 							$str .= $this->entity->get( $elem['name'] );
 						}
 
 						$str .= "</textarea>";
+						if ( $inline ) {
+							$str .= "</div>";
+						}
 
 					} else if ( $elem['type'] == "select" || $elem['type'] == 'entity' ) {
+						if ( $inline ) {
+							$str .= "<div class='col-sm-10'>";
+						}
 						$str .= "<select class='form-control ";
 						if ( $elem['options']['attr']['class'] !== null ) {
 							$str .= $elem['options']['attr']['class'];
@@ -187,6 +229,9 @@ class FormBuilder {
 							$str .= ">$value</option>";
 						}
 						$str .= "</select>";
+						if ( $inline ) {
+							$str .= "</div>";
+						}
 					} else {
 						if ( $elem['type'] == "string" ) {
 							$elem['type'] = "text";
@@ -194,7 +239,13 @@ class FormBuilder {
 						if ( $elem['type'] == "datetime" ) {
 							$elem['type'] = "datetime-local";
 						}
-
+						if ( $inline ) {
+							if ( $elem['name'] == "societyName" ) {
+								$str .= "<div class='col-sm-9'>";
+							} else {
+								$str .= "<div class='col-sm-10'>";
+							}
+						}
 						$str .= "<input type='" . $elem['type'] . "' class='form-control ";
 						if ( $elem['options']['attr']['class'] !== null ) {
 							$str .= $elem['options']['attr']['class'];
@@ -203,19 +254,33 @@ class FormBuilder {
 						if ( $elem['options']['attr']['placeholder'] !== null ) {
 							$str .= "placeholder='" . $elem['options']['attr']['placeholder'] . "'";
 						}
-						if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null ) {
+						if ( $this->entity != null && $val !== null ) {
 							if ( $elem['type'] == "datetime-local" ) {
-								$temp = $this->entity->get( $elem['name'] )->format( 'Y-m-d' ) . "T" . $this->entity->get( $elem['name'] )->format( "H:i:s" );
-								$str  .= " value='" . $temp . "' ";
+
+								if ( is_string( $this->entity->get( $elem['name'] ) ) ) {
+									$str .= " value='" . $this->entity->get( $elem['name'] ) . "' ";
+								} else if ( $this->entity->get( $elem['name'] ) != false ) {
+									$temp = $this->entity->get( $elem['name'] )->format( 'Y-m-d' ) . "T" . $this->entity->get( $elem['name'] )->format( "H:i:s" );
+									$str  .= " value='" . $temp . "' ";
+								}
 
 							} else {
-								$str .= " value='" . $this->entity->get( $elem['name'] ) . "' ";
+								$str .= " value='" . $val . "' ";
 							}
 						}
 						$str .= ">";
 
+						if ( $inline ) {
+							$str .= "</div>";
+						}
+
 					}
-					$str .= " </div>";
+
+					if ( $inline ) {
+						$str .= " </div>";
+					}
+
+
 				}
 			}
 		}
@@ -226,32 +291,36 @@ class FormBuilder {
 		return $str;
 	}
 
-	/**
-	 *
-	 */
-	public
-	function createView(
-		$inline = false
-	) {
-		//todo we need the datepicker, color picker
-		//todo  add value if not null or selected if select or checked if checkbox(bool yes)
+
+	public function createView( $inline = false ) {
+
 		$str = "";
 		foreach ( $this->elements as $elem ) {
 
 			if ( $elem['type'] == "checkbox" || $elem['type'] == "radio" ) {
 
 				$str .= "<div class='form-check row mb-1'>";
-
-				$str .= "<input class='form-check-input mt-2 ";
+				if ( $elem['options']['attr']['data-toggle'] !== null ) {
+					$str .= "<input class=' ' ";
+				} else {
+					$str .= "<input class='form-check-input mt-2 ";
+				}
+				foreach ( $elem['options']['attr'] as $attr => $prop ) {
+					if ( $attr != 'class' && $attr != "id" ) {
+						$str .= $attr . "='" . $prop . "' ";
+					}
+				}
 				if ( $elem['options']['attr']['class'] !== null ) {
 					$str .= $elem['options']['attr']['class'];
 				}
 				$str .= "' type='" . $elem['type'] . "' id='" . $elem['options']['attr']['id'] . "' name='" . $elem['name'] . "' ";
+
 				if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null ) {
 					if ( $this->entity->get( $elem['name'] ) ) {
 						$str .= " checked ";
 					}
 				}
+
 				$str .= ">";
 				if ( $elem['options']['has_label'] ) {
 
@@ -396,23 +465,26 @@ class FormBuilder {
 		$this->formUrl = $request->server->get( 'REQUEST_URI' );
 		if ( $this->isSubmitted() && $this->isValid() ) {
 			foreach ( $this->elements as $elem ) {
-				if ( $elem['type'] == "datetime" || $elem['type'] == "datetime-local" ) {
+				if ( $elem['options']['mapped'] ) {
+					if ( $elem['type'] == "datetime" || $elem['type'] == "datetime-local" ) {
 
-					$date = ( new DateTime() )->createFromFormat( 'Y-m-d\TH:i', $request->request->get( $elem['name'] ) );
-					if ( ! $date ) {
+						$date = ( new DateTime() )->createFromFormat( 'Y-m-d\TH:i', $request->request->get( $elem['name'] ) );
+						if ( ! $date ) {
 
-						$date = ( new DateTime() )->createFromFormat( 'Y-m-d\TH:i:s', $request->request->get( $elem['name'] ) );
-					}
-					$this->entity->set( $elem['name'], $date );
-				} elseif ( $elem['type'] == "checkbox" || $elem['type'] == "radio" ) {
-					if ( $request->request->get( $elem['name'] ) !== null ) {
-						$this->entity->set( $elem['name'], true );
+							$date = ( new DateTime() )->createFromFormat( 'Y-m-d\TH:i:s', $request->request->get( $elem['name'] ) );
+						}
+						$this->entity->set( $elem['name'], $date );
+					} elseif ( $elem['type'] == "checkbox" || $elem['type'] == "radio" ) {
+						if ( $request->request->get( $elem['name'] ) !== null ) {
+							$this->entity->set( $elem['name'], true );
+						} else {
+							$this->entity->set( $elem['name'], false );
+						}
 					} else {
-						$this->entity->set( $elem['name'], false );
+						$this->entity->set( $elem['name'], $request->request->get( $elem['name'] ) );
 					}
-				} else {
-					$this->entity->set( $elem['name'], $request->request->get( $elem['name'] ) );
 				}
+
 			}
 		}
 	}

@@ -17,7 +17,11 @@ class InternalRouter {
 		$classes  = ClassFinder::getClassesInNamespace( 'App\Controller' );
 		$wpHelper = new Wp_Helper();
 		$wpHelper->addMenu( "TijaraShop", "manage_options", "TijaraShop", "Admin", "index", "", 50.5 );
-		$wpHelper->addSubMenu("TijaraShop", "Logs", "manage_options", "TijaraShop/logs","Admin", "adminLogs");
+
+		//tempo :
+		$wpHelper->addSubMenu("TijaraShop", "Permissions", "manage_options", "TijaraShop/perms","Permission", "index");
+
+
 
 		foreach ( $classes as $class ) {
 			$reflectionClass = new \ReflectionClass( $class );

@@ -25,7 +25,7 @@ class Supplier extends \Spot\Entity {
 'mail' => ['type' => 'string','required' => false ,],
 'refCode' => ['type' => 'string','required' => false ,],
 'webSite' => ['type' => 'string','required' => false ,],
-'paymetType' => ['type' => 'integer','required' => false ,],
+'paymentType' => ['type' => 'integer','required' => false ,],
 'iban' => ['type' => 'string','required' => false ,],
 'bic' => ['type' => 'string','required' => false ,],
 'tva' => ['type' => 'string','required' => false ,],

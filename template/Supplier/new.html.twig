@@ -1,0 +1,331 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Ajout de Supplier {% endblock %}
+
+{% block body %}
+    <div class="col-12">
+        {{ form.formStart()|raw }}
+        <div class="row text-black bg-lightblue px-2 align-items-center">
+
+            <div class="col-md-1 text-right">
+                {{ form.display("isSociety", true)|raw }}
+            </div>
+            <div class="col-md-5 mt-3">
+                {{ form.display("societyName", true)|raw }}
+            </div>
+            <div class="col-md-6">
+                <a href="#" class="inner-link" id="supplierAddMore"> <i class="fas fa-eye"></i> Plus d'informations</a>
+            </div>
+        </div>
+        <div id="supplierAdd1">
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="card card-success col-12">
+                        <div class="card-header">
+                            <div class="row mb-1">
+                                <div class="col-md-2">
+                                    {{ form.display('gender', false, false)|raw }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ form.display('firstName', false, false)|raw }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ form.display('lastName', false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    Civilité
+                                </div>
+                                <div class="col-md-5">
+                                    Prénom
+                                </div>
+                                <div class="col-md-5">
+                                    Nom
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-2">
+                                    Adresse
+                                </div>
+                                <div class="col-md-10">
+                                    {{ form.display('address', false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-2">CP / Ville</div>
+                                <div class="col-md-3">
+                                    {{ form.display('zipCode', false, false)|raw }}
+                                </div>
+                                <div class="col-md-7">
+                                    {{ form.display('city', false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row aic">
+                                <div class="col-md-2">
+                                    Pays
+                                </div>
+                                <div class="col-md-10">
+                                    {{ form.display('country', false, false)|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-warning col-12 mt-2">
+                        <div class="card-header">
+                            <div class="row mb-1 aic">
+                                <div class="col-md-2">Code Ref.</div>
+                                <div class="col-md-10">
+                                    {{ form.display('refCode', false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-2">Site Web</div>
+                                <div class="col-md-10">
+                                    {{ form.display('webSite', false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-1 offset-10 text-right mb-1">
+                                    {{ form.display('isActive', true, false)|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- END 1st col -->
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-primary col-12">
+                        <div class="card-header">
+                            <div class="row mb-1 aic">
+                                <div class="col-md-3">Téléphone</div>
+                                <div class="col-md-9">
+                                    {{ form.display('phone', false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-3">Mobile</div>
+                                <div class="col-md-9">
+                                    {{ form.display('mobilePhone', false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row aic">
+                                <div class="col-md-3">Mail</div>
+                                <div class="col-md-9">
+                                    {{ form.display('mail', false, false)|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-danger mt-1 col-12">
+                        <div class="card-header">
+                            Dernière commande le **
+                            <div class="row mt-4 mb-1 aic">
+                                <div class="col-md-5">Commande en cours</div>
+                                <div class="col-md-5"><input type="text" disabled class="form-control"></div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-5">
+                                    BL à facturer
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-5">
+                                    Factures à régler
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-5">
+                                    Avoirs
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="row mb-1 aic">
+                                <div class="col-md-5">
+                                    <strong>Solde théorique</strong>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--END 2nd col -->
+                </div>
+            </div>
+            <!-- END supplierAdd1 -->
+        </div>
+        <div id="supplierAdd2" style="display: none">
+            <div class="row mt-3 mb-2">
+                <div class="col-md-6">
+                    <div class="card col-12 card-info mb-2">
+                        <div class="card-header">
+                            <h5 class="card-title-info mb-2">Règlement</h5>
+                            <div class="col-9 offset-3">
+                                <div class="row aic">
+                                    <div class="col-md-5">Mode de règlement</div>
+                                    <div class="col-md-7">
+                                        {{ form.display("paymentType", false, false)|raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card col-12 card-success mb-2">
+                        <div class="card-header">
+                            <h5 class="card-title-info mb-2">Coordonnées bancaires</h5>
+                            <div class="row mb-2 aic">
+                                <div class="col-md-2">IBAN</div>
+                                <div class="col-md-10">
+                                    {{ form.display("iban", false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row aic">
+                                <div class="col-md-2">BIC</div>
+                                <div class="col-md-10">
+                                    {{ form.display("bic", false, false)|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- END 3rd col -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-warning mb-2">
+                        <div class="card-header">
+                            <h5 class="card-title-info mb-2"> Identification</h5>
+                            <div class="row">
+                                <div class="col-md-7 offset-5">
+                                    <div class="row aic mb-2">
+                                        <div class="col-md-4">N° TVA</div>
+                                        <div class="col-md-8">
+                                            {{ form.display("tva", false, false)|raw }}
+                                        </div>
+                                    </div>
+                                    <div class="row aic mb-2">
+                                        <div class="col-md-4">N° SIRET</div>
+                                        <div class="col-md-8">
+                                            {{ form.display("siret", false, false)|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END 4th col -->
+                </div>
+                <div class="col-md-12">
+                    <div class="card card-danger col-12">
+                        <div class="card-header">
+                            <div class="row text-center mb-2">
+                                <div class="col-md-2 "></div>
+                                <div class="col-md-3 "><h6 class="card-title-info">Nom / Prénom</h6></div>
+                                <div class="col-md-5 "><h6 class="card-title-info">Mail</h6></div>
+                                <div class="col-md-2 "><h6 class="card-title-info">Tel</h6></div>
+                            </div>
+                            <div class="row aic mb-2">
+                                <div class="col-md-2">Direction</div>
+                                <div class="col-md-3">
+                                    {{ form.display("directionName", false, false)|raw }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ form.display("directionMail", false, false)|raw }}
+                                </div>
+                                <div class="col-md-2">
+                                    {{ form.display("directionPhone", false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row aic mb-2">
+                                <div class="col-md-2">Comptabilité</div>
+                                <div class="col-md-3">
+                                    {{ form.display("comptaName", false, false)|raw }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ form.display("comptaMail", false, false)|raw }}
+                                </div>
+                                <div class="col-md-2">
+                                    {{ form.display("comptaPhone", false, false)|raw }}
+                                </div>
+                            </div>
+                            <div class="row aic mb-4">
+                                <div class="col-md-2">Commercial</div>
+                                <div class="col-md-3">
+                                    {{ form.display("comName", false, false)|raw }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ form.display("comMail", false, false)|raw }}
+                                </div>
+                                <div class="col-md-2">
+                                    {{ form.display("comPhone", false, false)|raw }}
+                                </div>
+                            </div>
+                            {{ form.display("notes", false, false)|raw }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--END supplierAdd2-->
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card col-12 card-success text-center">
+                    <div class="card-header text-center">
+                        {{ form.formSubmit( "Ajouter" )|raw }}
+                        <a href="{{ makeUrl('TijaraShop/supplier') }}" class="btn btn-danger">Retour à la liste des
+                            fournisseurs</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {{ form.formClose|raw }}
+    </div>
+    <script>
+        var configChoosenSupplierAdd = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': {allow_single_deselect: true},
+            '.chosen-select-no-single': {disable_search_threshold: 10},
+            '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+            '.chosen-select-rtl': {rtl: true},
+            '.chosen-select-width': {width: '95%'}
+        }
+        for (var selector in configChoosenSupplierAdd) {
+            $(selector).chosen(configChoosenSupplierAdd[selector]);
+        }
+        $('#supplierAddMore').click(function (event) {
+            event.preventDefault()
+            let pane1 = $('#supplierAdd1')
+            let pane2 = $('#supplierAdd2')
+            pane1.toggle()
+            pane2.toggle()
+        })
+
+        let temp = $('#country');
+        /*temp.option.each(function () {
+            console.log($(this).outerText)
+        })*/
+        /* let str = "";
+         $("#country option").each(function()
+         {
+             str += '"'+$(this)[0].value+'"=>"'+$(this)[0].outerText+'",'
+
+         });
+         console.log(str);*/
+    </script>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Lire Login {% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+        <tr>
+ <th>id</th>
+ <td>{{ Login.id }}</td> </tr><tr>
+ <th>username</th>
+ <td>{{ Login.username }}</td> </tr><tr>
+ <th>password</th>
+ <td>{{ Login.password }}</td> </tr><tr>
+ <th>hasAdmin</th>
+ <td>{{ Login.hasAdmin }}</td> </tr><tr>
+ <th>hasCompta</th>
+ <td>{{ Login.hasCompta }}</td> </tr><tr>
+ <th>hasProductManagement</th>
+ <td>{{ Login.hasProductManagement }}</td> </tr><tr>
+ <th>hasSupplierManagement</th>
+ <td>{{ Login.hasSupplierManagement }}</td> </tr><tr>
+ <th>hasStock</th>
+ <td>{{ Login.hasStock }}</td> </tr><tr>
+ <th>hasCaisse</th>
+ <td>{{ Login.hasCaisse }}</td> </tr><tr>
+ <th>isDefaultPass</th>
+ <td>{{ Login.isDefaultPass }}</td> </tr><tr>
+ <th>version</th>
+ <td>{{ Login.version }}</td> </tr>
+
+        </tbody>
+    </table>
+
+
+    <a href="{{ makeUrl("TijaraShop/login") }}"><i class="fa fa-arrow-left"></i> back to list</a>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Liste des Suppliers{% endblock %}
+{% block body %}
+    <div class="col-12">
+        <div class="card card-primary col-12">
+            <div class="card-header">
+                <ul class="nav">
+                    <li class="nav-item">
+                        Liste des Suppliers
+                    </li>
+                    <li class="nav-item ml-auto mr-2">
+                        <a href="{{ makeUrl('TijaraShop/supplier/new') }}" class="btn btn-sm btn-success">Ajouter
+                            Supplier</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table " id="myTable">
+                    <thead class="thead-dark">
+                    <th>#</th>
+                    <th>Raison sociale</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Tel</th>
+                    <th>Addresse</th>
+
+                    <th>Action</th>
+                    </thead>
+                    <tbdody>
+                        {% for Supplier in Suppliers %}
+                            <tr>
+                                <td>{{ Supplier.id }}</td>
+                                <td>{{ Supplier.societyName }}</td>
+                                <td>{{ Supplier.lastName }}</td>
+                                <td>{{ Supplier.firstName }}</td>
+                                <td>{{ Supplier.phone }} / {{ Supplier.mobilePhone }}</td>
+                                <td>{{ Supplier.address }} {{ Supplier.zipCode }} {{ Supplier.city }}</td>
+                                <td>
+                                    <a href="{{ makeUrl('TijaraShop/supplier/read') }}&id={{ Supplier.id }}">
+                                        <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                                                title="Voir">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </a>
+
+                                    <div class="float-right">
+                                        <a href="{{ makeUrl('TijaraShop/supplier/edit') }}&id={{ Supplier.id }}">
+                                            <button class="btn btn-warning" data-toggle="tooltip" data-placement="top"
+                                                    title="Editer">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                        </a>
+
+                                        <a href="{{ makeUrl('TijaraShop/supplier/delete') }}&id={{ Supplier.id }}">
+                                            <button class="btn  btn-danger" data-toggle="tooltip" data-placement="top"
+                                                    title="Supprimer">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                    </tbdody>
+                </table>
+                <script>
+                    $(document).ready(function () {
+                        $('#myTable').dataTable({
+                            "searching": false
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Lire PermissionModel {% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>id</th>
+            <td>{{ PermissionModel.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ PermissionModel.name }}</td>
+        </tr>
+        <tr class="{{ PermissionModel.hasAdmin ? "alert-success" : "alert-danger" }}">
+            <th>Accès Admin</th>
+            <td>{{ PermissionModel.hasAdmin ? "Oui" : "Non" }}</td>
+        </tr>
+        <tr class="{{ PermissionModel.hasCompta ? "alert-success" : "alert-danger" }}">
+            <th>Accès Compta</th>
+            <td>{{ PermissionModel.hasCompta ? "Oui" : "Non" }}</td>
+        </tr>
+        <tr class="{{ PermissionModel.hasProductManagement ? "alert-success" : "alert-danger" }}">
+            <th>Accès gestion produits</th>
+            <td>{{ PermissionModel.hasProductManagement ? "Oui" : "Non" }}</td>
+        </tr>
+        <tr class="{{ PermissionModel.hasSupplierManagement ? "alert-success" : "alert-danger" }}">
+            <th>Accès gestion fournisseurs</th>
+            <td>{{ PermissionModel.hasSupplierManagement ? "Oui" : "Non" }}</td>
+        </tr>
+        <tr class="{{ PermissionModel.hasStock ? "alert-success" : "alert-danger" }}">
+            <th>Accès gestion stocks</th>
+            <td>{{ PermissionModel.hasStock ? "Oui" : "Non" }}</td>
+        </tr>
+        <tr class="{{ PermissionModel.hasCaisse ? "alert-success" : "alert-danger" }}">
+            <th>Accès Caisse</th>
+            <td>{{ PermissionModel.hasCaisse ? "Oui" : "Non" }}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <a href="{{ makeUrl("TijaraShop/permissionmodel") }}"><i class="fa fa-arrow-left"></i> back to list</a>
+
+    </div>
+{% endblock %}

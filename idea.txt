@@ -1,0 +1,14 @@
+--------------------------------------------- DONE ---------------------------------------------
+
+- Perms => Add the older system (with custom checkbox) OK
+- Perms => Add label on checkbox =>
+- Perms => Add color based on yes no values ? => OK
+- Perms => rename label on read => OK
+
+--------------------------------------------- IDEA ---------------------------------------------
+- display a table with all logged session on main page of plugin ?
+
+--------------------------------------------- TODO ---------------------------------------------
+- Make user creation with our new system
+- Menu : Add an ORDER system on menu ? to order all of our submenu instead of reading files one by one ?
+
