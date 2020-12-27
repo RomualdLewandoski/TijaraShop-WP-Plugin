@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block menu %}Liste des Logins{% endblock %}
 {% block body %}
-<div class="col-12">
+    <div class="col-12">
         <div class="card card-primary col-12">
             <div class="card-header">
                 <ul class="nav">
                     <li class="nav-item">
-                            Liste des Logins
+                        Liste des Logins
                     </li>
                     <li class="nav-item ml-auto mr-2">
                         <a href="{{ makeUrl('TijaraShop/login/new') }}" class="btn btn-sm btn-success">Ajouter Login</a>
@@ -16,61 +16,56 @@
             <div class="card-body table-responsive">
                 <table class="table " id="myTable">
                     <thead class="thead-dark">
-                    <th>id </th>
-<th>username </th>
-<th>password </th>
-<th>hasAdmin </th>
-<th>hasCompta </th>
-<th>hasProductManagement </th>
-<th>hasSupplierManagement </th>
-<th>hasStock </th>
-<th>hasCaisse </th>
-<th>isDefaultPass </th>
-<th>version </th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Mot de passe</th>
+                    <th>Admin</th>
+                    <th>Compta</th>
+                    <th>Produits</th>
+                    <th>Fournisseurs</th>
+                    <th>Stock</th>
+                    <th>Caisse</th>
+
 
                     <th>Action</th>
                     </thead>
                     <tbdody>
                         {% for Login in Logins %}
-                        <tr>
-                           <td>{{ Login.id }}</td>
-<td>{{ Login.username }}</td>
-<td>{{ Login.password }}</td>
-<td>{{ Login.hasAdmin }}</td>
-<td>{{ Login.hasCompta }}</td>
-<td>{{ Login.hasProductManagement }}</td>
-<td>{{ Login.hasSupplierManagement }}</td>
-<td>{{ Login.hasStock }}</td>
-<td>{{ Login.hasCaisse }}</td>
-<td>{{ Login.isDefaultPass }}</td>
-<td>{{ Login.version }}</td>
+                            <tr>
+                                <td>{{ Login.username }}</td>
+                                <td>{{ Login/isDefaultPass ? Login.password : "********" }}</td>
 
-
-                           <td>
-                                <a href="{{ makeUrl('TijaraShop/login/read') }}&id={{ Login.id }}">
+                                <td class="{{ Login.hasAdmin ? "alert-success" : "alert-danger" }}">{{ Login.hasAdmin ? "Oui" : "Non" }}</td>
+                                <td class="{{ Login.hasCompta ? "alert-success" : "alert-danger" }}">{{ Login.hasCompta ? "Oui" : "Non" }}</td>
+                                <td class="{{ Login.hasProductManagement ? "alert-success" : "alert-danger" }}">{{ Login.hasProductManagement ? "Oui" : "Non" }}</td>
+                                <td class="{{ Login.hasSupplierManagement ? "alert-success" : "alert-danger" }}">{{ Login.hasSupplierManagement ? "Oui" : "Non" }}</td>
+                                <td class="{{ Login.hasStock ? "alert-success" : "alert-danger" }}">{{ Login.hasStock ? "Oui" : "Non" }}</td>
+                                <td class="{{ Login.hasCaisse ? "alert-success" : "alert-danger" }}">{{ Login.hasCaisse ? "Oui" : "Non" }}</td>
+                                
+                                <td>
+                                    <a href="{{ makeUrl('TijaraShop/login/read') }}&id={{ Login.id }}">
                                         <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
                                                 title="Voir">
                                             <i class="fa fa-eye"></i>
                                         </button>
                                     </a>
 
-                                <div class="float-right">
-                                    <a href="{{ makeUrl('TijaraShop/login/edit') }}&id={{ Login.id }}">
-                                        <button class="btn btn-warning" data-toggle="tooltip" data-placement="top"
-                                            title="Editer">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                    </a>
+                                    <div class="float-right">
+                                        <a href="{{ makeUrl('TijaraShop/login/edit') }}&id={{ Login.id }}">
+                                            <button class="btn btn-warning" data-toggle="tooltip" data-placement="top"
+                                                    title="Editer">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                        </a>
 
-                                    <a href="{{ makeUrl('TijaraShop/login/delete') }}&id={{ Login.id }}">
-                                        <button class="btn  btn-danger" data-toggle="tooltip" data-placement="top"
-                                            title="Supprimer">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                           </td>
-                        </tr>
+                                        <a href="{{ makeUrl('TijaraShop/login/delete') }}&id={{ Login.id }}">
+                                            <button class="btn  btn-danger" data-toggle="tooltip" data-placement="top"
+                                                    title="Supprimer">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
 
                         {% endfor %}
                     </tbdody>
@@ -78,7 +73,7 @@
                 <script>
                     $(document).ready(function () {
                         $('#myTable').dataTable({
-                            "searching": false
+                            "searching": true
                         });
                     });
                 </script>

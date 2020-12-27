@@ -16,7 +16,7 @@ class Install_Model extends Model
         $this->loadHelper('randomizer');
         $this->loadModel('api');
         $this->loadModel('user');
-        $this->table = $this->helper->db->getPrefix() . '_shop_Config';
+        $this->table = $this->helper->db->getPrefix() . '_shop_config';
     }
 
     public function makeInstall($request)
@@ -69,7 +69,7 @@ class Install_Model extends Model
             return false;
         } else {
             $data = $query[0];
-            return $data->step == 1;
+            return $data->step == "1";
         }
     }
 

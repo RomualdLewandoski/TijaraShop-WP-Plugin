@@ -17,7 +17,7 @@ class Controller extends System {
 
 	function checkInstall() {
 		if ( ! $this->model->install->isInstall() ) {
-			$this->helper->url->redirect( "wp-admin/admin.php?page=TijaraShop/install" );
+			//$this->helper->url->redirect( "wp-admin/admin.php?page=TijaraShop/install" );
 		}
 	}
 

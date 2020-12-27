@@ -59,6 +59,9 @@ class FormBuilder {
 					$arr[ $data->id ] = $data->nom;
 				}
 			} else {
+				if ($options['hasCustomLabel']){
+					$arr[0] = $options['select-label'];
+				}
 				foreach ( $repo->all() as $data ) {
 
 					$arr[ $data->id ] = $data->get( $options['target'] );
@@ -154,7 +157,6 @@ class FormBuilder {
 						}
 					}
 					foreach ( $elem['options']['attr'] as $attr => $prop ) {
-						r( $attr );
 						if ( $attr != 'class' && $attr != "id" ) {
 							$str .= " " . $attr . "='" . $prop . "' ";
 						}

@@ -59,11 +59,13 @@ class Login_Controller extends Controller {
 		$Login = new Login();
 		$em    = $this->getManager()->getRepository( Login::class );
 		$form  = $this->createForm( LoginType::class, $Login );
-
+		$request = $this->request();
 		$form->handleRequest( $this->request() );
 
 		if ( $form->isSubmitted() && $form->isValid() ) {
-
+			$Login->set('version', new \DateTime('now'));
+			//todo check if pass == null if yes auto createit and set isDefaultPass to true else encode it on bcrypt + isDefaultPass = false
+			//todo check permission if 0 do nothing else each perms needs to be edited related to selectedPermissionModel
 			if ( $em->save( $Login ) ) {
 				if ( ( new Log_Model() )
 					->log( null,
