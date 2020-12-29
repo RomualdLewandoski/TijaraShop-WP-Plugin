@@ -5,13 +5,21 @@
 - Perms => Add color based on yes no values ? => OK
 - Perms => rename label on read => OK
 - values on formBuilder if mapped = false are displayed
+- Make user creation with our new system
+- Delete User
+- Reset user password (no need for log here)
+- Edit user with our new system (Design + back)
+- User : Fix <?= $pageUrl ?> on Abort
 
 --------------------------------------------- IDEA ---------------------------------------------
 - display a table with all logged session on main page of plugin ?
 
 --------------------------------------------- TODO ---------------------------------------------
-- Make user creation with our new system
 - Menu : Add an ORDER system on menu ? to order all of our submenu instead of reading files one by one ?
+
+- Api Controller
+- Install Controller
+- Main Controller
 
 - Supplier => search on true
 - Brand => Search on true

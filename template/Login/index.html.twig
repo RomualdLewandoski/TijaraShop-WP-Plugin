@@ -42,12 +42,7 @@
                                 <td class="{{ Login.hasCaisse ? "alert-success" : "alert-danger" }}">{{ Login.hasCaisse ? "Oui" : "Non" }}</td>
                                 
                                 <td>
-                                    <a href="{{ makeUrl('TijaraShop/login/read') }}&id={{ Login.id }}">
-                                        <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
-                                                title="Voir">
-                                            <i class="fa fa-eye"></i>
-                                        </button>
-                                    </a>
+
 
                                     <div class="float-right">
                                         <a href="{{ makeUrl('TijaraShop/login/edit') }}&id={{ Login.id }}">

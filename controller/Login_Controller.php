@@ -152,6 +152,22 @@ class Login_Controller extends Controller
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+                $Login->set('version', new \DateTime('now'));
+                if ($request->request->get('permission') != "0") {
+                    $pManager = $this->getManager()->getRepository(PermissionModel::class);
+                    $perms = $pManager->first(['id' => $request->request->get('permission')]);
+                    if ($perms === false) {
+                        (new Session_Helper())->set_flashdata('error', 'Permission not found');
+                        $this->helper->url->redirect($this->getRoute('TijaraShop/login'));
+                    } else {
+                        $Login->set('hasAdmin', $perms->hasAdmin);
+                        $Login->set('hasCompta', $perms->hasCompta);
+                        $Login->set('hasProductManagement', $perms->hasProductManagement);
+                        $Login->set('hasSupplierManagement', $perms->hasSupplierManagement);
+                        $Login->set('hasStock', $perms->hasStock);
+                        $Login->set('hasCaisse', $perms->hasCaisse);
+                    }
+                }
                 $oldLogin = $em->first(['id' => $id]);
                 if ($em->save($Login)) {
                     if ((new Log_Model())
@@ -164,6 +180,7 @@ class Login_Controller extends Controller
                         )) {
                         (new Session_Helper())
                             ->set_flashdata("success", "Login a bien été modifiée");
+                        $this->helper->url->redirect($this->getRoute('TijaraShop/login'));
                     } else {
                         $em->save($oldLogin);
                         (new Session_Helper())
@@ -177,19 +194,20 @@ class Login_Controller extends Controller
 
             $this->render('Login/edit.html.twig', [
                 'form' => $form,
+                'Login'=> $Login
             ]);
 
         }
     }
 
     /**
-     * @RouteAnnotation(parent="null", title="readLogin", slug="login/read")
+     * @RouteAnnotation(parent="null", title="resetLoginPassword", slug="login/reset")
      */
-    public function read()
+    public function passWordReset()
     {
         $this->checkInstall();
-        $em = $this->getManager()->getRepository(Login::class);
         $request = $this->request();
+        $em = $this->getManager()->getRepository(Login::class);
         $id = $request->query->get('id');
         if ($id == null) {
             (new Session_Helper())
@@ -202,14 +220,15 @@ class Login_Controller extends Controller
                 ->set_flashdata('error', "Unknown Login");
             $this->helper->url->redirect($this->getRoute('TijaraShop/login'));
         } else {
-
-            $this->render('Login/read.html.twig', [
-                'Login' => $Login
-            ]);
-
+            $Login->set('isDefaultPass', true);
+            $password = (new Randomizer_Helper())->randomizeString(8);
+            $Login->set('password', $password);
+            $em->save($Login);
+            (new Session_Helper())
+                ->set_flashdata('success', "Le mot de passe a bien été réinitialisé");
+            $this->helper->url->redirect($this->getRoute('TijaraShop/login') . "&id=" . $id);
         }
     }
-
 
     /**
      * @RouteAnnotation(parent="null", title="deleteLogin", slug="login/delete")

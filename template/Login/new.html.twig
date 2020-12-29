@@ -78,7 +78,7 @@
             </div>
             <div class="card-body text-center">
                 {{ form.formSubmit( "Ajouter" )|raw }}
-                <a href="<?= $pageUrl ?>" class="btn btn-danger">Annuler</a>
+                <a href="{{ makeUrl('TijaraShop/login') }}" class="btn btn-danger">Annuler</a>
             </div>
         </div>
         {{ form.formClose|raw }}
