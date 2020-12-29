@@ -10,12 +10,12 @@
 - Reset user password (no need for log here)
 - Edit user with our new system (Design + back)
 - User : Fix <?= $pageUrl ?> on Abort
+- Menu : Add an ORDER system on menu ? to order all of our submenu instead of reading files one by one ?
 
 --------------------------------------------- IDEA ---------------------------------------------
 - display a table with all logged session on main page of plugin ?
 
 --------------------------------------------- TODO ---------------------------------------------
-- Menu : Add an ORDER system on menu ? to order all of our submenu instead of reading files one by one ?
 
 - Api Controller
 - Install Controller

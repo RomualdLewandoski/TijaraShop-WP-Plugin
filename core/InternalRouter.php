@@ -23,9 +23,10 @@ class InternalRouter
         //tempo :
         $wpHelper->addSubMenu("null", "Install TijaraShop", "manage_options", "TijaraShop/install", "Install", "displayInstall");
 
-        $wpHelper->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", "Admin", "adminUsers");
+        //$wpHelper->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", "Admin", "adminUsers");
 
 
+        $arr = [];
         foreach ($classes as $class) {
             $reflectionClass = new \ReflectionClass($class);
 
@@ -42,20 +43,45 @@ class InternalRouter
                     $str = str_replace("App\Controller\\", "", $class);
                     $str = str_replace("_Controller", "", $str);
                     //echo "$myAnnotation->parent $myAnnotation->title $myAnnotation->slug $str $method";
-                    $wpHelper->addSubMenu($myAnnotation->parent,
-                        $myAnnotation->title,
-                        "manage_options",
-                        "TijaraShop/" . $myAnnotation->slug,
-                        $str,
-                        $method
-                    );
+                    $temp = new \stdClass();
+                    $temp->parent = $myAnnotation->parent;
+                    $temp->title = $myAnnotation->title;
+                    $temp->slug = $myAnnotation->slug;
+                    $temp->str = $str;
+                    $temp->method = $method;
+                    $temp->order = $myAnnotation->order;
+                    $arr[] = $temp;
+
                 }
             }
         }
 
 
+        usort($arr, 'self::cmp_obj');
+
+        foreach ($arr as $item){
+            $wpHelper->addSubMenu($item->parent,
+                $item->title,
+                "manage_options",
+                "TijaraShop/" . $item->slug,
+                $item->str,
+                $item->method
+            );
+        }
+
         //r( $myAnnotation );
         //r( $reflectionClass->getMethods() );
 
     }
+
+    private static function cmp_obj($a, $b)
+    {
+        $al = strtolower($a->order);
+        $bl = strtolower($b->order);
+        if ($al == $bl) {
+            return 0;
+        }
+        return ($al > $bl) ? +1 : -1;
+    }
+
 }

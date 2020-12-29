@@ -40,7 +40,7 @@ class Boutique_Controller extends Controller {
 	}
 
 	/**
-	 * @RouteAnnotation(parent="TijaraShop", title="Boutique", slug="boutique")
+	 * @RouteAnnotation(parent="TijaraShop", title="Boutique", slug="boutique", order=1)
 	 */
 	public function index() {
 		$this->checkInstall();
