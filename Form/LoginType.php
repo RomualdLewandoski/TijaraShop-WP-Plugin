@@ -98,7 +98,8 @@ class LoginType extends AbstractType {
 			'class'          => PermissionModel::class,
 			'select-label'   => "custom",
 			'target'         => "name",
-			'hasCustomLabel' => true
+			'hasCustomLabel' => true,
+            'mapped' => false
 		] );
 
 	}

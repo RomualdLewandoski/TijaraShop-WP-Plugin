@@ -205,7 +205,7 @@ class FormBuilder {
 							$str .= "placeholder='" . $elem['options']['attr']['placeholder'] . "'";
 						}
 						$str .= " id='" . $elem['options']['attr']['id'] . "'>";
-						if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null ) {
+						if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null && ($elem['options']['mapped'] === null || $elem['options']['mapped'] == true)) {
 							$str .= $this->entity->get( $elem['name'] );
 						}
 
@@ -256,7 +256,7 @@ class FormBuilder {
 						if ( $elem['options']['attr']['placeholder'] !== null ) {
 							$str .= "placeholder='" . $elem['options']['attr']['placeholder'] . "'";
 						}
-						if ( $this->entity != null && $val !== null ) {
+						if ( $this->entity != null && $val !== null && ($elem['options']['mapped'] === null || $elem['options']['mapped'] === true) ) {
 							if ( $elem['type'] == "datetime-local" ) {
 
 								if ( is_string( $this->entity->get( $elem['name'] ) ) ) {
@@ -355,7 +355,7 @@ class FormBuilder {
 						$str .= $elem['options']['attr']['class'];
 					}
 					$str .= "' name='" . $elem['name'] . "' id='" . $elem['options']['attr']['id'] . "'>";
-					if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null ) {
+					if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null && ($elem['options']['mapped'] === null || $elem['options']['mapped'] == true) ) {
 						$str .= $this->entity->get( $elem['name'] );
 					}
 
@@ -402,7 +402,7 @@ class FormBuilder {
 					if ( $elem['options']['attr']['placeholder'] !== null ) {
 						$str .= "placeholder='" . $elem['options']['attr']['placeholder'] . "'";
 					}
-					if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null ) {
+					if ( $this->entity != null && $this->entity->get( $elem['name'] ) !== null && ($elem['options']['mapped'] === null || $elem['options']['mapped'] == true) ) {
 						if ( $elem['type'] == "datetime-local" ) {
 
 							if ( is_string( $this->entity->get( $elem['name'] ) ) ) {

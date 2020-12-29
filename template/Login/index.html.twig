@@ -32,7 +32,7 @@
                         {% for Login in Logins %}
                             <tr>
                                 <td>{{ Login.username }}</td>
-                                <td>{{ Login/isDefaultPass ? Login.password : "********" }}</td>
+                                <td>{{ Login.isDefaultPass ? Login.password : "********" }}</td>
 
                                 <td class="{{ Login.hasAdmin ? "alert-success" : "alert-danger" }}">{{ Login.hasAdmin ? "Oui" : "Non" }}</td>
                                 <td class="{{ Login.hasCompta ? "alert-success" : "alert-danger" }}">{{ Login.hasCompta ? "Oui" : "Non" }}</td>

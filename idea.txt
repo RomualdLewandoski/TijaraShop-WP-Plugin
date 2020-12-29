@@ -4,6 +4,7 @@
 - Perms => Add label on checkbox =>
 - Perms => Add color based on yes no values ? => OK
 - Perms => rename label on read => OK
+- values on formBuilder if mapped = false are displayed
 
 --------------------------------------------- IDEA ---------------------------------------------
 - display a table with all logged session on main page of plugin ?
