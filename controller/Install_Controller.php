@@ -1,7 +1,17 @@
 <?php
+
+
 namespace App\Controller;
 
+
 use App\Controller;
+use App\Helper\Randomizer_Helper;
+use App\Helper\Session_Helper;
+use App\RouteAnnotation;
+use Entity\ApiCredentials;
+use Entity\Config;
+use Entity\Login;
+use Form\InstallType;
 
 class Install_Controller extends Controller
 {
@@ -29,102 +39,83 @@ class Install_Controller extends Controller
         $this->helper->wp->getScript('bootstrap.bundle.min');
     }
 
-    public function install()
+    /**
+     * @RouteAnnotation(parent="null", title="Install_Controller", slug="install")
+     */
+    public function index()
     {
-        global $wpdb;
-        $apiCredentialsTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_ApiCredentials(
-                                idApiCredentials INT AUTO_INCREMENT PRIMARY KEY,
-                                privateKey VARCHAR(255) NOT NULL                               
-);";
 
-        $permissionModelTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_PermissionModel(
-                                idPermissionModel INT AUTO_INCREMENT PRIMARY KEY,
-                                namePermissionModel VARCHAR(255) NOT NULL,
-                                hasAdmin TINYINT(1),
-                                hasCompta TINYINT(1),
-                                hasProductManagement TINYINT(1),
-                                hasSupplierManagement TINYINT(1),
-                                hasStock TINYINT(1),
-                                hasCaisse TINYINT(1)
-);";
-        $shopLoginTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_ShopLogin (
-                            idShopLogin INT AUTO_INCREMENT PRIMARY KEY,
-                            usernameShopLogin VARCHAR(255) NOT NULL,
-                            passwordShopLogin TEXT NOT NULL,
-                            hasAdmin TINYINT(1),
-                            hasCompta TINYINT(1),
-                            hasProductManagement TINYINT(1),
-                            hasSupplierManagement TINYINT(1),
-                            hasStock TINYINT(1),
-                            hasCaisse TINYINT(1),
-                            isDefaultPass TINYINT(1)
-);";
+        $form = $this->createForm(InstallType::class, null);
 
-        $shopConfigTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Config(
-                                idConfig INT AUTO_INCREMENT PRIMARY KEY,
-                                host VARCHAR(255) NOT NULL,
-                                method VARCHAR(255) NOT NULL,
-                                step INT
-)";
-        $shopSupplierTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Supplier(
-                                idSupplier INT AUTO_INCREMENT PRIMARY KEY,
-                                isSociety TINYINT(1),
-                                societyName VARCHAR(255),
-                                gender VARCHAR(20),
-                                firstName VARCHAR(255),
-                                lastName VARCHAR(255),
-                                address VARCHAR(255),
-                                zipCode VARCHAR (50),
-                                city VARCHAR(255),
-                                country varchar (140),
-                                phone VARCHAR(100),
-                                mobilePhone VARCHAR(100),
-                                mail VARCHAR(255),
-                                refCode VARCHAR(100),
-                                webSite VARCHAR(255),
-                                paymentType INT,
-                                iban VARCHAR(255),
-                                bic VARCHAR(255),
-                                tva VARCHAR (255),
-                                siret VARCHAR(255),
-                                contact TEXT,
-                                notes TEXT,
-                                isActive TINYINT(1)
-);";
-        $shopLogTable = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}_shop_Log(
-                            idLog INT AUTO_INCREMENT PRIMARY KEY,
-                            userLog VARCHAR(255) NOT NULL,
-                            dateLog DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                            typeLog VARCHAR(255) NOT NULL,
-                            actionLog VARCHAR(255) NOT NULL,
-                            targetIdLog INT,
-                            beforeLog TEXT,
-                            afterLog TEXT
-);";
-        $this->helper->db->custom($apiCredentialsTable);
-        $this->helper->db->custom($permissionModelTable);
-        $this->helper->db->custom($shopLoginTable);
-        $this->helper->db->custom($shopConfigTable);
-        $this->helper->db->custom($shopSupplierTable);
-        $this->helper->db->custom($shopLogTable);
-    }
+        $form->handleRequest($this->request());
 
-    public function displayInstall()
-    {
-        $data['pageUrl'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['error'] = $this->helper->session->flashdata("error");
-        $data['success'] = $this->helper->session->flashdata("success");
-        $request = $this->request();
-        $action = $request->get('action');
-        if ($action == null) {
-            $this->loadView("adminInstall", $data);
-        } else if ($action == "install") {
-            if ($this->helper->form->verify(array('siteUrl', 'methodInstall', 'adminName', 'adminPassword', 'adminPasswordConf'))) {
-                $this->model->install->makeInstall($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $request = $this->request();
+            $apiManager = $this->getManager()->getRepository(ApiCredentials::class);
+            $userManager = $this->getManager()->getRepository(Login::class);
+            $configManager = $this->getManager()->getRepository(Config::class);
+
+            $url = $request->request->get('url');
+            $install = $request->request->get('install');
+            $apiKey = $request->request->get('apiKey');
+            $userName = $request->request->get('userName');
+            $password = $request->request->get('password');
+            $passwordConf = $request->request->get('passwordConf');
+
+            if ($url == null || $install == null || $userName == null || $password == null || $passwordConf == null) {
+                (new Session_Helper())->set_flashdata('error', 'Des champs sont manquants dans le formulaire d\'installation');
             } else {
-                $this->helper->session->set_flashdata("error", "Des champs sont manquants dans le formulaire d'installation");
-                $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
+                if ($password != $passwordConf) {
+                    (new Session_Helper())->set_flashdata('error', 'Le mot de passe et sa confirmation ne correspondent pas');
+                } else {
+                    if ($apiKey == null) {
+                        $apiKey = mb_strtoupper((new Randomizer_Helper())->randomizeString(15));
+                    }
+                    $api = new ApiCredentials();
+                    $api->set('privateKey', $apiKey);
+                    $api->set('id', 1);
+                    $apiManager->save($api);
+
+                    $adminUser = new Login();
+                    $adminUser->set('username', $userName);
+                    $adminUser->set('password', password_hash($password, PASSWORD_DEFAULT));
+                    $adminUser->set('hasAdmin', true);
+                    $adminUser->set('hasCompta', true);
+                    $adminUser->set('hasProductManagement', true);
+                    $adminUser->set('hasSupplierManagement', true);
+                    $adminUser->set('hasStock', true);
+                    $adminUser->set('hasCaisse', true);
+                    $adminUser->set('isDefaultPass', false);
+                    $adminUser->set('version', new \DateTime('now'));
+                    $userManager->save($adminUser);
+
+                    $config = new Config();
+                    $config->set('host', $url);
+                    if ($install == "nope") {
+                        $install = "install";
+                    }
+                    $config->set('method', $install);
+                    $config->set('step', 1);
+                    $configManager->save($config);
+
+                    (new Session_Helper())->set_flashdata('success', "L'installation est terminée");
+                    $this->helper->url->redirect($this->getRoute('TijaraShop'));
+
+                }
             }
+
         }
+
+        $this->render('Install/index.html.twig', [
+            'form' => $form
+        ]);
     }
+
+
+    public function getConfig()
+    {
+        $em = $this->getManager()->getRepository(Config::class);
+        return $em->first(['id' => 1]);
+    }
+
 }

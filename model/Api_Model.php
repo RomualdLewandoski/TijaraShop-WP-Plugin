@@ -13,7 +13,7 @@ class Api_Model extends Model
     {
         $this->loadHelper('db');
         $this->loadModel("log");
-        $this->table = $this->helper->db->getPrefix() . '_shop_ApiCredentials';
+        $this->table = $this->helper->db->getPrefix() . '_shop_apicredentials';
     }
 
     /**
@@ -66,7 +66,7 @@ class Api_Model extends Model
 
     public function getConfig()
     {
-        $query = $this->helper->db->get_where($this->helper->db->getPrefix() . '_shop_Config', array('idConfig' => 1));
+        $query = $this->helper->db->get_where($this->helper->db->getPrefix() . '_shop_config', array('idConfig' => 1));
         return $query[0];
     }
 

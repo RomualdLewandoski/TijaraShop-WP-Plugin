@@ -27,7 +27,7 @@ class User_Model extends Model
      * @param $userName
      * @param $password
      * @return bool
-     * @see Install_Model::makeInstall()
+     * @see Install_Old_Model::makeInstall()
      */
     public function createAdminUser($userName, $password)
     {

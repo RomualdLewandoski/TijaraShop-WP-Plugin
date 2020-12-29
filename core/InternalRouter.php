@@ -21,9 +21,8 @@ class InternalRouter
         $wpHelper->addMenu("TijaraShop", "manage_options", "TijaraShop", "Admin", "index", "", 50.5);
 
         //tempo :
-        $wpHelper->addSubMenu("null", "Install TijaraShop", "manage_options", "TijaraShop/install", "Install", "displayInstall");
 
-        //$wpHelper->addSubMenu("TijaraShop", "Utilisateurs", "manage_options", "TijaraShop/users", "Admin", "adminUsers");
+        $wpHelper->addSubMenu("TijaraShop", "ApiOld", "manage_options", "TijaraShop/api", "Admin", "adminApi");
 
 
         $arr = [];

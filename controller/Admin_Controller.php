@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller;
 use App\Model\Api_Model;
+use Entity\Config;
 
 class Admin_Controller extends Controller
 {
@@ -258,8 +259,15 @@ class Admin_Controller extends Controller
 
     function checkInstall()
     {
-        if (!$this->model->install->isInstall()) {
-            $this->helper->url->redirect("wp-admin/admin.php?page=TijaraShop/install");
+        $em = $this->getManager()->getRepository(Config::class);
+        $config = $em->first(['id' => 1]);
+
+        if ($config != false) {
+            if( $config->step != 1){
+                $this->helper->url->redirect($this->getRoute('TijaraShop/install'));
+            }
+        } else {
+            $this->helper->url->redirect($this->getRoute('TijaraShop/install'));
         }
     }
 

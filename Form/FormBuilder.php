@@ -136,7 +136,12 @@ class FormBuilder {
 		$str = "";
 		foreach ( $this->elements as $elem ) {
 			if ( $val1 == null ) {
-				$val = $this->entity->get( $elem['name'] );
+			    if ($this->entity != null){
+
+                    $val = $this->entity->get( $elem['name'] );
+                }else{
+			        $val = "";
+                }
 			} else {
 				$val = $val1;
 			}
@@ -278,7 +283,7 @@ class FormBuilder {
 
 					}
 
-					if ( $inline ) {
+					if ( $inline && $group ) {
 						$str .= " </div>";
 					}
 
