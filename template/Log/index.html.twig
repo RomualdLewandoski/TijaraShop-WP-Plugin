@@ -34,7 +34,7 @@
                                 <td>{{ Log.user }}</td>
                                 <td>{{ Log.type }}</td>
                                 <td>{{ Log.action }}</td>
-                                <td>{{ Log.date|date("Y-m-d H:i:s") }}</td>
+                                <td>{{ Log.date|date("Y/m/d H:i:s") }}</td>
 
 
                                 <td>
@@ -63,7 +63,7 @@
                 <script>
                     $(document).ready(function () {
                         $('#myTable').dataTable({
-                            "searching": false
+                            "searching": true
                         });
                     });
                 </script>

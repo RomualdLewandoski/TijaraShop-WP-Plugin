@@ -24,18 +24,17 @@
 - Api Controller
 - Main Controller
 -Order menu : Api/ Permission / Login / Boutiques / Fournisseur / Catégories / Marques
+- Supplier => search on true
+- Brand => Search on true
+- Catégorie => search on true
+- Log => Search on true
+- Rewrite Install & API System
 
 
 --------------------------------------------- IDEA ---------------------------------------------
 - display a table with all logged session on main page of plugin ?
 
 --------------------------------------------- TODO ---------------------------------------------
-
-- Supplier => search on true
-- Brand => Search on true
-- Catégorie => search on true
-- Log => Search on true
-- Rewrite Install & API System
 
 - Products
 
