@@ -40,7 +40,7 @@ class PermissionModel_Controller extends Controller {
 	}
 
 	/**
-	 * @RouteAnnotation(parent="TijaraShop", title="PermissionModel", slug="permissionmodel")
+	 * @RouteAnnotation(parent="TijaraShop", title="Permissions", slug="permissionmodel", order=2)
 	 */
 	public function index() {
 		$this->checkInstall();

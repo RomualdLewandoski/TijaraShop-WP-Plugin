@@ -41,7 +41,7 @@ class Supplier_Controller extends Controller {
 	}
 
 	/**
-	 * @RouteAnnotation(parent="TijaraShop", title="Fournisseurs", slug="supplier")
+	 * @RouteAnnotation(parent="TijaraShop", title="Fournisseurs", slug="supplier", order=5)
 	 */
 	public function index() {
 		$this->checkInstall();

@@ -40,7 +40,7 @@ class Brand_Controller extends Controller {
 	}
 
 	/**
-	 * @RouteAnnotation(parent="TijaraShop", title="Marques", slug="brand")
+	 * @RouteAnnotation(parent="TijaraShop", title="Marques", slug="brand", order=7)
 	 */
 	public function index() {
 		$this->checkInstall();

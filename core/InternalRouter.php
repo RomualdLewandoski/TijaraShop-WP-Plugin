@@ -18,12 +18,7 @@ class InternalRouter
 
         $classes = ClassFinder::getClassesInNamespace('App\Controller');
         $wpHelper = new Wp_Helper();
-        $wpHelper->addMenu("TijaraShop", "manage_options", "TijaraShop", "Admin", "index", "", 50.5);
-
-        //tempo :
-
-        $wpHelper->addSubMenu("TijaraShop", "ApiOld", "manage_options", "TijaraShop/api", "Admin", "adminApi");
-
+        $wpHelper->addMenu("TijaraShop", "manage_options", "TijaraShop", "Main", "index", "", 50.5);
 
         $arr = [];
         foreach ($classes as $class) {
@@ -58,7 +53,7 @@ class InternalRouter
 
         usort($arr, 'self::cmp_obj');
 
-        foreach ($arr as $item){
+        foreach ($arr as $item) {
             $wpHelper->addSubMenu($item->parent,
                 $item->title,
                 "manage_options",

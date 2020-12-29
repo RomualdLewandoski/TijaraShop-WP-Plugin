@@ -42,11 +42,11 @@ class Api_Controller extends Controller
     }
 
     /**
-     * @RouteAnnotation(parent="TijaraShop", title="Api", slug="Api_Controller", order=1)
+     * @RouteAnnotation(parent="TijaraShop", title="Api", slug="api", order=1)
      */
     public function index()
     {
-
+        $this->checkInstall();
         $em = $this->getManager()->getRepository(ApiCredentials::class);
         $api = $em->first(['id' => 1]);
 

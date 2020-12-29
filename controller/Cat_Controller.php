@@ -40,7 +40,7 @@ class Cat_Controller extends Controller {
 	}
 
 	/**
-	 * @RouteAnnotation(parent="TijaraShop", title="Catégorie", slug="cat")
+	 * @RouteAnnotation(parent="TijaraShop", title="Catégorie", slug="cat", order=6)
 	 */
 	public function index() {
 		$this->checkInstall();

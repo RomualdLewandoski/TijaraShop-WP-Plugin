@@ -44,7 +44,7 @@ class Login_Controller extends Controller
     }
 
     /**
-     * @RouteAnnotation(parent="TijaraShop", title="Login", slug="login")
+     * @RouteAnnotation(parent="TijaraShop", title="Utilisateurs", slug="login", order=3)
      */
     public function index()
     {
