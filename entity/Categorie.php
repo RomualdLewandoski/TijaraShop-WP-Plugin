@@ -15,6 +15,7 @@ class Categorie extends \Spot\Entity {
 			'nom'      => [ 'type' => 'string', 'required' => true, ],
 			'position' => [ 'type' => 'integer', 'required' => false, ],
 			'parent'   => [ 'type' => 'integer', 'required' => true, ],
+            'version' => ['type' => 'datetime', 'required' => true,],
 
 		];
 	}

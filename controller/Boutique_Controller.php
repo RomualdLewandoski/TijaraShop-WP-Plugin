@@ -63,7 +63,7 @@ class Boutique_Controller extends Controller {
 		$form->handleRequest( $this->request() );
 
 		if ( $form->isSubmitted() && $form->isValid() ) {
-
+            $Boutique->set( 'version', new \DateTime( 'now' ) );
 			if ( $em->save( $Boutique ) ) {
 				if ( ( new Log_Model() )
 					->log( null,
@@ -117,7 +117,9 @@ class Boutique_Controller extends Controller {
 			$form->handleRequest( $request );
 			if ( $form->isSubmitted() && $form->isValid() ) {
 				$oldBoutique = $em->first( [ 'id' => $id ] );
-				if ( $em->save( $Boutique ) ) {
+                $Boutique->set( 'version', new \DateTime( 'now' ) );
+
+                if ( $em->save( $Boutique ) ) {
 					if ( ( new Log_Model() )
 						->log( null,
 							"Boutique",

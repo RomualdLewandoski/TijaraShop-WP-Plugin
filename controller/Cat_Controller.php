@@ -51,7 +51,7 @@ class Cat_Controller extends Controller {
 		$form->handleRequest( $this->request() );
 
 		if ( $form->isSubmitted() && $form->isValid() ) {
-
+            $Categorie->set( 'version', new \DateTime( 'now' ) );
 			if ( $em->save( $cat ) ) {
 				if ( ( new Log_Model() )
 					->log( null,
@@ -92,6 +92,7 @@ class Cat_Controller extends Controller {
 
 		$form->handleRequest( $this->request() );
 		if ( $form->isSubmitted() && $form->isValid() ) {
+            $cat->set( 'version', new \DateTime( 'now' ) );
 			if ( $em->save( $cat ) ) {
 				if ( ( new Log_Model() )
 					->log( null,
@@ -150,7 +151,9 @@ class Cat_Controller extends Controller {
 			$form->handleRequest( $request );
 			if ( $form->isSubmitted() && $form->isValid() ) {
 				$oldCat = $em->first( [ 'id' => $catId ] );
-				if ( $em->save( $cat ) ) {
+                $cat->set( 'version', new \DateTime( 'now' ) );
+
+                if ( $em->save( $cat ) ) {
 					if ( ( new Log_Model() )
 						->log( null,
 							"Categorie",

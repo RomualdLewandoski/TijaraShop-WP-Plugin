@@ -29,7 +29,14 @@
 - Catégorie => search on true
 - Log => Search on true
 - Rewrite Install & API System
-
+- Add version on each entity How need this :
+    Boutique
+    Brand
+    Category
+    Login (if it don't do)
+    PermissionModel
+    Supplier
+- make php bin/console migrations:migrate (similar to symfony make migration used instead of refreshing our pages to apply migrations)
 
 --------------------------------------------- IDEA ---------------------------------------------
 - display a table with all logged session on main page of plugin ?

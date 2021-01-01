@@ -141,29 +141,6 @@ class System {
 
 	}
 
-	public function loadView( $view, $data = null ) {
-		$realView        = $view;
-		$data['pageUrl'] = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-		$data['error']   = $this->helper->session->flashdata( "error" );
-		$data['success'] = $this->helper->session->flashdata( "success" );
-		if ( $data != null ) {
-			foreach ( $data as $key => $value ) {
-				$$key = $value;
-			}
-		}
-
-		echo "    <link rel=\"stylesheet\" href=\"https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css\"
-          media=\"all\">
-    <link rel=\"stylesheet\" href=\"https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css\"
-          media=\"all\">
-    <link rel=\"stylesheet\" href=\"https://kit-free.fontawesome.com/releases/latest/css/free.min.css\" media=\"all\">
-        <link href=\"https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css\"
-          rel=\"stylesheet\">
-    <script src=\"https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js\"></script>";
-		include_once wpPluginFolder . 'views/' . $realView . '.php';
-
-	}
-
 	public function loadHelper( $helper ) {
 		$realHelper = ucfirst( $helper ) . '_Helper';
 		require_once wpPluginFolder . 'helper/' . $realHelper . '.php';

@@ -63,7 +63,7 @@ class Brand_Controller extends Controller {
 		$form->handleRequest( $this->request() );
 
 		if ( $form->isSubmitted() && $form->isValid() ) {
-
+            $Brand->set( 'version', new \DateTime( 'now' ) );
 			if ( $em->save( $Brand ) ) {
 				if ( ( new Log_Model() )
 					->log( null,
@@ -117,6 +117,7 @@ class Brand_Controller extends Controller {
 			$form->handleRequest( $request );
 			if ( $form->isSubmitted() && $form->isValid() ) {
 				$oldBrand = $em->first( [ 'id' => $id ] );
+                $Brand->set( 'version', new \DateTime( 'now' ) );
 				if ( $em->save( $Brand ) ) {
 					if ( ( new Log_Model() )
 						->log( null,

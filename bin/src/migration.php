@@ -61,8 +61,8 @@ class Migration extends Command {
 		$wpConfigStr  = $wpConfigFile->read();
 		$wpConfigStr  = explode( "<?php", $wpConfigStr )[1];
 		$wpConfigStr  = explode( "define('WP_DEBUG', false);", $wpConfigStr )[0];
-		eval( $wpConfigStr );
-		if ( $helper->ask( $input, $output, $question ) ) {
+        eval( $wpConfigStr );
+        if ( $helper->ask( $input, $output, $question ) ) {
 			$directory         = __DIR__ . "/../../entity";
 			$scanned_directory = array_diff( scandir( $directory ), array( '..', '.' ) );
 			$arr               = [];
@@ -73,7 +73,7 @@ class Migration extends Command {
 					$realName = "\Entity\\" . $name;
 
 
-					$em = ( new EntityManager() )->getManager()->getRepository( $realName );
+					$em = ( new EntityManager() )->getCliManager()->getRepository( $realName );
 
 					$table          = $em->entity()::table();
 					$schemaManager  = $em->connection()->getSchemaManager();
@@ -114,7 +114,7 @@ class Migration extends Command {
 				$migrateName          = "Migrate_" . $count;
 				$newMigrateFile       = new File( $folder . $migrateName . ".php", "w" );
 				$configMigration      = new File( $configFolder . "migrationVersion.txt", "w" );
-				$migrateModelFile     = new File( __DIR__ . "\migrate.txt", 'r' );
+				$migrateModelFile     = new File( __DIR__ . "/migrate.txt", 'r' );
 				$migrationModelString = "";
 				foreach ( $migrateModelFile->iterate() as $buffer ) {
 					$migrationModelString .= $buffer;

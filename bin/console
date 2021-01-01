@@ -9,6 +9,7 @@ use Console\MakeController;
 use Console\MakeEntity;
 use Console\MakeForm;
 use Console\MakeCrud;
+use Console\MigrationsMigrate;
 
 $app = new Application('Console App', 'v1.0.0');
 $app -> add(new Migration());
@@ -17,5 +18,6 @@ $app -> add(new MakeController());
 $app -> add(new MakeEntity());
 $app -> add(new MakeForm());
 $app -> add(new MakeCrud());
+$app -> add(new MigrationsMigrate());
 
 $app->run();
