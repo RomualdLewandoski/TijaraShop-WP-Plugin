@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Controller;
 use App\RouteAnnotation;
+use Entity\WooCommerceApi;
 
 class Main_Controller extends Controller {
 	public function __construct() {
@@ -36,8 +37,13 @@ class Main_Controller extends Controller {
 
 	public function index(){
         $this->checkInstall();
+
+        $WooCommerceApiManager = $this->getManager()->getRepository(WooCommerceApi::class);
+        $wApi = $WooCommerceApiManager->all()[0];
+
 	    $this->render( 'Main/index.html.twig', [
-            'config' => (new Install_Controller())->getConfig()
+            'config' => (new Install_Controller())->getConfig(),
+            'wApi' => $wApi,
         ]);
 
 	}

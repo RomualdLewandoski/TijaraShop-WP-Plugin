@@ -57,15 +57,36 @@ class MigrationsMigrate extends Command
             $current->version = 0;
         }
         if ($current->version < $lastVersion) {
+            $continue = true;
             for ($i = $current->version; $i < $lastVersion; $i++) {
-                $migrateName = "Migrate_" . $i;
-                require_once __DIR__ . "/../../migration/migrate/" . $migrateName . ".php";
-                $migrate = new $migrateName();
-                if (!$migrate->execute()) {
-                    $output->writeln("<error>Migration " . $migrateName . "has encountered an unexpected error</error>");
-                } else {
-                    $output->writeln("<info>Migration " . $migrateName . " has been successfully applied</info>");
+                if ($continue) {
+                    $migrateName = "Migrate_" . $i;
+                    require_once __DIR__ . "/../../migration/migrate/" . $migrateName . ".php";
+                    $migrate = new $migrateName();
+                    $migrate->setSql();
+                    $sqls = $migrate->sql;
+                    $flag = true;
+                    foreach ($sqls as $sql) {
+                        $req = $db->prepare($sql);
+                        if (!$req->execute()) {
+                            $flag = false;
+                            $continue = false;
+                            $output->writeln("<error> An error has been encountered on " . $sql);
+                        }
+                    }
+                    if ($flag) {
+                        $version = $i + 1;
+                        $sqlInsert = "INSERT INTO wp__shop_migration (version) VALUES (?)";
+                        $reqInsert = $db->prepare($sqlInsert);
+                        $reqInsert->bindParam(1, $version);
+                        $reqInsert->execute();
+                        $output->writeln("<info>Migration " . $migrateName . " has been successfully applied</info>");
+
+                    } else {
+                        $output->writeln("<error>Migration " . $migrateName . "has encountered an unexpected error</error>");
+                    }
                 }
+
             }
         } else {
             $output->writeln("<comment>Nothing to migrate</comment>");

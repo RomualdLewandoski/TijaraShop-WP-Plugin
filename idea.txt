@@ -37,12 +37,17 @@
     PermissionModel
     Supplier
 - make php bin/console migrations:migrate (similar to symfony make migration used instead of refreshing our pages to apply migrations)
+- migrations:migrate don't working cause use helper we need to find a way to do it (SEEMS WORKING)
+- Add WooCommerce Integration with REST API (we need to create a new entity for that)
+- Add explication to generate WooCommerce API key on WooCommerceApi/new
+- Add a new Card on main to tell if woocommerceKey are generated or not
+- WooCommerce Connection USING App\Helper\WooCommerce::getClient()
+
 
 --------------------------------------------- IDEA ---------------------------------------------
 - display a table with all logged session on main page of plugin ?
 
 --------------------------------------------- TODO ---------------------------------------------
-
 - Products
 
 - API communicator application<=>Site

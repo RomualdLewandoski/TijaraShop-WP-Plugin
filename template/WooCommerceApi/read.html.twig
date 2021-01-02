@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Lire WooCommerceApi {% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+        <tr>
+ <th>id</th>
+ <td>{{ WooCommerceApi.id }}</td> </tr><tr>
+ <th>key</th>
+ <td>{{ WooCommerceApi.key }}</td> </tr><tr>
+ <th>secret</th>
+ <td>{{ WooCommerceApi.secret }}</td> </tr>
+
+        </tbody>
+    </table>
+
+
+    <a href="{{ makeUrl("TijaraShop/woocommerceapi") }}"><i class="fa fa-arrow-left"></i> back to list</a>
+
+    </div>
+{% endblock %}

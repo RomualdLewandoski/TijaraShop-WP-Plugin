@@ -65,4 +65,21 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-3">
+        <div class="card card-success">
+            <div class="card-header">API WooCommerce</div>
+            <div class="card-body">
+                Ajoutez ici la configuration API de WooCommerce <br>
+                <b>Requis pour que le plugin fonctionne</b>
+                <br><br>Etat des clé api WooCommerce:
+                {{ wApi == null ? '  <span class="text-danger">Non générée</span>' :  ' <span class="text-success">Générée</span>'}}
+            </div>
+            <div class="card-footer text-center">
+                <a href="{{ makeUrl('TijaraShop/woocommerceapi') }}" class="btn btn-primary">
+                    Allez à la gestion des clés WooCommerce
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
