@@ -42,12 +42,34 @@
 - Add explication to generate WooCommerce API key on WooCommerceApi/new
 - Add a new Card on main to tell if woocommerceKey are generated or not
 - WooCommerce Connection USING App\Helper\WooCommerce::getClient()
+- Libs for generating barCode  new BarcodeGeneratorSVG()::getBarcode('YOURCODEHERE', $generator::TYPE_CODE_128);
 
 
 --------------------------------------------- IDEA ---------------------------------------------
 - display a table with all logged session on main page of plugin ?
 
 --------------------------------------------- TODO ---------------------------------------------
+
+- rework for our formBuilder (perhaps we could look at symfony form builder)
+        - Need to add required by default !
+
+        - Input Type Text => OK
+        - Input Type Email => OK
+        - Input Type Number => OK
+        - Input Type ColorPicker => OK
+        - Input Type DatePicker => OK
+        - Radio => OK
+        - Button => OK
+        - Select Type
+        - Relation Type
+
+
+        Revoir values poour tous les forms xcept radio and checkbox
+
+
+
+
+
 - Products
 
 - API communicator application<=>Site

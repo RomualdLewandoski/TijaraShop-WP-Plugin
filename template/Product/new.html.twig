@@ -1,0 +1,323 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Ajout de Product {% endblock %}
+
+{% block body %}
+
+    <div class="col-10">
+        {{ form.formStart()|raw }}
+        <!--DEBUT PANE 1 -->
+        <div id="pane1" style="display: none">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class='image-preview-wrapper mt-3'>
+                        <img id='image-preview' src='{{ wp }}'>
+                    </div>
+                    <input type='hidden' name='image_attachment_id' id='image_attachment_id' value='{{ wpResult }}'>
+                    <div class="text-center mt-2">
+                        <input id="upload_image_button" type="button" class="btn btn-secondary"
+                               value="Définir l'image"/>
+                    </div>
+
+                    <script type='text/javascript'>
+                        jQuery(document).ready(function ($) {
+                            var file_frame;
+                            var wp_media_post_id = wp.media.model.settings.post.id; // Store the old id
+                            var set_to_post_id = "{{ getOption }}"; // Set this
+                            jQuery('#upload_image_button').on('click', function (event) {
+                                event.preventDefault();
+                                if (file_frame) {
+                                    file_frame.uploader.uploader.param('post_id', set_to_post_id);
+                                    file_frame.open();
+                                    return;
+                                } else {
+                                    wp.media.model.settings.post.id = set_to_post_id;
+                                }
+                                file_frame = wp.media.frames.file_frame = wp.media({
+                                    title: 'Select a image to upload',
+                                    button: {
+                                        text: 'Use this image',
+                                    },
+                                    multiple: false // Set to true to allow multiple files to be selected
+                                });
+                                file_frame.on('select', function () {
+                                    attachment = file_frame.state().get('selection').first().toJSON();
+                                    $('#image-preview').attr('src', attachment.url).css('width', '100%');
+                                    $('#image_attachment_id').val(attachment.id);
+                                    wp.media.model.settings.post.id = wp_media_post_id;
+                                });
+                                file_frame.open();
+                            });
+                            jQuery('a.add_media').on('click', function () {
+                                wp.media.model.settings.post.id = wp_media_post_id;
+                            });
+                        });
+                    </script>
+
+
+                </div>
+
+                <div class="col-md-7">
+                    <div class="card card-success">
+                        <div class="card-header">Informations du produit</div>
+                        <div class="card-body">
+                            {{ form.display('Designiation', false, false)|raw }}
+                            {{ form.display('label', false, false)|raw }}
+                            {{ form.display('refArticle', false, false)|raw }}
+                            <br>
+                            <a href="#" class="inner-link" id=""> <i class="fas fa-eye"></i> Afficher les autres
+                                informations</a>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2"></div>
+
+
+                <div class="col-md-3">
+                    <div class="card card-primary">
+                        <div class="card-header">Gestion du produit</div>
+                        <div class="card-body">
+                            {{ form.display('prixVente', false, false)|raw }}
+                            {{ form.display('tva', false, false)|raw }}
+                            {{ form.display('stockMin', false, false)|raw }}
+                            <br>
+                            <a href="#" class="inner-link" id=""> <i class="fas fa-shopping-cart"></i> Gérer les stocks
+                                boutiques</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="card card-warning">
+                        <div class="card-header">Identification</div>
+                        <div class="card-body">
+                            {{ form.display('codeBarre', false, false)|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--FIN PANE 1 -->
+        <!-- DEBUT PANE 2 -->
+        <div id="pane2" style="display: none">
+            <div class="col-12 ">
+                <a href="#" class="ml-1 inner-link show-menu" data-pane="pane1"><i class="fa fa-arrow-left"></i> Retour
+                    au
+                    produit</a>
+                <div class="card">
+                    <div class="row py-5">
+                        <div class="col-3 px-5 border-right">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                 aria-orientation="vertical">
+                                <p class="h3">Actions</p><br>
+                                <a class="nav-link active" id="remiseListeTab" data-toggle="pill" href="#remiseListe"
+                                   role="tab" aria-controls="remiseListe" aria-selected="true">Liste</a>
+                                <a class="nav-link" id="remiseAddTab" data-toggle="pill" href="#remiseAdd"
+                                   role="tab" aria-controls="remiseAdd" aria-selected="false">Ajouter</a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="tab-content pr-3" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="remiseListe" role="tabpanel"
+                                     aria-labelledby="remiseListeTab">
+                                    <table class="table" id="remiseTable">
+                                        <thead class="thead-dark">
+                                        <th>Description</th>
+                                        <th>Remise Max</th>
+                                        <th>Code</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Très abimé</td>
+                                            <td>50%</td>
+                                            <td>R-001</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger removeRemise"><i
+                                                            class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Moyennement abimé</td>
+                                            <td>25%</td>
+                                            <td>R-002</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger removeRemise"><i
+                                                            class="fa fa-trash"></i></button>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Panier 200€</td>
+                                            <td>5%</td>
+                                            <td>R-003</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger removeRemise"><i
+                                                            class="fa fa-trash"></i></button>
+                                            </td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="remiseAdd" role="tabpanel"
+                                     aria-labelledby="remiseAddTab">
+
+                                    <div class="form-group">
+                                        <label for="descriptionRemise">Description</label>
+                                        <input type="text" class="form-control preventEnter" id="descriptionRemise"
+                                               placeholder="Description remise">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="maxRemise">Maximum remise</label>
+                                        <input type="number" class="form-control preventEnter" id="maxRemise"
+                                               placeholder="Maximum remise en %">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="codeRemise">Code remise</label>
+                                        <input type="text" class="form-control preventEnter" id="codeRemise"
+                                               placeholder="Code de la remise">
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button class="btn btn-success" id="addRemise">Ajouter une remise</button>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- FIN PANE 2 -->
+        <div id="pane3">
+            <div class="col-12 ">
+                <a href="#" class="ml-1 inner-link show-menu" data-pane="pane1"><i class="fa fa-arrow-left"></i> Retour
+                    au
+                    produit</a>
+                <div class="card card-primary">
+                    <div class="card-body">
+                        {{ form.display('Poid', false, false)|raw }}
+                        {{ form.display('Hauteur', false, fase)|raw }}
+                        {{ form.display('Largeur', false, false)|raw }}
+                        {{ form.display('Longueur', false, false)|raw }}
+                        {{ form.display('livraison', false, false)|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 mr-0 pr-0 mt-4 mt-mb-0 ">
+        <div class="menu-btn float-md-right show-menu" data-pane="pane2">
+            <i class="fa fa-euro mr-1"></i> Remise
+        </div>
+        <div class="menu-btn float-md-right show-menu" data-pane="pane3">
+            <i class="fa fa-car mr-1"></i>Livraison
+        </div>
+        <div class="menu-btn float-md-right show-menu" data-pane="pane4">
+            <i class="fa fa-code-branch mr-1"></i>Cat/Marque
+        </div>
+        <div class="menu-btn float-md-right show-menu" data-pane="pane5">
+            <i class="fa fa-parachute-box mr-1"></i>Fournisseurs
+        </div>
+        <div class="menu-btn float-md-right show-menu" data-pane="pane6">
+            <i class="fa fa-clone mr-1"></i>Déclinaison
+        </div>
+        <div class="menu-btn float-md-right show-menu" data-pane="pane7">
+            <i class="fa fa-people-carry mr-1"></i>Mouvements
+        </div>
+    </div>
+
+
+    {{ form.formClose|raw }}
+    </div>
+
+    <script>
+        $(document).ready(function (event) {
+
+            var currentPane = "pane1"
+
+            $('#livraisonId').css('max-width', "100%")
+
+
+            //REIMISE
+
+            var tableRemise = $('#remiseTable').dataTable();
+
+            $('#addRemise').click(function (event) {
+                event.preventDefault()
+                addRemise()
+            })
+
+            function addRemise() {
+                let description = $('#descriptionRemise').val()
+                let maxRemise = $('#maxRemise').val()
+                let codeRemise = $('#codeRemise').val()
+                let fourthCol = `<td>
+                                                <button class="btn btn-sm btn-danger removeRemise"><i
+                                                            class="fa fa-trash"></i></button>
+                                            </td>`
+                if (description != "" || maxRemise != "" || codeRemise != "") {
+                    tableRemise.fnAddData([
+                        description,
+                        maxRemise + "%",
+                        codeRemise,
+                        fourthCol
+                    ], true)
+                    $('.removeRemise').unbind('click', removeRemiseLigne)
+                    $('.removeRemise').click(removeRemiseLigne)
+                    $('#remiseListeTab').tab('show')
+                    $('#descriptionRemise').val("")
+                    $('#maxRemise').val("")
+                    $('#codeRemise').val("")
+                } else {
+                    alert('Vous devez replir tout le formulaire d\'ajout de remise pour continuer')
+                }
+
+            }
+
+            $('.removeRemise').click(removeRemiseLigne)
+
+            function removeRemiseLigne() {
+                var btn = $(this)
+                var ligne = btn.parent().parent()
+                var id = btn.attr('data-id') // ici pas besoin de l'id mais on va en avoir besoin dans la partie edition donc voila on se prépare a l'avance
+                //ligne.remove()
+                tableRemise.fnDeleteRow(ligne)
+            }
+
+
+            $('.show-menu').click(function () {
+                var btn = $(this)
+                var nextPane = btn.attr('data-pane')
+                if (nextPane != currentPane) {
+                    $('#' + currentPane).hide()
+                    $('#' + nextPane).show()
+                    currentPane = nextPane
+                }
+            })
+
+
+            //PREVENT SUBMIT FORM WHEN ENTER IS PRESSED ON UNWANTED INPUT
+            $('.preventEnter').keydown(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault()
+                    if ($('#descriptionRemise').is(":focus") || $('#maxRemise').is(":focus") || $('#codeRemise').is(":focus")) {
+                        addRemise()
+                    }
+                }
+            })
+
+
+        })
+
+
+    </script>
+{% endblock %}

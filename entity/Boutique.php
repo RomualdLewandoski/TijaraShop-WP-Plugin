@@ -23,7 +23,7 @@ class Boutique extends \Spot\Entity
     public static function relations(Mapper $mapper, Entity $entity)
     {
         return [
-
+            'stocks' => $mapper->hasMany( $entity, Stock::class, 'boutique_id'),
         ];
     }
 

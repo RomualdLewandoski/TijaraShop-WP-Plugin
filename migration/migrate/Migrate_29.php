@@ -2,15 +2,15 @@
 
 use App\Migration\Migrate\Migrate;
 
-class Migrate_22 extends Migrate
+class Migrate_29 extends Migrate
 {
 
     public function setSql()
     {
         $this->sql = [
-            "ALTER TABLE categorie ADD `parent` INT UNSIGNED DEFAULT NULL",
-            "ALTER TABLE categorie ADD CONSTRAINT categorie_fk_parent FOREIGN KEY (parent) REFERENCES categorie (id) ON UPDATE CASCADE ON DELETE SET NULL",
-            "CREATE INDEX IDX_497DD6343D8E604F ON categorie (parent)",
+            "ALTER TABLE product ADD `brand_id` INT UNSIGNED DEFAULT NULL",
+            "ALTER TABLE product ADD CONSTRAINT product_fk_brand FOREIGN KEY (brand_id) REFERENCES brand (id) ON UPDATE CASCADE ON DELETE CASCADE",
+            "CREATE INDEX IDX_D34A04AD44F5D008 ON product (brand_id)",
 
         ];
     }
@@ -22,7 +22,7 @@ class Migrate_22 extends Migrate
         foreach ($this->sql as $sql) {
             if (!$this->helper->db->custom($sql)) {
                 $flag = false;
-                echo "Err sql Migrate_22";
+                echo "Err sql Migrate_29";
             }
         }
         if (!$flag) {
@@ -34,6 +34,6 @@ class Migrate_22 extends Migrate
 
     public function updateVersion()
     {
-        $this->helper->db->insert($this->wpdb->prefix . "_shop_migration", array('version' => 23));
+        $this->helper->db->insert($this->wpdb->prefix . "_shop_migration", array('version' => 30));
     }
 }

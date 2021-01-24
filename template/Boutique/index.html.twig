@@ -27,7 +27,7 @@
                         <tr>
                            <td>{{ Boutique.id }}</td>
 <td>{{ Boutique.nom }}</td>
-<td>{{ Boutique.isDefault }}</td>
+<td>{{ Boutique.isDefault ? "Oui":"Non"}}</td>
 
 
                            <td>
@@ -62,7 +62,7 @@
                 <script>
                     $(document).ready(function () {
                         $('#myTable').dataTable({
-                            "searching": false
+                            "searching": true
                         });
                     });
                 </script>

@@ -11,7 +11,11 @@ class TwigUrlExtention extends AbstractExtension {
 
 	public function getFunctions() {
 		return [
-			new TwigFunction( 'makeUrl', [ $this, 'makeUrl' ] )
+			new TwigFunction( 'makeUrl', [ $this, 'makeUrl' ] ),
+			new TwigFunction( 'wp', [ $this, 'wp' ] ),
+			new TwigFunction( 'wpResult', [ $this, 'wpResult' ] ),
+			new TwigFunction( 'wpResult2', [ $this, 'wpResult2' ] ),
+			new TwigFunction( 'wpResult3', [ $this, 'getOption' ] ),
 		];
 	}
 
@@ -30,4 +34,19 @@ class TwigUrlExtention extends AbstractExtension {
 		return $url;
 	}
 
+	public function wp(){
+        return wp_get_attachment_url(get_option('media_selector_attachment_id'));
+    }
+
+    public function wpResult(){
+        return get_option('media_selector_attachment_id');
+    }
+
+    public function wpResult2(){
+       return _e('Upload image');
+    }
+
+    public function getOption(){
+        return get_option( 'media_selector_attachment_id', 0 );
+    }
 }

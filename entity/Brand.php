@@ -23,7 +23,7 @@ class Brand extends \Spot\Entity
     public static function relations(Mapper $mapper, Entity $entity)
     {
         return [
-
+            'products' => $mapper->hasMany($entity, Product::class, 'id')->order(['id' => 'ASC'])
         ];
     }
 

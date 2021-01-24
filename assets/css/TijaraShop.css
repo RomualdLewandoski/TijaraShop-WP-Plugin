@@ -210,3 +210,18 @@ pre {
     font-family: sans-serif;
     color: #9fa5aa;
 }
+
+.menu-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    width: 75%;
+    background-color: #cccccc;
+    border: 1px solid #aaaaaa;
+    min-height: 115px;
+    height: calc(100%/6);
+    cursor: pointer;
+    word-break: break-word;
+
+}

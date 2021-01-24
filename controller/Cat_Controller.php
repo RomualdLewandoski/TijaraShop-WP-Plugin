@@ -51,7 +51,7 @@ class Cat_Controller extends Controller {
 		$form->handleRequest( $this->request() );
 
 		if ( $form->isSubmitted() && $form->isValid() ) {
-            $Categorie->set( 'version', new \DateTime( 'now' ) );
+            $cat->set( 'version', new \DateTime( 'now' ) );
 			if ( $em->save( $cat ) ) {
 				if ( ( new Log_Model() )
 					->log( null,
@@ -175,7 +175,7 @@ class Cat_Controller extends Controller {
 				}
 			}
 
-			$this->render( 'categorie/read.html.twig', [
+			$this->render( 'categorie/edit.html.twig', [
 				'form'   => $form,
 				'listed' => $em->getCatListed(),
 				'cat'    => $cat

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block menu %}Lire Product {% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+        <tr>
+ <th>id</th>
+ <td>{{ Product.id }}</td> </tr><tr>
+ <th>Designiation</th>
+ <td>{{ Product.Designiation }}</td> </tr><tr>
+ <th>label</th>
+ <td>{{ Product.label }}</td> </tr><tr>
+ <th>codeBarre</th>
+ <td>{{ Product.codeBarre }}</td> </tr><tr>
+ <th>refArticle</th>
+ <td>{{ Product.refArticle }}</td> </tr><tr>
+ <th>refFournisseur</th>
+ <td>{{ Product.refFournisseur }}</td> </tr><tr>
+ <th>Poid</th>
+ <td>{{ Product.Poid }}</td> </tr><tr>
+ <th>Hauteur</th>
+ <td>{{ Product.Hauteur }}</td> </tr><tr>
+ <th>Largeur</th>
+ <td>{{ Product.Largeur }}</td> </tr><tr>
+ <th>Longueur</th>
+ <td>{{ Product.Longueur }}</td> </tr><tr>
+ <th>prixAchat</th>
+ <td>{{ Product.prixAchat }}</td> </tr><tr>
+ <th>prixVente</th>
+ <td>{{ Product.prixVente }}</td> </tr><tr>
+ <th>tva</th>
+ <td>{{ Product.tva }}</td> </tr><tr>
+ <th>stockMin</th>
+ <td>{{ Product.stockMin }}</td> </tr><tr>
+ <th>descriptionCourte</th>
+ <td>{{ Product.descriptionCourte }}</td> </tr><tr>
+ <th>description</th>
+ <td>{{ Product.description }}</td> </tr><tr>
+ <th>version</th>
+ <td>{{ Product.version }}</td> </tr><tr>
+ <th>isOnWeb</th>
+ <td>{{ Product.isOnWeb }}</td> </tr><tr>
+ <th>brand_id</th>
+ <td>{{ Product.brand_id }}</td> </tr><tr>
+ <th>livraison</th>
+ <td>{{ Product.livraison }}</td> </tr>
+
+        </tbody>
+    </table>
+
+
+    <a href="{{ makeUrl("TijaraShop/product") }}"><i class="fa fa-arrow-left"></i> back to list</a>
+
+    </div>
+{% endblock %}

@@ -18,7 +18,9 @@
         "doctrine/annotations": "^1.11",
         "haydenpierce/class-finder": "^0.4.2",
         "maximebf/debugbar": "^1.16",
-        "automattic/woocommerce": "^3.0"
+        "automattic/woocommerce": "^3.0",
+        "picqer/php-barcode-generator": "^2.1",
+        "anahkiasen/html-object": "^1.4"
     },
     "autoload": {
         "psr-4": {

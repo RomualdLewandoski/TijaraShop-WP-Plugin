@@ -40,8 +40,8 @@ class Supplier extends \Spot\Entity {
 
 	public static function relations( Mapper $mapper, Entity $entity ) {
 		return [
-            
-		];
+            'products' => $mapper->hasManyThrough($entity, Product::class, SuppliersProducts::class, 'product_id', 'supplier_id')
+        ];
 	}
 
 	public function getTable(){

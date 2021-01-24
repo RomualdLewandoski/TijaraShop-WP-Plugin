@@ -23,8 +23,10 @@ class Categorie extends \Spot\Entity {
 	public static function relations( Mapper $mapper, Entity $entity ) {
 		return [
 			'getChild'  => $mapper->hasMany( $entity, 'Entity\Categorie', 'parent' ),
-			'getParent' => $mapper->belongsTo( $entity, 'Entity\Categorie', "parent" )
-		];
+			'getParent' => $mapper->belongsTo( $entity, 'Entity\Categorie', "parent" ),
+            'products' => $mapper->hasManyThrough($entity, Product::class, Catproducts::class, 'product_id', 'category_id' )
+
+        ];
 	}
 
 	public function getTable() {

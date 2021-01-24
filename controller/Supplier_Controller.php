@@ -29,6 +29,7 @@ class Supplier_Controller extends Controller {
 		$this->helper->wp->addStyle( 'datatables' );
 		$this->helper->wp->addScript( 'jquery-3.4.1.min' );
 		$this->helper->wp->addScript( 'datatables' );
+		$this->helper->wp->addScript( 'chosen.jquery' );
 		$this->helper->wp->addScript( 'bootstrap.bundle.min' );
 		//Ajout des styles
 		$this->helper->wp->getStyle( 'bootstrap' );
@@ -36,6 +37,7 @@ class Supplier_Controller extends Controller {
 		$this->helper->wp->getStyle( 'datatables' );
 		$this->helper->wp->getScript( 'jquery-3.4.1.min' );
 		$this->helper->wp->getScript( 'datatables' );
+		$this->helper->wp->getScript( 'chosen.jquery' );
 		$this->helper->wp->getScript( 'bootstrap.bundle.min' );
 
 	}
